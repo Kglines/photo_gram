@@ -5,7 +5,7 @@ class Comment(db.Model):
     __tablename__ = 'comments'
 
     id = db.Column(db.Integer, primary_key=True)
-    image_id = db.Column(db.integer, db.ForeignKey('images.id'), nullable=False)
+    image_id = db.Column(db.Integer, db.ForeignKey('images.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     body = db.Column(db.String(2000))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
