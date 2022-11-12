@@ -16,6 +16,15 @@ class Image(db.Model):
     comments = db.relationship('Comment', back_populates='image', cascade='all, delete-orphan')
     likes = db.relationship('Like', back_populates='image', cascade='all, delete-orphan')
 
+
+    def num_comments(self):
+        return len(self.comments)
+
+
+    def num_likes(self):
+        return len(self.likes)
+
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -23,5 +32,22 @@ class Image(db.Model):
             'caption': self.caption,
             'image_url': self.image_url,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
+            'num_comments': self.num_comments(),
+            'num_likes': self.num_likes()
+        }
+
+
+    def image_details_to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'caption': self.caption,
+            'image_url': self.image_url,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+            'num_comments': self.num_comments(),
+            'num_likes': self.num_likes(),
+            'Comments': [comment.to_dict() for comment in self.comments],
+            'Likes': [like.to_dict() for like in self.likes]
         }
