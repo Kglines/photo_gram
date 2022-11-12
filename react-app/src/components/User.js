@@ -34,6 +34,9 @@ function User() {
       <li>
         <strong>Bio</strong> {user.bio}
       </li>
+      <li>
+        <img className='profile-pic' src={user.profile_img} alt={user.username}/>
+      </li>
     </ul>
   );
 }
