@@ -1,8 +1,19 @@
 from flask import Blueprint, jsonify
-from flask_login import login_required
-from app.models import User
+from flask_login import login_required, current_user
+from app.models import User, db
+from app.forms import UserEditForm
 
 user_routes = Blueprint('users', __name__)
+
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
 
 
 @user_routes.route('/')
@@ -22,4 +33,24 @@ def user(id):
     Query for a user by id and returns that user in a dictionary
     """
     user = User.query.get(id)
-    return user.to_dict()
+    return user.user_details_to_dict()
+
+
+# Edit a User
+@user_routes.route('/<int:id>')
+@login_required
+def edit_user(id):
+    user = User.query.get(id)
+    if user is None:
+        return {'errors': ['User not found.']}, 404
+    if user.id != current_user.id:
+        return {'errors': ['Unauthorized, please sign in.']}, 401
+    form = UserEditForm()
+    if form.validate_on_submit():
+        user.firstname=form.data['firstname']
+        user.lastname=form.data['lastname']
+        user.bio=form.data['bio']
+        user.profile_img=form.data['profile_img']
+        db.session.commit()
+        return user.to_dict(), 200
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401

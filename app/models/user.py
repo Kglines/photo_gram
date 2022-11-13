@@ -47,3 +47,15 @@ class User(db.Model, UserMixin):
             'bio': self.bio,
             'profile_img': self.profile_img
         }
+
+    def user_details_to_dict(self):
+        return {
+            'id': self.id,
+            'firstname': self.firstname,
+            'lastname': self.lastname,
+            'username': self.username,
+            'email': self.email,
+            'bio': self.bio,
+            'profile_img': self.profile_img,
+            'Images': [image.image_details_to_dict() for image in self.images]
+        }

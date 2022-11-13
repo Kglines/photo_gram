@@ -5,12 +5,13 @@ import { fetchUserImages } from '../store/images';
 
 function User() {
   const [user, setUser] = useState({});
+  const { Images } = user
   // const [images, setImages] = useState({});
   const { userId }  = useParams();
   const dispatch = useDispatch();
-
-  const fetchedImages = useSelector(state => state.images)
-  console.log('FETCHED IMAGES = ', fetchedImages)
+  
+  // const fetchedImages = useSelector(state => state.images)
+  // console.log('FETCHED IMAGES = ', fetchedImages)
   useEffect(() => {
     if (!userId) {
       return;
@@ -22,14 +23,10 @@ function User() {
     })();
   }, [userId]);
 
-  useEffect(() => {
-    dispatch(fetchUserImages(userId))
-  }, [dispatch])
-
   if (!user) {
     return null;
   }
-
+  
   return (
     <>
       <ul>
@@ -37,24 +34,34 @@ function User() {
           <strong>User Id</strong> {userId}
         </li>
         <li>
-          <strong>Username</strong> {user.username}
+          <strong>Username</strong> {user?.username}
         </li>
         <li>
-          <strong>Email</strong> {user.email}
+          <strong>Email</strong> {user?.email}
         </li>
         <li>
-          <strong>Bio</strong> {user.bio}
+          <strong>Bio</strong> {user?.bio}
         </li>
         <li>
-          <img className='profile-pic' src={user.profile_img} alt={user.username}/>
+          <img
+            className='profile-pic'
+            src={user?.profile_img}
+            alt={user?.username}
+          />
         </li>
       </ul>
       <div>
-        {/* {fetchedImages && (
-          fetchedImages.map(image => (
-            <div>{image.caption}</div>
-          ))
-        )} */}
+        {user &&
+          Images?.map((image) => (
+            <div key={image?.id}>
+              <img src={image?.image_url} alt={image?.caption} />
+              <div>{image?.caption}</div>
+              <div>{image?.Likes.length} Likes</div>
+              <div>
+                {image?.Comments?.length} Comments
+              </div>
+            </div>
+          ))}
       </div>
     </>
   );
