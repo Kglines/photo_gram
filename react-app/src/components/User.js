@@ -31,6 +31,9 @@ function User() {
       <li>
         <strong>Email</strong> {user.email}
       </li>
+      <li>
+        <strong>Bio</strong> {user.bio}
+      </li>
     </ul>
   );
 }
