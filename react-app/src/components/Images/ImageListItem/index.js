@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import './ImageListItem.css'
 
 function ImageListItem({ image }) {
+  // console.log('Image List Item = ', image)
   return (
     <div>
       <NavLink to={`/images/${image.id}`}>
