@@ -18,7 +18,7 @@ export const getAllImages = (images) => {
 
 // GET User Images
 export const getUserImages = (images) => {
-    console.log('USER IMAGE ACTION')
+    // console.log('USER IMAGE ACTION')
     return {
         type: GET_USER_IMAGES,
         payload: images
@@ -74,7 +74,7 @@ export const fetchAllImages = () => async (dispatch) => {
 // GET USER Images Thunk
 export const fetchUserImages = (userId) => async (dispatch) => {
     const res = await fetch(`/api/users/${userId}`);
-    console.log('USER IMAGE FETCH THUNK', res)
+    // console.log('USER IMAGE FETCH THUNK', res)
     if(res.ok){
         const images = await res.json();
         dispatch(getUserImages(images));
@@ -150,11 +150,11 @@ const imagesReducer = (state = initialState, action) => {
     switch(action.type){
         case GET_ALL_IMAGES:
             // newState.all_images = {}
-            console.log('ALL IMAGES PAYLOAD', action.payload.Images.forEach(image => newState[image.id] = image))
+            // console.log('ALL IMAGES PAYLOAD', action.payload.Images.forEach(image => newState[image.id] = image))
             // action.payload.Images.forEach(image => newState[image.id] = image)
             return newState
         case GET_USER_IMAGES:
-            console.log('USER IMAGE REDUCER', action.payload)
+            // console.log('USER IMAGE REDUCER', action.payload)
             // action.payload.forEach(image => newState[image.id] = image)
             return newState
         case GET_ONE_IMAGE:
