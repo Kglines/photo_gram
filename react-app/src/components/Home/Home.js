@@ -5,7 +5,7 @@ import { fetchAllImages } from '../../store/images'
 function Home() {
     const [images, setImages] = useState({})
     const sessionImages = Object.values(useSelector(state => state.images))
-    console.log('SESSION IMAGES HOME PAGE = ', Object.values(sessionImages))
+    // console.log('SESSION IMAGES HOME PAGE = ', Object.values(sessionImages))
     const dispatch = useDispatch()
 
     useEffect(() => {
