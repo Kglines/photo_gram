@@ -149,8 +149,9 @@ const imagesReducer = (state = initialState, action) => {
     let newState = {...state};
     switch(action.type){
         case GET_ALL_IMAGES:
-            // newState = {}
-            action.payload.forEach(image => newState[image.id] = image)
+            // newState.all_images = {}
+            console.log('ALL IMAGES PAYLOAD', action.payload.Images.forEach(image => newState[image.id] = image))
+            // action.payload.Images.forEach(image => newState[image.id] = image)
             return newState
         case GET_USER_IMAGES:
             console.log('USER IMAGE REDUCER', action.payload)
