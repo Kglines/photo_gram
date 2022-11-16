@@ -49,6 +49,9 @@ function User() {
             alt={user?.username}
           />
         </li>
+        <li>
+          <strong>{Images.length}</strong> posts
+        </li>
       </ul>
       <div>
         {user &&

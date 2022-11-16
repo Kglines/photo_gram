@@ -1,12 +1,13 @@
 
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import './NavBar.css';
 
 const NavBar = () => {
   const user = useSelector(state => state.session.user);
+  const history = useHistory()
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   let sessionLinks;
@@ -14,17 +15,23 @@ const NavBar = () => {
   if(user){
     sessionLinks = (
       <ul className='nav-list'>
-        <li>
-          <button className='create-btn nav-btn'>
-            Create
+        <li className='nav-list-item'>
+          <button className='logo' onClick={() => history.push('/')}>
+            Photogram
           </button>
         </li>
-        <li>
-          <NavLink className='nav-btn' to='/users' exact={true} activeClassName='active'>
-            Explore
-          </NavLink>
+        <li className='nav-list-item'>
+          <button className='create-btn nav-btn'>Create</button>
         </li>
-        <li>
+        <li className='nav-list-item'>
+          <button className='nav-btn' onClick={() => history.push('/users')}>
+            Explore
+          </button>
+        </li>
+        <li className='nav-list-item'>
+          <button className='nav-btn' onClick={() => history.push(`/users/${user.id}`)}>Profile</button>
+        </li>
+        <li className='nav-list-item'>
           <LogoutButton />
         </li>
       </ul>
