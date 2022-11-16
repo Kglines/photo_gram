@@ -37,6 +37,9 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
+        <Route path='/' exact={true}>
+          <LoginForm />
+        </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
@@ -46,7 +49,7 @@ function App() {
         <ProtectedRoute path='/images/:imageId' exact={true}>
           <ImageDetail />
         </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
+        <ProtectedRoute path='/home' exact={true} >
           <ImageList />
         </ProtectedRoute>
       </Switch>

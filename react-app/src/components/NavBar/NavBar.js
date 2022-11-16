@@ -16,7 +16,7 @@ const NavBar = () => {
     sessionLinks = (
       <ul className='nav-list'>
         <li className='nav-list-item'>
-          <button className='logo' onClick={() => history.push('/')}>
+          <button className='logo' onClick={() => history.push('/home')}>
             Photogram
           </button>
         </li>
