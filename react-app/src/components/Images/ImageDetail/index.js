@@ -7,25 +7,27 @@ import './ImageDetail.css'
 function ImageDetail() {
   const { imageId } = useParams()
   const dispatch = useDispatch()
+  console.log('Image ID = ', imageId)
+  const image = useSelector(state => state.images)
+  // const [image, setImage] = useState({});
+  console.log('IMAGE', image.Image)
 
-  // const image = useSelector(state => state.images)
-  const [image, setImage] = useState({});
-  console.log('IMAGE', image)
-
-  // useEffect(() => {
-  //   dispatch(fetchOneImage(imageId))
-  // }, [dispatch, imageId])
   useEffect(() => {
-    (async () => {
-      const res = await fetchOneImage(imageId)
-      const image = await res.json()
-      setImage(image)
-    })()
-  }, [imageId])
+    dispatch(fetchOneImage(imageId))
+  }, [dispatch, imageId])
+  // useEffect(() => {
+  //   (async () => {
+  //     const res = await fetchOneImage(imageId)
+  //     const image = await res.json()
+  //     setImage(image)
+  //   })()
+  // }, [imageId])
 
   return (
     <div>
-      {image.caption}
+      IMAGE DETAIL
+      <img src={image?.Image?.image_url} alt={image?.Image?.caption} />
+      {image?.Image?.caption}
     </div>
   )
 }

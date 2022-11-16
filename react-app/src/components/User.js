@@ -50,9 +50,13 @@ function User() {
           />
         </li>
         <li>
-          <strong>{Images.length}</strong> posts
+          <strong>{Images?.length}</strong> posts
         </li>
       </ul>
+      <div>
+        <button>+</button>
+        <p>New</p>
+      </div>
       <div>
         {user &&
           Images?.map((image) => (
