@@ -6,18 +6,39 @@ import './ImageList.css'
 
 function ImageList() {
   const images = Object.values(useSelector(state => state.images))
-  // console.log('Image List = ', Object.values(images))
+  // const user = useSelector(state => state.session.user)
+  const [usersList, setUsersList] = useState([]);
+
+  
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch('/api/users/');
+      const responseData = await response.json();
+      setUsersList(responseData.users);
+    }
+    fetchData();
+  }, []);
+  // console.log('IMAGE LIST USERS', usersList)
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchAllImages())
   }, [dispatch])
 
+  let user;
+
+
   return (
     <div>
       {images && images?.map(image => (
-        <div key={image.id}>
-          <ImageListItem image={image}/>
+        <div key={image?.id}>
+          {usersList.map(users => {
+            if (users?.id === image?.user_id){
+              user = users
+            }
+          })}
+          <ImageListItem image={image} user={user}/>
         </div>
       ))}
     </div>
