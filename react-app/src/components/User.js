@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { Modal } from '../context/Modal';
 import { fetchUserImages } from '../store/images';
+import ImageCreateForm from './Images/ImageCreateForm';
 import ImageListItem from './Images/ImageListItem';
 
 function User() {
   const [user, setUser] = useState({});
+  const [showModal, setShowModal] = useState(false);
+
   const { Images } = user
+  console.log('IMAGE FROM USER = ', Images)
   // const [images, setImages] = useState({});
   const { userId }  = useParams();
   const dispatch = useDispatch();
@@ -55,14 +60,19 @@ function User() {
         </li>
       </ul>
       <div>
-        <button>+</button>
+        <button onClick={() => setShowModal(true)}>+</button>
+        {showModal && (
+          <Modal onClose={() => setShowModal(false)}>
+            <ImageCreateForm setShowModal={setShowModal} />
+          </Modal>
+        )}
         <p>New</p>
       </div>
       <div>
         {user &&
           Images?.map((image) => (
             <div key={image?.id}>
-              <ImageListItem image={image} user={user}/>
+              <ImageListItem image={image} />
             </div>
           ))}
       </div>

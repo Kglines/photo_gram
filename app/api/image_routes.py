@@ -61,6 +61,7 @@ def edit_image(id):
     if image.user_id != current_user.id:
         return {'errors': ['Unauthorized, please sign in.']}, 401
     form = ImageForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         image.caption=form.data['caption']
         image.image_url=form.data['image_url']

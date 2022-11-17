@@ -5,12 +5,15 @@ import ImageListItem from '../ImageListItem';
 import './ImageList.css'
 
 function ImageList() {
-  const images = Object.values(useSelector(state => state.images))
-  // const user = useSelector(state => state.session.user)
+  const images = Object.values(useSelector(state => state.images?.all_images ? state.images.all_images : state.images))
+  // const images = useSelector(state => state.images.all_images)
+  console.log('IMAGE IMAGELIST = ', images)
+  // const imagesArr = Object.values(images[0]);
   const [usersList, setUsersList] = useState([]);
-
   
 
+  let user;
+  
   useEffect(() => {
     async function fetchData() {
       const response = await fetch('/api/users/');
@@ -19,26 +22,26 @@ function ImageList() {
     }
     fetchData();
   }, []);
-  // console.log('IMAGE LIST USERS', usersList)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchAllImages())
   }, [dispatch])
 
-  let user;
-
-
+  // const imageUser = usersList.find(user => user.id === imagesArr.userId)
+  
   return (
     <div>
-      {images && images?.map(image => (
+      {images?.map(image => (
         <div key={image?.id}>
-          {usersList.map(users => {
+          {usersList?.forEach(users => {
             if (users?.id === image?.user_id){
+            console.log('IMAGEUSER = ', user)
               user = users
             }
           })}
-          <ImageListItem image={image} user={user}/>
+            <ImageListItem image={image} user={user} />
         </div>
       ))}
     </div>

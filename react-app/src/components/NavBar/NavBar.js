@@ -1,27 +1,45 @@
-
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, Redirect, useHistory } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
+import ImageCreateForm from '../Images/ImageCreateForm';
+import { Modal } from '../../context/Modal'
 import './NavBar.css';
 
 const NavBar = () => {
   const user = useSelector(state => state.session.user);
   const history = useHistory()
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   let sessionLinks;
+
+  const handleClick = () => {
+    return history.push('/home')
+    // return <Redirect to={'/home'} />
+  }
 
   if(user){
     sessionLinks = (
       <ul className='nav-list'>
         <li className='nav-list-item'>
-          <button className='logo' onClick={() => history.push('/home')}>
-            Photogram
+        <NavLink to='/home'>
+          <p className='logo'>Photogram</p>
+        </NavLink>
+        </li>
+        <li className='nav-list-item'>
+          <button className='nav-btn' onClick={handleClick}>
+            Home
           </button>
         </li>
         <li className='nav-list-item'>
-          <button className='create-btn nav-btn'>Create</button>
+          <button onClick={() => setShowModal(true)} className='create-btn nav-btn'>Create</button>
+          {showModal && (
+            <Modal onClose={() => setShowModal(false)}>
+              <ImageCreateForm setShowModal={setShowModal}/>
+            </Modal>
+          )}
         </li>
         <li className='nav-list-item'>
           <button className='nav-btn' onClick={() => history.push('/users')}>
