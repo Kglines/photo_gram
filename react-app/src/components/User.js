@@ -62,13 +62,7 @@ function User() {
         {user &&
           Images?.map((image) => (
             <div key={image?.id}>
-              <ImageListItem image={image}/>
-              {/* <img src={image?.image_url} alt={image?.caption} />
-              <div>{image?.caption}</div>
-              <div>{image?.Likes.length} Likes</div>
-              <div>
-                {image?.Comments?.length} Comments
-              </div> */}
+              <ImageListItem image={image} user={user}/>
             </div>
           ))}
       </div>

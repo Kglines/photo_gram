@@ -52,5 +52,5 @@ class Image(db.Model):
             'num_comments': self.num_comments(),
             'num_likes': self.num_likes(),
             'Comments': [comment.to_dict() for comment in self.comments],
-            'Likes': [like.to_dict() for like in self.likes]
+            'Likes': [like.to_dict() for like in self.likes],
         }
