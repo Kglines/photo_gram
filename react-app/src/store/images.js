@@ -112,8 +112,8 @@ export const fetchCreateImage = (image) => async (dispatch) => {
 };
 
 // Edit Image Thunk
-export const fetchEditImage = (image) => async (dispatch) => {
-    const res = await fetch(`/api/images/${image.id}`, {
+export const fetchEditImage = (image, imageId) => async (dispatch) => {
+    const res = await fetch(`/api/images/${imageId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(image)
@@ -149,16 +149,18 @@ const imagesReducer = (state = initialState, action) => {
     let newState = {...state};
     switch(action.type){
         case GET_ALL_IMAGES:
-            // newState.all_images = {}
+            newState.all_images = {}
             // console.log('ALL IMAGES PAYLOAD', action.payload.Images.forEach(image => newState[image.id] = image))
-            action.payload.Images.forEach(image => newState[image.id] = image)
+            action.payload.Images.forEach(image => newState.all_images[image.id] = image)
             return newState
         case GET_USER_IMAGES:
             // console.log('USER IMAGE REDUCER', action.payload)
-            action.payload.forEach(image => newState[image.id] = image)
+            newState.user_images = {}
+            action.payload.Images.forEach(image => newState.user_images[image.id] = image)
             return newState
         case GET_ONE_IMAGE:
-            newState = action.payload
+            newState.one_image = {}
+            newState.one_image = action.payload
             return newState
         case CREATE_IMAGES:
             newState = { ...state, [action.payload.id]: action.payload }
