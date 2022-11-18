@@ -30,15 +30,16 @@ function ImageCreateForm({ setShowModal }) {
     // console.log('FORM DATA', formData)
     // console.log('RES', res)
 
-    if (res.ok){
-      await res.json()
-      setImageLoading(false)
-      setShowModal(false)
-      history.push(`/home`)
-    }
-    else {
+    if (res.ok) {
+      await res.json();
       setImageLoading(false);
-      console.log('error')
+      history.push(`/home`);
+      setShowModal(false);
+    } else {
+      setImageLoading(false);
+      const data = await res.json();
+      console.log('error');
+      if(data && data.errors) setErrors(data.errors)
     }
     
     // const createdImage = await dispatch(fetchCreateImage(formData))
@@ -76,7 +77,7 @@ function ImageCreateForm({ setShowModal }) {
         />
         <button type='submit'>Submit</button>
         <button onClick={() => setShowModal(false)}>Cancel</button>
-        {imageLoading && <p>Loading...</p>}
+        {(imageLoading) && <p>Loading...</p>}
       </form>
     </div>
   )

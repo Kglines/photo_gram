@@ -22,7 +22,7 @@ def validation_errors_to_error_messages(validation_errors):
 @image_routes.route('')
 @login_required
 def all_images():
-    images = Image.query.all()
+    images = Image.query.order_by(Image.created_at)
     return {'Images': [image.image_details_to_dict() for image in images]}, 200
 
 
@@ -42,9 +42,10 @@ def create_image():
     form['csrf_token'].data = request.cookies['csrf_token']
     
     if "image_url" not in request.files:
+        print('ERROR ON LINE 45 OF IMAGE ROUTES')
         return {'errors': 'image url required'}, 400
     file = request.files['image_url']
-    
+
     if form.validate_on_submit():
         image = Image(
             user_id=current_user.id,
