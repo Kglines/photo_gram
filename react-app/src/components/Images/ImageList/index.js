@@ -7,7 +7,7 @@ import './ImageList.css'
 function ImageList() {
   const images = Object.values(useSelector(state => state.images?.all_images ? state.images.all_images : state.images))
   // const images = useSelector(state => state.images.all_images)
-  console.log('IMAGE IMAGELIST = ', images)
+  // console.log('IMAGE IMAGELIST = ', images)
   // const imagesArr = Object.values(images[0]);
   const [usersList, setUsersList] = useState([]);
   
@@ -37,7 +37,6 @@ function ImageList() {
         <div key={image?.id}>
           {usersList?.forEach(users => {
             if (users?.id === image?.user_id){
-            console.log('IMAGEUSER = ', user)
               user = users
             }
           })}

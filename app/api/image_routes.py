@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from app.models import db, Image, Comment
 from app.forms import ImageForm, CommentForm
 from flask_login import current_user, login_required
+from app.aws import upload_file_to_s3, allowed_file, get_unique_filename
 
 image_routes = Blueprint('image', __name__)
 
@@ -39,12 +40,26 @@ def image_detail(id):
 def create_image():
     form = ImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    
+    if "image_url" not in request.files:
+        print('Wombat')
+        return {'errors': 'image url required'}, 400
+    file = request.files['image_url']
+    print(file)
     if form.validate_on_submit():
         image = Image(
             user_id=current_user.id,
             caption=form.data['caption'],
             image_url=form.data['image_url']
         )
+        if not allowed_file(file.filename):
+            return {'errors': 'file type not permitted'}, 400
+            
+        file.filename = get_unique_filename(file.filename)
+        upload = upload_file_to_s3(file)
+        if 'url' not in upload:
+            return upload, 400
+        image.image_url = upload['url']
         db.session.add(image)
         db.session.commit()
         return image.to_dict(), 200

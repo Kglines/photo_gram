@@ -11,7 +11,7 @@ function User() {
   const [showModal, setShowModal] = useState(false);
 
   const { Images } = user
-  console.log('IMAGE FROM USER = ', Images)
+  // console.log('IMAGE FROM USER = ', Images)
   // const [images, setImages] = useState({});
   const { userId }  = useParams();
   const dispatch = useDispatch();
