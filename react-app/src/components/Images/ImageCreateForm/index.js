@@ -20,19 +20,20 @@ function ImageCreateForm({ setShowModal }) {
     formData.append('image_url', image_url);
     console.log('image_url', image_url)
     // console.log('caption', caption)
-    console.log('formdata', formData)
+    // console.log('formdata', formData)
     setImageLoading(true);
     
     const res = await fetch('/api/images', {
       method: 'POST',
       body: formData
     })
-    console.log('FORM DATA', formData)
-    console.log('RES', res)
+    // console.log('FORM DATA', formData)
+    // console.log('RES', res)
 
     if (res.ok){
       await res.json()
       setImageLoading(false)
+      setShowModal(false)
       history.push(`/api/images/${res.id}`)
     }
     else {

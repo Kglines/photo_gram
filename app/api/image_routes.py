@@ -42,10 +42,9 @@ def create_image():
     form['csrf_token'].data = request.cookies['csrf_token']
     
     if "image_url" not in request.files:
-        print('Wombat')
         return {'errors': 'image url required'}, 400
     file = request.files['image_url']
-    print(file)
+    
     if form.validate_on_submit():
         image = Image(
             user_id=current_user.id,
