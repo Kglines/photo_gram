@@ -34,7 +34,7 @@ function ImageCreateForm({ setShowModal }) {
       await res.json()
       setImageLoading(false)
       setShowModal(false)
-      history.push(`/api/images/${res.id}`)
+      history.push(`/home`)
     }
     else {
       setImageLoading(false);
