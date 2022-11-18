@@ -16,27 +16,43 @@ function ImageCreateForm({ setShowModal }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
+    formData.append('caption', caption)
     formData.append('image_url', image_url);
-
+    console.log('image_url', image_url)
+    // console.log('caption', caption)
+    console.log('formdata', formData)
     setImageLoading(true);
-    const createdImage = await dispatch(fetchCreateImage(formData))
-      .then((res) => {
-        setShowModal(false)
-        return res
-      })
-      .then((res) => {
-        history.push(`/images/${res.id}`)
-      })
-      .catch(async (res) => {
-        const data = await res.json()
-        if(data && data.errors) setErrors(data.errors)
-      })
-      return createdImage
-  }
+    
+    const res = await fetch('/api/images', {
+      method: 'POST',
+      body: formData
+    })
+    console.log('FORM DATA', formData)
+    console.log('RES', res)
 
-  const updatedImage = (e) => {
-    const file = e.target.value
-    setImage_url(file)
+    if (res.ok){
+      await res.json()
+      setImageLoading(false)
+      history.push(`/api/images/${res.id}`)
+    }
+    else {
+      setImageLoading(false);
+      console.log('error')
+    }
+    
+    // const createdImage = await dispatch(fetchCreateImage(formData))
+    //   .then((res) => {
+    //     setShowModal(false)
+    //     return res
+    //   })
+    //   .then((res) => {
+    //     history.push(`/images/${res.id}`)
+    //   })
+    //   .catch(async (res) => {
+    //     const data = await res.json()
+    //     if(data && data.errors) setErrors(data.errors)
+    //   })
+    //   return createdImage
   }
 
   return (
@@ -54,8 +70,8 @@ function ImageCreateForm({ setShowModal }) {
         />
         <input 
           type='file'
-          accept='image_url/*'
-          onChange={updatedImage}
+          accept='image/*'
+          onChange={(e) => setImage_url(e.target.files[0])}
         />
         <button type='submit'>Submit</button>
         <button onClick={() => setShowModal(false)}>Cancel</button>

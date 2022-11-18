@@ -97,6 +97,7 @@ export const fetchOneImage = (imageId) => async (dispatch) => {
 
 // Create Image Thunk
 export const fetchCreateImage = (image) => async (dispatch) => {
+    console.log('CREAT THUNK', image)
     const res = await fetch(`/api/images`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

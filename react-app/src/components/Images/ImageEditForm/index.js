@@ -8,7 +8,7 @@ function ImageEditForm({ imageId, setEditModal, image }) {
   const [image_url, setImage_url] = useState(image?.Image?.image_url)
   const [errors, setErrors] = useState([])
 
-  console.log('IMAGE EDIT FORM = ', image?.Image?.user_id, imageId)
+  // console.log('IMAGE EDIT FORM = ', image?.Image?.user_id, imageId)
 
   const dispatch = useDispatch()
 

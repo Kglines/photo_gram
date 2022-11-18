@@ -5,7 +5,7 @@ import './ImageListItem.css'
 
 function ImageListItem({ image, user }) {
   const history = useHistory()
-  console.log('IMAGE LIST ITEM ', image)
+  // console.log('IMAGE LIST ITEM ', image)
   return (
     <div>
     <NavLink to={`/users/${user?.id}`}>
