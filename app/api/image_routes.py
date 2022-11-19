@@ -22,7 +22,7 @@ def validation_errors_to_error_messages(validation_errors):
 @image_routes.route('')
 @login_required
 def all_images():
-    images = Image.query.order_by(Image.created_at)
+    images = Image.query.all()
     return {'Images': [image.image_details_to_dict() for image in images]}, 200
 
 
@@ -106,8 +106,6 @@ def create_comment(id):
     image = Image.query.get(id)
     if image is None:
         return {'errors': ['Image not found']}, 404
-    if image.user_id != current_user.id:
-        return {'errors': ['Unauthorized. Please sign in.']}, 401
     form = CommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():

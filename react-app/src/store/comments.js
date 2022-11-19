@@ -52,7 +52,7 @@ export const deleteComment = (id) => {
 
 // Get all Comments Thunk
 // export const fetchAllComments = () => async (dispatch) => {
-//     const res = await fetch(`/api/`)
+//     const res = await fetch(`/api/comments`)
 // }
 
 // Get One Comment Thunk
