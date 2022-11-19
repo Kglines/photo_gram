@@ -1,6 +1,33 @@
 /* TODO Add site wide styles */
 body {
+    box-sizing: border-box;
     position: relative;
     margin-left: 35%;
     background-color: rgb(241, 239, 239);
+}
+
+.user-link {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+.user-link:hover{
+    text-decoration: underline;
+    color: rgb(69, 69, 69);
+}
+
+.profile-img{
+    border-radius: 50px;
+}
+
+.edit-btn, .delete-btn {
+    background-color: transparent;
+    border: none;
+    color: #838c95;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+    color: #0a95ff;
+    cursor: pointer;
 }

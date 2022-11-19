@@ -7,7 +7,8 @@ import './ImageList.css'
 function ImageList() {
   const images = Object.values(useSelector(state => state.images?.all_images ? state.images.all_images : state.images))
   // const images = useSelector(state => state.images.all_images)
-  // console.log('IMAGE IMAGELIST = ', images)
+  function compare(a, b){ return b - a}
+  // console.log('IMAGEs IMAGELIST = ', images.map(image => image?.created_at).sort(compare))
   // const imagesArr = Object.values(images[0]);
   const [usersList, setUsersList] = useState([]);
   
