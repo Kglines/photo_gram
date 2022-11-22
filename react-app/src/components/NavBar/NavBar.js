@@ -12,6 +12,7 @@ const NavBar = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [aboutModal, setAboutModal] = useState(false)
 
   let sessionLinks;
 
@@ -24,9 +25,9 @@ const NavBar = () => {
     sessionLinks = (
       <ul className='nav-list'>
         <li className='nav-list-item'>
-        <NavLink to='/home'>
-          <p className='logo'>Photogram</p>
-        </NavLink>
+          <NavLink to='/home'>
+            <p className='logo'>Photogram</p>
+          </NavLink>
         </li>
         <li className='nav-list-item'>
           <button className='nav-btn' onClick={handleClick}>
@@ -34,10 +35,15 @@ const NavBar = () => {
           </button>
         </li>
         <li className='nav-list-item'>
-          <button onClick={() => setShowModal(true)} className='create-btn nav-btn'>Create</button>
+          <button
+            onClick={() => setShowModal(true)}
+            className='create-btn nav-btn'
+          >
+            Create
+          </button>
           {showModal && (
             <Modal onClose={() => setShowModal(false)}>
-              <ImageCreateForm setShowModal={setShowModal}/>
+              <ImageCreateForm setShowModal={setShowModal} />
             </Modal>
           )}
         </li>
@@ -47,7 +53,36 @@ const NavBar = () => {
           </button>
         </li>
         <li className='nav-list-item'>
-          <button className='nav-btn' onClick={() => history.push(`/users/${user.id}`)}>Profile</button>
+          <button
+            className='nav-btn'
+            onClick={() => history.push(`/users/${user.id}`)}
+          >
+            Profile
+          </button>
+        </li>
+        <li className='nav-list-item'>
+          <button className='nav-btn' onClick={() => setAboutModal(true)}>
+            About
+          </button>
+          {aboutModal && (
+            <Modal onClose={() => setAboutModal(false)}>
+              <a
+                rel='noreferrer'
+                target='_blank'
+                href='https://github.com/Kglines/photo_gram'
+              >
+                Github
+              </a>
+              <br></br>
+              <a
+                rel='noreferrer'
+                target='_blank'
+                href='https://www.linkedin.com/in/keith-glines-70b28b30'
+              >
+                LinkedIn
+              </a>
+            </Modal>
+          )}
         </li>
         <li className='nav-list-item'>
           <LogoutButton />
@@ -55,25 +90,26 @@ const NavBar = () => {
       </ul>
     );
   } else {
-    sessionLinks = (
-      <ul>
-        <li>
-          <NavLink to='/' exact={true} activeClassName='active'>
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/login' exact={true} activeClassName='active'>
-            Login
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/sign-up' exact={true} activeClassName='active'>
-            Sign Up
-          </NavLink>
-        </li>
-      </ul>
-    )
+    sessionLinks = null
+    // (
+      // <ul>
+      //   <li>
+      //     <NavLink to='/' exact={true} activeClassName='active'>
+      //       Home
+      //     </NavLink>
+      //   </li>
+      //   <li>
+      //     <NavLink to='/login' exact={true} activeClassName='active'>
+      //       Login
+      //     </NavLink>
+      //   </li>
+        // <li>
+        //   <NavLink to='/sign-up' exact={true} activeClassName='active'>
+        //     Sign Up
+        //   </NavLink>
+        // </li>
+      // </ul>
+    // )
   }
 
   return (

@@ -21,6 +21,8 @@
 .image-pic {
     width: 500px;
     height: 550px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .image-pic-container{
