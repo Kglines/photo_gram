@@ -1,0 +1,9 @@
+.user-info-container {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+}
+
+.user-info-item{
+    list-style: none;
+}

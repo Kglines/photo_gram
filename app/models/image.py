@@ -1,5 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .user import User
+from .like import Like
+from flask_login import current_user
 from datetime import datetime
 
 class Image(db.Model):
@@ -27,6 +29,13 @@ class Image(db.Model):
     def num_likes(self):
         return len(self.likes)
 
+    def liked(self):
+        liked = True
+        num_of_likes = Like.query.filter(Like.user_id == current_user.id).filter(Like.image_id == self.id).first()
+        if num_of_likes is None:
+            liked = False
+        return liked
+
 
     def to_dict(self):
         return {
@@ -52,5 +61,8 @@ class Image(db.Model):
             'num_comments': self.num_comments(),
             'num_likes': self.num_likes(),
             'Comments': [comment.to_dict() for comment in self.comments],
-            'Likes': [like.to_dict() for like in self.likes],
+            'Likes': {
+                'total': self.num_likes(),
+                'liked': self.liked()
+            },
         }

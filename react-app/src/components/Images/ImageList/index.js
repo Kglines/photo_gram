@@ -40,6 +40,10 @@ function ImageList() {
 
   const dispatch = useDispatch()
 
+  const loadImages = () => {
+    dispatch(fetchAllImages());
+  }
+
   useEffect(() => {
     dispatch(fetchAllImages())
   }, [dispatch])
@@ -55,7 +59,7 @@ function ImageList() {
               user = users
             }
           })}
-            <ImageListItem image={image} user={user} />
+            <ImageListItem image={image} user={user} loadImages={loadImages}/>
         </div>
       ))}
     </div>

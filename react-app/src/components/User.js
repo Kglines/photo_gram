@@ -5,10 +5,13 @@ import { Modal } from '../context/Modal';
 import { fetchUserImages } from '../store/images';
 import ImageCreateForm from './Images/ImageCreateForm';
 import ImageListItem from './Images/ImageListItem';
+import './User.css'
+import UserEditForm from './UserEditForm';
 
 function User() {
   const [user, setUser] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
 
   const { Images } = user
   // console.log('IMAGE FROM USER = ', Images)
@@ -35,30 +38,47 @@ function User() {
   
   return (
     <>
-      <ul>
-        <li>
-          <strong>User Id</strong> {userId}
-        </li>
-        <li>
-          <strong>Username</strong> {user?.username}
-        </li>
-        <li>
-          <strong>Email</strong> {user?.email}
-        </li>
-        <li>
-          <strong>Bio</strong> {user?.bio}
-        </li>
-        <li>
-          <img
-            className='profile-pic'
-            src={user?.profile_img}
-            alt={user?.username}
-          />
-        </li>
-        <li>
-          <strong>{Images?.length}</strong> posts
-        </li>
-      </ul>
+      <div>
+        <div className='user-info-container'>
+          <div className='user-img-container'>
+            <li>
+              <img
+                className='profile-pic'
+                src={user?.profile_img}
+                alt={user?.username}
+              />
+            </li>
+          </div>
+          <div className='user-info'>
+            <ul>
+              <li className='user-info-item'>
+                {user?.firstname} {user?.lastname}
+              </li>
+              <li className='user-info-item'>
+                <strong>Username</strong> {user?.username}
+              </li>
+              <li className='user-info-item'>
+                <strong>Email</strong> {user?.email}
+              </li>
+              <li className='user-info-item'>
+                <strong>Bio</strong> {user?.bio}
+              </li>
+              <li className='user-info-item'>
+                <strong>{Images?.length}</strong> posts
+              </li>
+            </ul>
+          </div>
+          <div className='user-edit-btn'>
+            <button onClick={() => setEditModal(true)}>Edit Profile</button>
+            {editModal && (
+              <Modal onClose={() => setEditModal(false)}>
+                <UserEditForm setEditModal={setEditModal} />
+              </Modal>
+            )}
+          </div>
+        </div>
+      </div>
+
       <div>
         <button onClick={() => setShowModal(true)}>+</button>
         {showModal && (

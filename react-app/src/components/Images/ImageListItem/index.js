@@ -1,8 +1,9 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import Likes from '../../Likes';
 import './ImageListItem.css'
 
-function ImageListItem({ image, user }) {
+function ImageListItem({ image, user, loadImages }) {
 
   const postDate = image?.updated_at ? image?.updated_at?.slice(0, 16) : image?.created_at?.slice(0, 16)
 
@@ -26,6 +27,7 @@ function ImageListItem({ image, user }) {
         <p>View all {image?.Comments?.length} Comments</p>
       </NavLink>
       <div>
+        <Likes image={image} loadImages={loadImages}/>
         <p>{image?.Likes?.length} Likes</p>
       </div>
     </div>

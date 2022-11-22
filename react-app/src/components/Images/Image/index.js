@@ -4,12 +4,16 @@ import { Modal } from '../../../context/Modal';
 import ImageEditForm from '../ImageEditForm';
 import ImageDelete from '../ImageDelete';
 import './Image.css'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CommentCreateForm from '../../Comments/CommentCreateForm';
 import CommentList from '../../Comments/CommentList';
+import Likes from '../../Likes';
+import { fetchCreateLike } from '../../../store/images';
+import { fetchDeleteLike } from '../../../store/images';
 
-function Image({ image, user }) {
+function Image({ image, user, loadImage }) {
   const { imageId } = useParams()
+  const dispatch = useDispatch()
   const [editModal, setEditModal] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -17,13 +21,30 @@ function Image({ image, user }) {
   const sessionUser = useSelector(state => state.session.user)
   const isOwner = sessionUser.id === image?.Image?.user_id
 
+  const liked = image?.Image?.Likes?.liked
+
+  
+  const handleClick = async (e) => {
+    return liked
+      ? await dispatch(fetchDeleteLike(imageId))
+          .then(() => loadImage(imageId))
+          .then(() => loadImage(imageId))
+      : await dispatch(fetchCreateLike(imageId))
+          .then(() => loadImage(imageId))
+          .then(() => loadImage(imageId))
+  };
+
   return (
     <div className='image-container'>
       <div className='image-btn-container'>
         {/* <NavLink to={`/users/${user?.id}`} className='user-link'>
           <p>{user?.username}</p>
         </NavLink> */}
-        {isOwner && <button className='edit-btn' onClick={() => setEditModal(true)}>Edit</button>}
+        {isOwner && (
+          <button className='edit-btn' onClick={() => setEditModal(true)}>
+            Edit
+          </button>
+        )}
         {editModal && (
           <Modal onClose={() => setEditModal(false)}>
             <ImageEditForm
@@ -34,7 +55,9 @@ function Image({ image, user }) {
           </Modal>
         )}
         {isOwner && (
-          <button className='delete-btn' onClick={() => setDeleteModal(true)}>Delete</button>
+          <button className='delete-btn' onClick={() => setDeleteModal(true)}>
+            Delete
+          </button>
         )}
         {deleteModal && (
           <Modal onClose={() => setDeleteModal(false)}>
@@ -57,11 +80,13 @@ function Image({ image, user }) {
         <div className='image-text-container'>
           <div className='image-text-container-header'>
             <NavLink to={`/users/${user?.id}`} className='user-link'>
-              {user?.profile_img && (<img
-                className='profile-img'
-                src={user?.profile_img}
-                alt={user?.username}
-              />)}
+              {user?.profile_img && (
+                <img
+                  className='profile-img'
+                  src={user?.profile_img}
+                  alt={user?.username}
+                />
+              )}
               <p>{user?.username}</p>
             </NavLink>
           </div>
@@ -72,7 +97,7 @@ function Image({ image, user }) {
             <p className='caption'>{image?.Image?.caption}</p>
           </div>
           <div className='comment-container'>
-                <CommentList comments={image?.Image?.Comments}/>
+            <CommentList comments={image?.Image?.Comments} />
             {/* {image?.Image?.Comments.map((comment) => (
               <div className='comment-container-content' key={comment?.id}>
                 <NavLink
@@ -86,11 +111,14 @@ function Image({ image, user }) {
             ))} */}
           </div>
           <div>
-            <p>{image?.Image?.num_likes} Likes</p>
+            <div>
+              <button onClick={handleClick}>Like</button>
+              <div>{image?.Image?.Likes?.total} Likes</div>
+            </div>
             <p>{image?.Image?.num_comments} Comments</p>
           </div>
           <div>
-            <CommentCreateForm image={image}/>
+            <CommentCreateForm image={image} />
           </div>
         </div>
       </div>
