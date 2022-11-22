@@ -12,8 +12,8 @@ class Image(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     caption = db.Column(db.String(2000), nullable=False)
     image_url = db.Column(db.String, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=datetime.now())
+    updated_at = db.Column(db.DateTime, onupdate=datetime.now())
 
     user = db.relationship('User', back_populates='images')
     comments = db.relationship('Comment', back_populates='image', cascade='all, delete-orphan')

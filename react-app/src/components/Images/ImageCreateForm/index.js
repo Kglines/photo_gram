@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { fetchCreateImage } from '../../../store/images'
+import { fetchAllImages, fetchCreateImage } from '../../../store/images'
 import './ImageCreateForm.css'
 
 function ImageCreateForm({ setShowModal }) {
@@ -18,7 +18,7 @@ function ImageCreateForm({ setShowModal }) {
     const formData = new FormData();
     formData.append('caption', caption)
     formData.append('image_url', image_url);
-    console.log('image_url', image_url)
+    // console.log('image_url', image_url)
     // console.log('caption', caption)
     // console.log('formdata', formData)
     setImageLoading(true);
@@ -29,10 +29,10 @@ function ImageCreateForm({ setShowModal }) {
     })
     // console.log('FORM DATA', formData)
     // console.log('RES', res)
-
     if (res.ok) {
       await res.json();
       setImageLoading(false);
+      dispatch(fetchAllImages())
       history.push(`/home`);
       setShowModal(false);
     } else {
@@ -44,11 +44,14 @@ function ImageCreateForm({ setShowModal }) {
     
     // const createdImage = await dispatch(fetchCreateImage(formData))
     //   .then((res) => {
+    //     setImageLoading(false)
     //     setShowModal(false)
     //     return res
     //   })
     //   .then((res) => {
+    //     console.log('RES = ', res)
     //     history.push(`/images/${res.id}`)
+    //     return res
     //   })
     //   .catch(async (res) => {
     //     const data = await res.json()

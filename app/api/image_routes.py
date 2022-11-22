@@ -22,7 +22,7 @@ def validation_errors_to_error_messages(validation_errors):
 @image_routes.route('')
 @login_required
 def all_images():
-    images = Image.query.all()
+    images = Image.query.order_by(Image.created_at.desc())
     return {'Images': [image.image_details_to_dict() for image in images]}, 200
 
 
