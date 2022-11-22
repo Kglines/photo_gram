@@ -5,6 +5,8 @@ const GET_ONE_IMAGE = 'one_image/get';
 const CREATE_IMAGES = 'images/create';
 const EDIT_IMAGES = 'images/edit';
 const DELETE_IMAGES = 'images/delete';
+const CREATE_LIKE = 'like/create'
+const DELETE_LIKE = 'like/delete'
 
 // ******** Images Actions ********
 
@@ -54,6 +56,22 @@ export const deleteImage = (id) => {
     return {
         type: DELETE_IMAGES,
         payload: id
+    }
+}
+
+// Create a Like
+export const createLike = (imageId) => {
+    return {
+        type: CREATE_LIKE,
+        payload: imageId
+    }
+}
+
+// Delete a Like
+export const deleteLike = (imageId) => {
+    return {
+        type: DELETE_LIKE,
+        payload: imageId
     }
 }
 
@@ -141,6 +159,34 @@ export const fetchDeleteImage = (imageId) => async (dispatch) => {
     };
     return res;
 };
+
+// Create Like Thunk
+export const fetchCreateLike = (imageId) => async (dispatch) => {
+    let res = await fetch(`/api/images/${imageId}/like`, {
+        method: 'POST'
+    })
+
+    if (res.ok){
+        const like = await res.json()
+        dispatch(createLike(like))
+        return like
+    }
+    return res;
+}
+
+// Delete Like Thunk
+export const fetchDeleteLike = (imageId) => async (dispatch) => {
+    let res = await fetch(`/api/images/${imageId}/like`, {
+        method: 'DELETE'
+    })
+
+    if (res.ok){
+        const like = await res.json()
+        dispatch(deleteLike(like))
+        return like
+    }
+    return res;
+}
 
 // ******** REDUCER *********
 

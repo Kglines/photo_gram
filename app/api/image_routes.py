@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from app.models import db, Image, Comment
+from app.models import db, Image, Comment, Like
 from app.forms import ImageForm, CommentForm
 from flask_login import current_user, login_required
 from app.aws import upload_file_to_s3, allowed_file, get_unique_filename
@@ -118,3 +118,36 @@ def create_comment(id):
         db.session.commit()
         return comment.to_dict(), 200
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+# Create a Like
+@image_routes.route('/<int:id>/like', methods=['POST'])
+@login_required
+def like_image(id):
+    image = Image.query.get(id)
+    if image is None:
+        return {'errors': ['Image not found']}, 404
+    like = Like.query.filter(Like.user_id == current_user.id).filter(Like.image_id == image.id).first()
+    if like is None:
+        like = Like(
+            user_id=current_user.id,
+            image_id=image.id
+        )
+        db.session.add(like)
+        db.session.commit()
+        return {"Message": "Image liked" }
+    return {"errors": ["Already liked image"]}, 401
+
+# Delete a Like
+@image_routes.route('/<int:id>/like', methods=['DELETE'])
+@login_required
+def unlike_image(id):
+    image = Image.query.get(id)
+    if image is None:
+        return {'errors': ['Image not found']}, 404
+    like = Like.query.filter(Like.user_id == current_user.id).filter(Like.image_id == image.id).first()
+    if like is None:
+        return {"errors": "Image not found."}
+    db.session.delete(like)
+    db.session.commit()
+    return {"Message": "Image unliked" }
+    

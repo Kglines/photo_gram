@@ -28,6 +28,10 @@ function ImageDetail() {
     dispatch(fetchOneImage(imageId))
   }, [dispatch, imageId])
 
+  const loadImage = (imageId) => {
+    dispatch(fetchOneImage(imageId));
+  }
+
   usersList.map(users => {
     if (users?.id === image?.Image?.user_id) {
       return user = users;
@@ -36,7 +40,7 @@ function ImageDetail() {
 
   return (
     <div>
-      <Image image={image} user={user}/>
+      <Image image={image} user={user} loadImage={loadImage}/>
     </div>
   )
 }
