@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { NavLink, Redirect, useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import ImageCreateForm from '../Images/ImageCreateForm';
 import { Modal } from '../../context/Modal'
+import { BsHouseDoorFill } from 'react-icons/bs';
+import { VscDiffAdded } from 'react-icons/vsc';
+import { MdOutlineExplore } from 'react-icons/md'
+import { BsInfoSquare } from 'react-icons/bs'
+import { IoSettingsOutline } from 'react-icons/io5'
 import './NavBar.css';
 
 const NavBar = () => {
   const user = useSelector(state => state.session.user);
   const history = useHistory()
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [aboutModal, setAboutModal] = useState(false)
 
@@ -18,7 +22,6 @@ const NavBar = () => {
 
   const handleClick = () => {
     return history.push('/home')
-    // return <Redirect to={'/home'} />
   }
 
   if(user){
@@ -31,6 +34,7 @@ const NavBar = () => {
         </li>
         <li className='nav-list-item'>
           <button className='nav-btn' onClick={handleClick}>
+            <BsHouseDoorFill />
             Home
           </button>
         </li>
@@ -39,6 +43,7 @@ const NavBar = () => {
             onClick={() => setShowModal(true)}
             className='create-btn nav-btn'
           >
+            <VscDiffAdded />
             Create
           </button>
           {showModal && (
@@ -49,6 +54,7 @@ const NavBar = () => {
         </li>
         <li className='nav-list-item'>
           <button className='nav-btn' onClick={() => history.push('/users')}>
+            <MdOutlineExplore />
             Explore
           </button>
         </li>
@@ -57,11 +63,13 @@ const NavBar = () => {
             className='nav-btn'
             onClick={() => history.push(`/users/${user.id}`)}
           >
+            <IoSettingsOutline />
             Profile
           </button>
         </li>
         <li className='nav-list-item'>
           <button className='nav-btn' onClick={() => setAboutModal(true)}>
+            <BsInfoSquare /> 
             About
           </button>
           {aboutModal && (
