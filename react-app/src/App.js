@@ -9,7 +9,6 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import ImageDetail from './components/Images/ImageDetail';
-import Home from './components/Home/Home';
 import ImageList from './components/Images/ImageList';
 
 function App() {
