@@ -15,12 +15,14 @@ function CommentListItem({ comment }) {
 
   return (
     <div>
-      <NavLink className='user-link' to={`/users/${comment?.userId}`}>
-        <p className='comment-user'>{comment?.user?.username}</p>
-      </NavLink>
-      <p className='comment-body'>{comment?.body}</p>
+      <div className='comment'>
+        <NavLink className='user-link' to={`/users/${comment?.userId}`}>
+          <p className='comment-user'>{comment?.user?.username}</p>
+        </NavLink>
+        <p className='comment-body'>{comment?.body}</p>
+      </div>
       {isOwner && 
-      <button onClick={() => setEditModal(true)}>Edit</button>
+      <button className='edit-btn' onClick={() => setEditModal(true)}>Edit</button>
       }
       {editModal && (
         <Modal onClose={() => setEditModal(false)}>
@@ -28,7 +30,7 @@ function CommentListItem({ comment }) {
         </Modal>
       )}
       {isOwner && 
-        <button onClick={() => setDeleteModal(true)}>Delete</button>
+        <button className='delete-btn' onClick={() => setDeleteModal(true)}>Delete</button>
       }
       {deleteModal && (
         <Modal onClose={() => setDeleteModal(false)}>

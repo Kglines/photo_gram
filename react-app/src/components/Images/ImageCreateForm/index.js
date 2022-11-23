@@ -63,7 +63,7 @@ function ImageCreateForm({ setShowModal }) {
   return (
     <div>
       {errors && errors.map(error => (
-        <div key={error}>{error}</div>
+        <div className='errors' key={error}>{error}</div>
       ))}
       <form onSubmit={handleSubmit}>
         <input 

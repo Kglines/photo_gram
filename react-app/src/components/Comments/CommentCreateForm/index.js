@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { fetchCreateComments } from '../../../store/comments'
 import { fetchOneImage } from '../../../store/images'
+import './CommentCreateForm.css'
 
 function CommentCreateForm({ image }) {
+  
   const dispatch = useDispatch()
     const [comment, setComment] = useState('')
     const [errors, setErrors] = useState([])
@@ -25,10 +27,10 @@ function CommentCreateForm({ image }) {
         return newComment
     }
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='comment-create-form-container' onSubmit={handleSubmit}>
         <input 
             type='text'
-            placeholder='Comment'
+            placeholder='Add a Comment...'
             value={comment}
             onChange={(e) => setComment(e.target.value)}
         />

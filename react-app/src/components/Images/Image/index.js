@@ -10,6 +10,7 @@ import CommentList from '../../Comments/CommentList';
 import Likes from '../../Likes';
 import { fetchCreateLike } from '../../../store/images';
 import { fetchDeleteLike } from '../../../store/images';
+import { FaRegHeart, FaHeart, FaRegComment } from 'react-icons/fa';
 
 function Image({ image, user, loadImage }) {
   const { imageId } = useParams()
@@ -22,7 +23,6 @@ function Image({ image, user, loadImage }) {
   const isOwner = sessionUser.id === image?.Image?.user_id
 
   const liked = image?.Image?.Likes?.liked
-
   
   const handleClick = async (e) => {
     return liked
@@ -37,9 +37,6 @@ function Image({ image, user, loadImage }) {
   return (
     <div className='image-container'>
       <div className='image-btn-container'>
-        {/* <NavLink to={`/users/${user?.id}`} className='user-link'>
-          <p>{user?.username}</p>
-        </NavLink> */}
         {isOwner && (
           <button className='edit-btn' onClick={() => setEditModal(true)}>
             Edit
@@ -98,27 +95,32 @@ function Image({ image, user, loadImage }) {
           </div>
           <div className='comment-container'>
             <CommentList comments={image?.Image?.Comments} />
-            {/* {image?.Image?.Comments.map((comment) => (
-              <div className='comment-container-content' key={comment?.id}>
-                <NavLink
-                  className='user-link'
-                  to={`/users/${comment?.user?.id}`}
-                >
-                  <p className='comment-user'>{comment?.user?.username}</p>
-                </NavLink>
-                <p className='comment-body'>{comment?.body}</p>
+          </div>
+          <div>
+            <div className='image-icons-container-image'>
+              <div className='image-icons'>
+                {liked ? (
+                  <FaHeart
+                    className='like-icon'
+                    style={{ color: 'red' }}
+                    onClick={handleClick}
+                  />
+                ) : (
+                  <FaRegHeart className='like-icon' onClick={handleClick} />
+                )}
+                <FaRegComment className='comment-icon' />
               </div>
-            ))} */}
-          </div>
-          <div>
-            <div>
-              <button onClick={handleClick}>Like</button>
-              <div>{image?.Image?.Likes?.total} Likes</div>
+              <div className='image-icons-res-image'>
+                {image?.Image?.Likes?.total === 1 ? (
+                  <p>{image?.Image?.Likes?.total} Like</p>
+                ) : (
+                  <p>{image?.Image?.Likes?.total} Likes</p>
+                )}
+              </div>
             </div>
-            <p>{image?.Image?.num_comments} Comments</p>
           </div>
           <div>
-            <CommentCreateForm image={image} />
+            <CommentCreateForm className='comment-create-form' image={image} />
           </div>
         </div>
       </div>

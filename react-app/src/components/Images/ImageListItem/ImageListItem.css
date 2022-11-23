@@ -45,6 +45,27 @@
     100% { opacity: 1; }
 }
 
+.image-icons{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: -10px;
+    gap: 10px;
+}
+.image-icons-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.like-icon:hover, .comment-icon:hover{
+    cursor: pointer;
+}
+
+.image-icons-res{
+    margin-top: -20px;
+    font-size: 13px;
+}
+
 .image-list-item-img-caption {
     background-color: white;
     display: -webkit-box;
