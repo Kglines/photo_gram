@@ -23,8 +23,8 @@ function Image({ image, user, loadImage }) {
   const isOwner = sessionUser.id === image?.Image?.user_id
 
   const liked = image?.Image?.Likes?.liked
-  
-  const handleClick = async (e) => {
+  // console.log('Load Image = ', () => loadImage(imageId))
+  const handleClick = async () => {
     return liked
       ? await dispatch(fetchDeleteLike(imageId))
           .then(() => loadImage(imageId))
