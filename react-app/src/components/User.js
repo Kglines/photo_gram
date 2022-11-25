@@ -15,8 +15,9 @@ function User() {
   const [user, setUser] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
-  const userImages = Object.values(useSelector(state => state?.images?.user_images))
-  console.log('USER IMAGES = ', userImages)
+  const userImages = useSelector(state => state?.images)
+  let userImgArr = Object.values(userImages.user_images)
+  console.log('USER IMAGES = ', userImgArr.map(image => image.Likes))
   
 
   useEffect(() => {
@@ -104,7 +105,7 @@ function User() {
         <p>New</p>
       </div>
       <div>
-        {userImages?.map((image) => (
+        {userImgArr?.map((image) => (
           <div key={image?.id}>
             <ImageListItem image={image} loadImages={loadImages} />
           </div>
