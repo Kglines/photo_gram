@@ -15,11 +15,10 @@ function User() {
   const [user, setUser] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
-  const userImages = useSelector(state => state?.images)
-  let userImgArr = Object.values(userImages.user_images)
-  console.log('USER IMAGES = ', userImgArr.map(image => image.Likes))
+  const userImages = Object.values(useSelector(state => state?.images?.user_images ? state.images.user_images : state.images))
+  // let userImgArr = Object.values(userImages?.user_images)
+  // console.log('USER IMAGES = ', userImages);
   
-
   useEffect(() => {
     dispatch(fetchUserImages(parsedId));
   }, [dispatch, parsedId])
@@ -31,16 +30,16 @@ function User() {
   
   // const fetchedImages = useSelector(state => state.images)
   // console.log('FETCHED IMAGES = ', fetchedImages)
-  useEffect(() => {
-    if (!userId) {
-      return;
-    }
-    (async () => {
-      const response = await fetch(`/api/users/${userId}`);
-      const user = await response.json();
-      setUser(user);
-    })();
-  }, [userId]);
+  // useEffect(() => {
+  //   if (!userId) {
+  //     return;
+  //   }
+  //   (async () => {
+  //     const response = await fetch(`/api/users/${userId}`);
+  //     const user = await response.json();
+  //     setUser(user);
+  //   })();
+  // }, [userId]);
 
   if (!user) {
     return null;
@@ -105,7 +104,7 @@ function User() {
         <p>New</p>
       </div>
       <div>
-        {userImgArr?.map((image) => (
+        {userImages?.map((image) => (
           <div key={image?.id}>
             <ImageListItem image={image} loadImages={loadImages} />
           </div>
