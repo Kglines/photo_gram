@@ -9,15 +9,24 @@ import './User.css'
 import UserEditForm from './UserEditForm';
 
 function User() {
+  const { userId } = useParams();
+  const parsedId = parseInt(userId)
+  const dispatch = useDispatch();
   const [user, setUser] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
+  const userImages = Object.values(useSelector(state => state?.images?.user_images))
+  console.log('USER IMAGES = ', userImages)
+  
+
+  useEffect(() => {
+    dispatch(fetchUserImages(parsedId));
+  }, [dispatch, parsedId])
 
   const { Images } = user
   // console.log('IMAGE FROM USER = ', Images)
   // const [images, setImages] = useState({});
-  const { userId }  = useParams();
-  const dispatch = useDispatch();
+  
   
   // const fetchedImages = useSelector(state => state.images)
   // console.log('FETCHED IMAGES = ', fetchedImages)
@@ -35,6 +44,12 @@ function User() {
   if (!user) {
     return null;
   }
+
+  const loadImages = (userId) => {
+    return dispatch(fetchUserImages(userId))
+  }
+
+  // console.log('USER LOAD = ', loadImages)
   
   return (
     <>
@@ -89,12 +104,11 @@ function User() {
         <p>New</p>
       </div>
       <div>
-        {user &&
-          Images?.map((image) => (
-            <div key={image?.id}>
-              <ImageListItem image={image} />
-            </div>
-          ))}
+        {userImages?.map((image) => (
+          <div key={image?.id}>
+            <ImageListItem image={image} loadImages={loadImages} />
+          </div>
+        ))}
       </div>
     </>
   );

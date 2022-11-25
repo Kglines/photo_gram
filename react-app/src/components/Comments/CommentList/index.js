@@ -7,7 +7,7 @@ function CommentList({ comments }) {
   const dispatch = useDispatch()
 
   // const comments = useSelector(state => state.comments)
-  console.log('COMMENTS COMMENT LIST = ', comments)
+  // console.log('COMMENTS COMMENT LIST = ', comments)
 
   return (
     <div className='comment-container'>

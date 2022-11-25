@@ -1,10 +1,32 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import Likes from '../../Likes';
-import { FaRegComment } from 'react-icons/fa';
+import { FaHeart, FaRegComment, FaRegHeart } from 'react-icons/fa';
 import './ImageListItem.css'
+import { useDispatch } from 'react-redux';
+import { fetchAllImages, fetchCreateLike, fetchDeleteLike, fetchOneImage, fetchUserImages} from '../../../store/images.js'
+
 
 function ImageListItem({ image, user, loadImages }) {
+  const dispatch = useDispatch()
+  const { userId } = useParams()
+  const liked = image?.Likes?.liked
+  
+  // console.log('Load Images liked', liked)
+  // console.log('Load Image User = ', userId)
+
+
+  const handleClick = async (e) => {
+    console.log('CLICKED')
+    return liked
+      ? await dispatch(fetchDeleteLike(image?.id))
+          .then(() => loadImages(userId))
+          .then(() => loadImages(userId))
+      :
+        await dispatch(fetchCreateLike(image?.id))
+          .then(() => loadImages(userId))
+          .then(() => loadImages(userId))
+  };
 
   const postDate = image?.updated_at ? image?.updated_at?.slice(0, 16) : image?.created_at?.slice(0, 16)
 
@@ -26,11 +48,25 @@ function ImageListItem({ image, user, loadImages }) {
         </NavLink>
         <div className='image-icons-container'>
           <div className='image-icons'>
-            <Likes
+            {/* <Likes
               className='like-icon'
               image={image}
               loadImages={loadImages}
-            />
+            /> */}
+            {/* {liked && <p>LIKE</p>} */}
+            {liked ? (
+              <FaHeart
+                className='like-icon'
+                style={{ color: 'red' }}
+                onClick={handleClick}
+              />
+            ) : (
+              <FaRegHeart 
+              className='like-icon' 
+              onClick={handleClick} 
+
+              />
+            )}
             <FaRegComment className='comment-icon' />
           </div>
           <div className='image-icons-res'>
