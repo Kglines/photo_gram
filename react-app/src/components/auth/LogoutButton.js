@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { IoLogOutOutline } from 'react-icons/io5';
 import { logout } from '../../store/session';
 
 const LogoutButton = () => {
@@ -8,7 +9,14 @@ const LogoutButton = () => {
     await dispatch(logout());
   };
 
-  return <button className='nav-btn' onClick={onLogout}>Logout</button>;
+  return (
+    <div>
+      <button className='nav-btn' onClick={onLogout}>
+        <IoLogOutOutline className='nav-icon' />
+        Logout
+      </button>
+    </div>
+  );
 };
 
 export default LogoutButton;

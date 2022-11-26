@@ -43,7 +43,7 @@ function ImageListItem({ image, user, loadImages }) {
           <img
             className='image-list-item-img'
             src={image?.image_url}
-            alt={image.caption}
+            alt={image?.caption}
           />
         </NavLink>
         <div className='image-icons-container'>

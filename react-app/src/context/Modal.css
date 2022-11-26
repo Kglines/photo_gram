@@ -27,7 +27,6 @@
   text-align: center;
   height: auto;
   width: auto;
-  
 }
 
 input {
@@ -86,6 +85,7 @@ input {
     border-radius: 20px;
     height: 40px;
     margin: 5px;
+    box-shadow: 1px 5px 10px silver;
 }
 
 .modal-btn:hover {
@@ -96,6 +96,7 @@ input {
 
 .modal-submit-btn {
   background-color: #0a95ff;
+  
 }
 
 .modal-cancel-btn {
