@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, NavLink } from 'react-router-dom';
 import { login } from '../../store/session';
@@ -71,7 +71,7 @@ const LoginForm = () => {
           <button
             className='login-btn'
             type='submit'
-            disabled={email.length === 0 || errors.length > 0}
+            disabled={email.length === 0}
           >
             Login
           </button>
