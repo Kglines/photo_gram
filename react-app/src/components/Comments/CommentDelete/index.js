@@ -25,19 +25,29 @@ function CommentDelete({ comment, setDeleteModal }) {
         })
     }
   return (
-    <div>
-        <ul>
-            {errors?.map(error => (
-                <li key={error}>{error}</li>
-            ))}
-        </ul>
-        <p>Are you sure you want to delete your comment?</p>
-        <div>
-            <button onClick={() => onDelete()}>Delete</button>
-            <button onClick={() => setDeleteModal(false)}>Cancel</button>
-        </div>
+    <div className='modal-container'>
+      <ul>
+        {errors?.map((error) => (
+          <li key={error}>{error}</li>
+        ))}
+      </ul>
+      <h2>Are you sure you want to delete your comment?</h2>
+      <div>
+        <button
+          className='modal-btn modal-submit-btn'
+          onClick={() => onDelete()}
+        >
+          Delete
+        </button>
+        <button
+          className='modal-btn modal-cancel-btn'
+          onClick={() => setDeleteModal(false)}
+        >
+          Cancel
+        </button>
+      </div>
     </div>
-  )
+  );
 }
 
 export default CommentDelete

@@ -28,20 +28,31 @@ function CommentEditForm({ setEditModal, comment}) {
         return newComment
     }
   return (
-    <form onSubmit={handleSubmit}>
-        <input 
-            type='text'
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            name='comment'
-        />
-        {errors?.map(error => (
-            <li className='errors' key={error}>{error}</li>
-        ))}
-        <button>Submit</button>
-        <button onClick={() => setEditModal(false)}>Cancel</button>
+    <form className='modal-container' onSubmit={handleSubmit}>
+      <h2>Edit Comment</h2>
+      <input
+        className='modal-input-title'
+        type='text'
+        value={body}
+        onChange={(e) => setBody(e.target.value)}
+        name='comment'
+      />
+      {errors?.map((error) => (
+        <li className='errors' key={error}>
+          {error}
+        </li>
+      ))}
+      <div>
+        <button className='modal-btn modal-submit-btn'>Submit</button>
+        <button
+          className='modal-btn modal-cancel-btn'
+          onClick={() => setEditModal(false)}
+        >
+          Cancel
+        </button>
+      </div>
     </form>
-  )
+  );
 }
 
 export default CommentEditForm

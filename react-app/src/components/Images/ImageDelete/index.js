@@ -20,17 +20,31 @@ function ImageDelete({ setDeleteModal, imageId }) {
     })
   }
   return (
-    <div>
+    <div className='modal-container'>
       <ul>
-        {errors?.map(error => (
-          <li className='errors' key={error}>{error}</li>
+        {errors?.map((error) => (
+          <li className='errors' key={error}>
+            {error}
+          </li>
         ))}
       </ul>
-      <p>Are you sure you want to delete this post?</p>
-      <button onClick={() => onDelete()}>Delete</button>
-      <button onClick={() => setDeleteModal(false)}>Cancel</button>
+      <h2>Are you sure you want to delete this post?</h2>
+      <div>
+        <button
+          className='modal-btn modal-submit-btn'
+          onClick={() => onDelete()}
+        >
+          Delete
+        </button>
+        <button
+          className='modal-btn modal-cancel-btn'
+          onClick={() => setDeleteModal(false)}
+        >
+          Cancel
+        </button>
+      </div>
     </div>
-  )
+  );
 }
 
 export default ImageDelete

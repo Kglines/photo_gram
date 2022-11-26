@@ -33,29 +33,39 @@ function ImageEditForm({ imageId, setEditModal, image }) {
     return newImage;
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <p>Edit your caption</p>
-      <input 
-        type='text' 
-        value={caption} 
-        onChange={(e) => setCaption(e.target.value)} 
-        name='caption' 
-        required 
+    <form className='modal-container' onSubmit={handleSubmit}>
+      <h2>Edit your caption</h2>
+      <input
+        className='modal-input-title'
+        type='text'
+        value={caption}
+        onChange={(e) => setCaption(e.target.value)}
+        name='caption'
+        required
       />
-      <input 
-        type='text' 
-        value={image_url} 
-        onChange={(e) => setImage_url(e.target.value)} 
-        name='image_url' 
-        required 
-      />
-      {errors?.map(error => (
-        <li key={error} className='errors'>{error}</li>
+      {/* <input
+        type='text'
+        value={image_url}
+        onChange={(e) => setImage_url(e.target.value)}
+        name='image_url'
+        required
+      /> */}
+      {errors?.map((error) => (
+        <li key={error} className='errors'>
+          {error}
+        </li>
       ))}
-      <button>Continue</button>
-      <button onClick={() => setEditModal(false)}>Cancel</button>
+      <div>
+        <button className='modal-btn modal-submit-btn'>Continue</button>
+        <button
+          className='modal-btn modal-cancel-btn'
+          onClick={() => setEditModal(false)}
+        >
+          Cancel
+        </button>
+      </div>
     </form>
-  )
+  );
 }
 
 export default ImageEditForm
