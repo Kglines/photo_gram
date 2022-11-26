@@ -32,7 +32,7 @@ function ImageListItem({ image, user, loadImages }) {
 
   return (
     <div className='image-list-item-container'>
-      <NavLink to={`/users/${user?.id}`}>
+      <NavLink className='user-link' to={`/users/${user?.id}`}>
         <p>{user?.username}</p>
       </NavLink>
       <div className='image-list-item-img-container'>
@@ -61,26 +61,31 @@ function ImageListItem({ image, user, loadImages }) {
                 onClick={handleClick}
               />
             ) : (
-              <FaRegHeart 
-              className='like-icon' 
-              onClick={handleClick} 
-
-              />
+              <FaRegHeart className='like-icon' onClick={handleClick} />
             )}
-            <FaRegComment className='comment-icon' />
+            <NavLink className='comment-link' to={`/images/${image?.id}`}>
+              <FaRegComment className='comment-icon' />
+            </NavLink>
           </div>
           <div className='image-icons-res'>
-            {image?.Likes?.total === 1 ? (
-              <p>{image?.Likes?.total} Like</p>
-            ) : (
-              <p>{image?.Likes?.total} Likes</p>
-            )}
+            <div>
+              <NavLink className='comment-link' to={`/images/${image?.id}`}>
+                <p>View Comments</p>
+                {/* <p>View all {image?.Comments?.length} Comments</p> */}
+              </NavLink>
+            </div>
+            <div>
+              {image?.Likes?.total === 1 ? (
+                <p>{image?.Likes?.total} Like</p>
+              ) : (
+                <p>{image?.Likes?.total} Likes</p>
+              )}
+            </div>
           </div>
         </div>
         <p className='image-list-item-img-caption'>{image?.caption}</p>
         <div className='image-list-item-post-date'>{postDate}</div>
       </div>
-      <p>View all {image?.Comments?.length} Comments</p>
     </div>
   );
 };
