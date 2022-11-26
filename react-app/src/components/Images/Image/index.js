@@ -108,7 +108,7 @@ function Image({ image, user, loadImage }) {
                 ) : (
                   <FaRegHeart className='like-icon' onClick={handleClick} />
                 )}
-                <FaRegComment className='comment-icon' />
+                {/* <FaRegComment className='comment-icon' /> */}
               </div>
               <div className='image-icons-res-image'>
                 {image?.Image?.Likes?.total === 1 ? (

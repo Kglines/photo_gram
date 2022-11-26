@@ -62,28 +62,45 @@ function ImageCreateForm({ setShowModal }) {
 
   return (
     <div>
-      {errors && errors.map(error => (
-        <div className='errors' key={error}>{error}</div>
-      ))}
-      <form onSubmit={handleSubmit}>
-        <input 
+      {errors &&
+        errors.map((error) => (
+          <div className='errors' key={error}>
+            {error}
+          </div>
+        ))}
+      <form onSubmit={handleSubmit} className='modal-container'>
+        <h2 className='modal-form-title'>Share A New Image</h2>
+        <input
+          className='modal-input-title file-btn'
+          type='file'
+          accept='image/*'
+          onChange={(e) => setImage_url(e.target.files[0])}
+          required
+        />
+        <input
+          className='modal-input-title'
           type='text'
           value={caption}
           onChange={(e) => setCaption(e.target.value)}
           name='caption'
           placeholder='Caption goes here...'
+          required
         />
-        <input 
-          type='file'
-          accept='image/*'
-          onChange={(e) => setImage_url(e.target.files[0])}
-        />
-        <button type='submit'>Submit</button>
-        <button onClick={() => setShowModal(false)}>Cancel</button>
-        {(imageLoading) && <p>Loading...</p>}
+        <div>
+          <button className='modal-btn modal-submit-btn' type='submit'>
+            Share
+          </button>
+          <button
+            className='modal-btn modal-cancel-btn'
+            onClick={() => setShowModal(false)}
+          >
+            Cancel
+          </button>
+        </div>
+        {imageLoading && <p>Loading...</p>}
       </form>
     </div>
-  )
+  );
 }
 
 export default ImageCreateForm
