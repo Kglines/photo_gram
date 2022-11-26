@@ -16,7 +16,7 @@ function CommentListItem({ comment }) {
   return (
     <div>
       <div className='comment'>
-        <NavLink className='user-link' to={`/users/${comment?.userId}`}>
+        <NavLink className='user-link' to={`/users/${comment?.user_id}`}>
           <p className='comment-user'>{comment?.user?.username}</p>
         </NavLink>
         <p className='comment-body'>{comment?.body}</p>
