@@ -17,7 +17,6 @@ function ImageListItem({ image, user, loadImages }) {
 
 
   const handleClick = async (e) => {
-    console.log('CLICKED')
     return liked
       ? await dispatch(fetchDeleteLike(image?.id))
           .then(() => loadImages(userId))
@@ -43,17 +42,12 @@ function ImageListItem({ image, user, loadImages }) {
           <img
             className='image-list-item-img'
             src={image?.image_url}
-            alt={image.caption}
+            alt={image?.caption}
           />
         </NavLink>
         <div className='image-icons-container'>
           <div className='image-icons'>
-            {/* <Likes
-              className='like-icon'
-              image={image}
-              loadImages={loadImages}
-            /> */}
-            {/* {liked && <p>LIKE</p>} */}
+            
             {liked ? (
               <FaHeart
                 className='like-icon'

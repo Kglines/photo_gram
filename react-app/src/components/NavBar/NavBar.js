@@ -9,6 +9,8 @@ import { VscDiffAdded } from 'react-icons/vsc';
 import { MdOutlineExplore } from 'react-icons/md'
 import { BsInfoSquare } from 'react-icons/bs'
 import { IoSettingsOutline } from 'react-icons/io5'
+import { AiFillGithub, AiFillLinkedin } from 'react-icons/ai';
+
 import './NavBar.css';
 
 const NavBar = () => {
@@ -34,7 +36,7 @@ const NavBar = () => {
         </li>
         <li className='nav-list-item'>
           <button className='nav-btn' onClick={handleClick}>
-            <BsHouseDoorFill />
+            <BsHouseDoorFill className='nav-icon' />
             Home
           </button>
         </li>
@@ -43,7 +45,7 @@ const NavBar = () => {
             onClick={() => setShowModal(true)}
             className='create-btn nav-btn'
           >
-            <VscDiffAdded />
+            <VscDiffAdded className='nav-icon' />
             Create
           </button>
           {showModal && (
@@ -54,7 +56,7 @@ const NavBar = () => {
         </li>
         <li className='nav-list-item'>
           <button className='nav-btn' onClick={() => history.push('/users')}>
-            <MdOutlineExplore />
+            <MdOutlineExplore className='nav-icon' />
             Explore
           </button>
         </li>
@@ -63,32 +65,45 @@ const NavBar = () => {
             className='nav-btn'
             onClick={() => history.push(`/users/${user.id}`)}
           >
-            <IoSettingsOutline />
+            <IoSettingsOutline className='nav-icon' />
             Profile
           </button>
         </li>
         <li className='nav-list-item'>
           <button className='nav-btn' onClick={() => setAboutModal(true)}>
-            <BsInfoSquare /> 
+            <BsInfoSquare className='nav-icon' />
             About
           </button>
           {aboutModal && (
             <Modal onClose={() => setAboutModal(false)}>
-              <a
-                rel='noreferrer'
-                target='_blank'
-                href='https://github.com/Kglines/photo_gram'
-              >
-                Github
-              </a>
-              <br></br>
-              <a
-                rel='noreferrer'
-                target='_blank'
-                href='https://www.linkedin.com/in/keith-glines-70b28b30'
-              >
-                LinkedIn
-              </a>
+              <div className='modal-container'>
+                <h2 className='modal-form-title'>Check out more about me!</h2>
+                <div className='link-btns'>
+                  <div>
+                    <a
+                      className='modal-btn modal-submit-btn link-btn'
+                      rel='noreferrer'
+                      target='_blank'
+                      href='https://www.linkedin.com/in/keith-glines-70b28b30'
+                    >
+                      <AiFillLinkedin className='nav-icon link-icon' />
+                      LinkedIn
+                    </a>
+
+                  </div>
+                  <div>
+                      <a
+                        className='modal-btn modal-cancel-btn link-btn'
+                        rel='noreferrer'
+                        target='_blank'
+                        href='https://github.com/Kglines/photo_gram'
+                      >
+                        <AiFillGithub className='nav-icon link-icon' />
+                        Github
+                      </a>
+                  </div>
+                </div>
+              </div>
             </Modal>
           )}
         </li>

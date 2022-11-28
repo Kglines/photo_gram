@@ -17,6 +17,8 @@
 }
 
 .nav-btn {
+    display: flex;
+    flex-direction: row;
     background-color: transparent;
     width: auto;
     border-radius: 15px;
@@ -31,6 +33,35 @@
     background-color: rgb(244, 242, 242);
     font-weight: bold;
     cursor: pointer;
+}
+
+.nav-icon{
+    /* margin-top: 1px; */
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+.nav-icon:hover{
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.link-btns{
+    display: flex;
+    flex-direction: row;
+    /* height: 70px; */
+}
+
+.link-btn{
+    display: flex;
+    flex-direction: row;
+    height: 20px;
+    text-align: center;
+}
+
+.link-icon{
+    font-size:22px;
+    padding-top: -15px;
 }
 
 .logo {

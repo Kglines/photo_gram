@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import User, db
+from app.models import User, db, Follow
 from app.forms import UserEditForm
 from app.aws import upload_file_to_s3, allowed_file, get_unique_filename
 
@@ -47,11 +47,11 @@ def user(id):
 #     if user.id != current_user.id:
 #         return {'errors': ['Unauthorized, please sign in.']}, 401
 #     form = UserEditForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
 #     # if "profile_img" not in request.files:
 #     #     return {'errors': 'image url required'}, 400
 #     file = request.files['profile_img']
 #     if form.validate_on_submit():
-#         user.profile_img = upload['url']
 #         user.firstname=form.data['firstname']
 #         user.lastname=form.data['lastname']
 #         user.bio=form.data['bio']
@@ -62,6 +62,69 @@ def user(id):
 #         upload = upload_file_to_s3(file)
 #         if 'url' not in upload:
 #             return upload, 400
+#         user.profile_img =upload['url']
 #         db.session.commit()
 #         return user.to_dict(), 200
 #     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+# Edit a User - no image
+@user_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def edit_user(id):
+    user = User.query.get(id)
+    if user is None:
+        return {'errors': ['User not found.']}, 404
+    if user.id != current_user.id:
+        return {'errors': ['Unauthorized, please sign in.']}, 401
+    form = UserEditForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        user.firstname=form.data['firstname']
+        user.lastname=form.data['lastname']
+        user.bio=form.data['bio']
+        db.session.commit()
+        return user.to_dict(), 200
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+# Create a Follow
+@user_routes.route('<int:id>/follow', methods=['POST'])
+@login_required
+def follow(id):
+    user = User.query.get(id)
+    if user is None:
+        return {'errors': ['User not found.']}, 404
+    if user.id == current_user.id:
+        return {'errors': ['User not able to follow yourself']}, 401
+    follow = Follow.query.filter(Follow.follows_id == current_user.id, Follow.user_id == user.id).first()
+    if follow is None:
+        return {'errors': 'Not able to follow'}, 401
+    follow = Follow(
+        follows_id=current_user.id,
+        user_id=user.id
+    )
+    db.session.add(follow)
+    db.session.commit()
+    return {'follows': [follow.to_dict() for follow in user.follows]}
+
+# Unfollow/Delete a follow
+@user_routes.route('/<int:id>/unfollow', methods=['DELETE'])
+@login_required
+def unfollow(id):
+    user = User.query.get(id)
+    if user is None:
+        return {'errors': ['User not found']}, 404
+    if user.id == current_user.id:
+        return {'errors': ['Not able to unfollow']}, 401
+    follow = Follow.query.filter(Follow.follows_id == current_user.id, Follow.user_id == user.id).first()
+    if follow is None:
+        return {'errors': ['Not currently following']}, 401
+    db.session.delete(follow)
+    db.session.commit()
+    return {'follows': [follow.to_dict() for follow in user.follows]}
+    
+# Get Follows
+@user_routes.route('/<int:id>/follows')
+@login_required
+def follows(id):
+    user = User.query.get(id)
+    return {'follows': user.user_details_to_dict()}
