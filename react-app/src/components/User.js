@@ -16,18 +16,18 @@ function User() {
   const [user, setUser] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
-  const userImages = Object.values(useSelector(state => state?.images?.user_images ? state.images.user_images : state.images))
+  const userImages = Object.values(useSelector(state => state?.images?.user_images ? state.images?.user_images : state.images))
   const sessionUser = useSelector(state => state.session.user)
-  const canLike = sessionUser.id !== user.id
-  const follows = useSelector(state => state.follows)
+  // const canLike = sessionUser.id !== user.id
+  // const follows = useSelector(state => state.follows)
 
-  console.log('USER = ', user)
-  console.log('SESSION USER = ', sessionUser)
-  console.log('FOLLOWS', follows)
+  // console.log('USER = ', user)
+  // console.log('SESSION USER = ', sessionUser)
+  // console.log('FOLLOWS', follows)
 
-  useEffect(() => {
-    dispatch(fetchFollows(userId))
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(fetchFollows(userId))
+  // }, [dispatch])
   
   useEffect(() => {
     dispatch(fetchUserImages(parsedId));
@@ -60,10 +60,10 @@ function User() {
     return dispatch(fetchUserImages(userId))
   }
 
-  console.log('follow', userId)
-  const handleFollow = (sessionUser, userId) => {
-    return dispatch(fetchCreateFollow(sessionUser, userId))
-  }
+  // console.log('follow', userId)
+  // const handleFollow = (sessionUser, userId) => {
+  //   return dispatch(fetchCreateFollow(sessionUser, userId))
+  // }
 
   // console.log('USER LOAD = ', loadImages)
   
@@ -120,9 +120,9 @@ function User() {
         <p>New</p>
       </div>
       <div>
-        {canLike && (
+        {/* {canLike && (
           <button onClick={handleFollow}>Follow</button>
-        )}
+        )} */}
       </div>
       <div>
         {userImages?.map((image) => (

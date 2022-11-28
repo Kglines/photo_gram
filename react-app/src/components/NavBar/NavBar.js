@@ -63,7 +63,7 @@ const NavBar = () => {
         <li className='nav-list-item'>
           <button
             className='nav-btn'
-            onClick={() => history.push(`/users/${user.id}`)}
+            onClick={() => history.push(`/users/${user?.id}`)}
           >
             <IoSettingsOutline className='nav-icon' />
             Profile

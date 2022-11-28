@@ -16,7 +16,7 @@ function Home() {
     <div>
         {sessionImages && sessionImages?.map(image => (
             <div>
-                <img src={image.image_url} alt={image.caption} />
+                <img src={image?.image_url} alt={image?.caption} />
                 {image?.caption}
             </div>
         ))}
