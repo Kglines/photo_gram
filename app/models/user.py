@@ -24,7 +24,8 @@ class User(db.Model, UserMixin):
     images = db.relationship('Image', back_populates='user')
     comments = db.relationship('Comment', back_populates='user')
     likes = db.relationship('Like', back_populates='user')
-    follows = db.relationship('Follow', back_populates='user')
+    follows = db.relationship('Follow', back_populates='user', foreign_keys='Follow.user_id', cascade='all, delete-orphan')
+    followers = db.relationship('Follow', back_populates='followers', foreign_keys='Follow.follows_id', cascade='all, delete-orphan')
 
     @property
     def password(self):
@@ -57,5 +58,6 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'bio': self.bio,
             'profile_img': self.profile_img,
-            'Images': [image.image_details_to_dict() for image in self.images]
+            'Images': [image.image_details_to_dict() for image in self.images],
+            'Follows': [follow.to_dict() for follow in self.follows]
         }

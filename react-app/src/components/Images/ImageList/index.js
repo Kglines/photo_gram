@@ -5,7 +5,7 @@ import ImageListItem from '../ImageListItem';
 import './ImageList.css'
 
 function ImageList() {
-  const images = Object.values(useSelector(state => state.images?.all_images ? state.images.all_images : state.images))
+  const images = Object.values(useSelector(state => state.images?.all_images ? state.images?.all_images : state.images))
   // const images = useSelector(state => state.images.all_images)
   // function compare(a, b){ return b - a}
   // console.log('IMAGEs IMAGELIST = ', images.map((image, i) => {

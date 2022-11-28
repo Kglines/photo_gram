@@ -13,6 +13,7 @@ import { fetchDeleteLike } from '../../../store/images';
 import { FaRegHeart, FaHeart, FaRegComment } from 'react-icons/fa';
 
 function Image({ image, user, loadImage }) {
+  console.log("USER IN IMAGE", user)
   const { imageId } = useParams()
   const dispatch = useDispatch()
   const [editModal, setEditModal] = useState(false)

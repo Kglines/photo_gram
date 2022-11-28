@@ -4,6 +4,14 @@
     display: flex;
     flex-direction: column;
     width: 50%;
+    margin-bottom: 75px;
+}
+
+.user-link{
+    /* background-color: yellow; */
+    width: 50px;
+    margin-bottom: -15px;
+    color: rgb(45, 39, 39);
 }
 
 .image-list-item-img-link{
@@ -77,6 +85,10 @@
 .comment-link:hover{
     text-decoration: none;
     color: rgb(129, 127, 127);
+}
+
+.comment-icon:hover{
+    
 }
 
 .image-list-item-img-caption {

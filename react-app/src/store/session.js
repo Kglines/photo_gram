@@ -1,6 +1,7 @@
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
+const GET_USER = 'user/ger'
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -10,6 +11,24 @@ const setUser = (user) => ({
 const removeUser = () => ({
   type: REMOVE_USER,
 })
+
+export const getUser = (user) => {
+  return {
+    type: GET_USER,
+    payload: user
+  }
+}
+
+export const fetchGetUser = (userId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}`);
+
+  if (res.ok) {
+    const user = await res.json();
+    dispatch(getUser(user));
+    return user
+  };
+  return res;
+};
 
 const initialState = { user: null };
 
