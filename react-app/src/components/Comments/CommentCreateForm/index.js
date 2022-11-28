@@ -17,7 +17,7 @@ function CommentCreateForm({ image }) {
         body: comment
       }
 
-      const newComment = dispatch(fetchCreateComments(payload, image?.Image.id))
+      const newComment = dispatch(fetchCreateComments(payload, image?.Image?.id))
       .then(() => dispatch(fetchOneImage(image?.Image?.id)))
         .catch(async (res) => {
           const data = await res.json()

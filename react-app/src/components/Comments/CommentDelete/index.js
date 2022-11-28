@@ -9,7 +9,7 @@ function CommentDelete({ comment, setDeleteModal }) {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    console.log('COMMENT DELETE = ', comment)
+    // console.log('COMMENT DELETE = ', comment)
 
     const [errors, setErrors] = useState([])
 
@@ -21,7 +21,7 @@ function CommentDelete({ comment, setDeleteModal }) {
         .then(() => setDeleteModal(false))
         .catch(async (res) => {
             const data = await res.json()
-            if (data?.errors) setErrors(data.errors)
+            if (data?.errors) setErrors(data?.errors)
         })
     }
   return (

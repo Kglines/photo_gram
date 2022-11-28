@@ -4,20 +4,20 @@ import { fetchCreateLike, fetchDeleteLike } from '../../store/images'
 import { FaRegHeart, FaHeart } from 'react-icons/fa'
 
 function Likes({ image, loadImages }) {
-    const dispatch = useDispatch()
-    const liked = image?.Likes?.liked
-    console.log('IMAGE INSIDE LIKES', liked)
+    // const dispatch = useDispatch()
+    // const liked = image?.Likes?.liked
+    // console.log('IMAGE INSIDE LIKES', liked)
 
     // console.log('IMAGE LIKES IN LIKES = ', liked);
-    const handleClick = async () => {
-        return liked
-          ? await dispatch(fetchDeleteLike(image?.id))
-              .then(() => loadImages(image?.user_id))
-              .then(() => loadImages(image?.user_id))
-          : await dispatch(fetchCreateLike(image?.id))
-              .then(() => loadImages(image?.user_id))
-              .then(() => loadImages(image?.user_id));
-    }
+    // const handleClick = async () => {
+    //     return liked
+    //       ? await dispatch(fetchDeleteLike(image?.id))
+    //           .then(() => loadImages(image?.user_id))
+    //           .then(() => loadImages(image?.user_id))
+    //       : await dispatch(fetchCreateLike(image?.id))
+    //           .then(() => loadImages(image?.user_id))
+    //           .then(() => loadImages(image?.user_id));
+    // }
   return (
     <div>
       {/* {liked ? (

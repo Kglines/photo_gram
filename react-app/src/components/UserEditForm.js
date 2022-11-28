@@ -8,10 +8,10 @@ function UserEditForm({ setEditModal, user }) {
     const dispatch = useDispatch();
     // console.log('USER USER EDIT FORM', user)
     const [newUser, setNewUser] = useState('')
-    const [firstname, setFirstname] = useState(user.firstname);
-    const [lastname, setLastname] = useState(user.lastname);
-    const [bio, setBio] = useState(user.bio);
-    const [profile_img, setProfile_img] = useState(user.profile_img);
+    const [firstname, setFirstname] = useState(user?.firstname);
+    const [lastname, setLastname] = useState(user?.lastname);
+    const [bio, setBio] = useState(user?.bio);
+    const [profile_img, setProfile_img] = useState(user?.profile_img);
     const [imageLoading, setImageLoading] = useState(false);
     const [errors, setErrors] = useState([]);
 

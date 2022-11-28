@@ -9,7 +9,7 @@ function ImageDetail() {
   const { imageId } = useParams()
   const dispatch = useDispatch()
 
-  const image = useSelector(state => state.images.one_image)
+  const image = useSelector(state => state.images?.one_image)
   // console.log('IMAGE DETAIL PAGE', image)
   const [usersList, setUsersList] = useState([]);
   
