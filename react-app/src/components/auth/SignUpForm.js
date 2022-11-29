@@ -34,7 +34,7 @@ const SignUpForm = () => {
   };
 
   const updateBio = (e) => {
-    setEmail(e.target.value);
+    setBio(e.target.value);
   }
 
   const updatePassword = (e) => {
