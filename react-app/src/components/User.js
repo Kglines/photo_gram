@@ -100,14 +100,14 @@ function User() {
               </li>
             </ul>
           </div>
-          <div className='user-edit-btn'>
+          {/* <div className='user-edit-btn'>
             <button onClick={() => setEditModal(true)}>Edit Profile</button>
             {editModal && (
               <Modal onClose={() => setEditModal(false)}>
                 <UserEditForm user={user} setEditModal={setEditModal} />
               </Modal>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
 
