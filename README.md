@@ -1,4 +1,60 @@
-# Flask React Project
+# **Instagram Clone**
+
+Welcome to our StackOverflow clone, created by the Boolean Bullies team. Checkout our live site by clicking [Photogram](https://photogram.onrender.com/).
+
+## **Technologies Used**
+For this project, we used the following technologies:
+- **Backend**
+    - Python
+    - Flask
+    - WTForms
+    - SQLAlchemy
+    - Alembic
+    - SQLite3 (development)
+    - PostgreSQL (production)
+- **Frontend**
+    - Javascript
+    - React
+    - React-Router
+    - React-Redux
+    - CSS
+
+## **To get started on your local environment**
+
+1. Clone the repo and run `pipenv install` to install the dependencies
+2. Create .env file, for example:
+    ```
+    SECRET_KEY=[add secret key here]
+    DATABASE_URL=sqlite:///dev.db
+    ```
+3. Start pipenv shell `pipenv shell`
+4. Migrate and seed database `flask db migrate` and `flask seed all`
+5. Run flask `flask run`
+6. cd into the `react-app`
+7. run `npm install` to install the frontend dependencies
+8. run `npm start` to start the frontend
+9. go to [localhost:3000](localhost:3000) in your browser
+
+## **Features**
+- Signup
+- Login
+- Demo user with full functionality
+- View all Posts/Images
+- View only your Posts/Images
+- Comment on any Post/Image
+- Update or Delete only a Post/Image that you shared
+- Update or Delete only a Comment you posted
+<!-- - Like/un-Like any Post/Image
+- See how many likes a Post/Image has
+- Follow other users and have other users follow you
+- Un-Follow other users
+- See the users that you're following -->
+
+## Future additions
+- Search bar to search for other users
+- Add hashtags
+
+<!-- # Flask React Project
 
 This is the starter for the Flask React project.
 
@@ -141,4 +197,4 @@ successfully deployed your Flask application to Render! You can find the URL for
 your site just below the name of the Web Service at the top of the page.
 
 [Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+[Dashboard]: https://dashboard.render.com/ -->
