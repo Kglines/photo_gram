@@ -1,6 +1,6 @@
 # **Instagram Clone**
 
-Welcome to our StackOverflow clone, created by the Boolean Bullies team. Checkout our live site by clicking [Photogram](https://photogram.onrender.com/).
+Welcome to my Instagram clone, created by the [Keith Glines](https://github.com/Kglines). Checkout the live site by clicking [Photogram](https://photogram.onrender.com/).
 
 ## **Technologies Used**
 For this project, we used the following technologies:
