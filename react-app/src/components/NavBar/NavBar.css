@@ -68,8 +68,12 @@
     border: none;
     font-family: 'Allura', cursive;
     font-size: 45px;
+    color: rgb(72, 72, 72);
+    text-decoration: none;
 }
+
 
 .logo:hover{
     cursor: pointer;
+    color: #0a95ff;
 }
