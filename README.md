@@ -12,6 +12,7 @@ For this project, we used the following technologies:
     - Alembic
     - SQLite3 (development)
     - PostgreSQL (production)
+    - AWS S3
 - **Frontend**
     - Javascript
     - React
