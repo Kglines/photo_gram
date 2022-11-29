@@ -38,7 +38,7 @@ function ImageCreateForm({ setShowModal }) {
     } else {
       setImageLoading(false);
       const data = await res.json();
-      console.log('error');
+      // console.log('error');
       if(data && data.errors) setErrors(data.errors)
     }
     
