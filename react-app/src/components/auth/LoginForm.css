@@ -50,16 +50,35 @@
 
 .login-form{
     background-color: white;
-    width: 75%;
+    width: 300px;
     height: 350px;
     padding: 50px;
     margin-left: -35%;
     text-align: center;
 }
 
-.login-form input {
+.signup-form{
+    background-color: white;
+    width: 300px;
+    height: 500px;
+    padding: 50px;
+    margin-left: -35%;
+    text-align: center;
+}
+
+.login-form input, .signup-form input {
     width: 220px;
     height: 25px;
+    border-radius: 5px;
+    border: 1px solid silver;
+    outline: none;
+    background-color: rgb(250, 250, 255);
+    font-size: 18px;
+}
+
+.signup-form textarea {
+    width: 220px;
+    height: 50px;
     border-radius: 5px;
     border: 1px solid silver;
     outline: none;
@@ -92,7 +111,8 @@
 .demo-login{
     background-color: white;
     margin-top: -20px;
-    width: 104%;
+    width: 300px;
     margin-left: -35%;
     text-align: center;
+    padding: 5px 50px;
 }
