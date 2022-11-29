@@ -10,6 +10,7 @@
 }
 
 #login-logo{
+    margin-top:-10px;
     font-size: 50px;
     cursor: default;
 }
@@ -50,7 +51,7 @@
 .login-form{
     background-color: white;
     width: 75%;
-    height: 500px;
+    height: 350px;
     padding: 50px;
     margin-left: -35%;
     text-align: center;
@@ -86,4 +87,12 @@
 .login-link{
     margin-top: 40px;
     font-size: 18px;
+}
+
+.demo-login{
+    background-color: white;
+    margin-top: -20px;
+    width: 104%;
+    margin-left: -35%;
+    text-align: center;
 }
