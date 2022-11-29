@@ -4,6 +4,7 @@ body {
     position: relative;
     margin-left: 35%;
     background-color: rgb(241, 239, 239);
+    font-family: sans-serif;
 }
 
 .user-link {
