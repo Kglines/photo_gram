@@ -92,22 +92,25 @@ function User() {
               <li className='user-info-item'>
                 <strong>Email</strong> {user?.email}
               </li>
-              <li className='user-info-item'>
+              {user?.bio ? <li className='user-info-item'>
                 <strong>Bio</strong> {user?.bio}
               </li>
+              :
+              null
+              }
               <li className='user-info-item'>
                 <strong>{Images?.length}</strong> posts
               </li>
             </ul>
           </div>
-          {/* <div className='user-edit-btn'>
+          <div className='user-edit-btn'>
             <button onClick={() => setEditModal(true)}>Edit Profile</button>
             {editModal && (
               <Modal onClose={() => setEditModal(false)}>
                 <UserEditForm user={user} setEditModal={setEditModal} />
               </Modal>
             )}
-          </div> */}
+          </div>
         </div>
       </div>
 

@@ -10,8 +10,39 @@
 }
 
 .add-btn{
-    font-size: 30px;
+    font-size: 40px;
 }
 .add-btn:hover{
     cursor: pointer;
+}
+
+.user-list-card{
+    margin-bottom: 50px;
+    border: 1px solid black;
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 1px 1px 10px silver;
+}
+
+.user-list{
+    display: grid;
+    grid-template-columns: repeat(3, 300px);
+    grid-template-rows: auto;
+    gap: 10px;
+    margin-left: -15%;
+    list-style: none;
+    
+}
+
+.user-list-title{
+    text-align: center;
+    margin-left: -25%;
+}
+.user-link-user-list{
+    color: rgb(110, 110, 110);
+    font-size: 22px;
+}
+.user-link-user-list:hover{
+    color: #0a95ff;
 }
