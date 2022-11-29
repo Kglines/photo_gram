@@ -41,7 +41,7 @@ export const deleteFollows = (id) => {
 // GET Follows
 export const fetchFollows = (userId) => async (dispatch) => {
     const res = await fetch(`/api/users/${userId}/follows`);
-    console.log('FOLLOWS THUNK = ', userId)
+    // console.log('FOLLOWS THUNK = ', userId)
     if(res.ok){
         const follows = await res.json();
         dispatch(getFollowers(follows));

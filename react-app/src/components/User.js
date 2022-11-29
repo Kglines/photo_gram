@@ -8,6 +8,7 @@ import ImageCreateForm from './Images/ImageCreateForm';
 import ImageListItem from './Images/ImageListItem';
 import './User.css'
 import UserEditForm from './UserEditForm';
+import { VscDiffAdded } from 'react-icons/vsc';
 
 function User() {
   const { userId } = useParams();
@@ -111,13 +112,15 @@ function User() {
       </div>
 
       <div>
-        <button onClick={() => setShowModal(true)}>+</button>
+        {/* <button onClick={() => setShowModal(true)}> */}
+          <VscDiffAdded className='add-btn' onClick={() => setShowModal(true)} />
+        {/* </button> */}
+        <div>Create</div>
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
             <ImageCreateForm setShowModal={setShowModal} />
           </Modal>
         )}
-        <p>New</p>
       </div>
       <div>
         {/* {canLike && (
