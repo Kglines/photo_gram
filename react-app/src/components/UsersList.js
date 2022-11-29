@@ -18,9 +18,9 @@ function UsersList() {
     return (
       <li className='user-list-card' key={user?.id}>
         <NavLink className='user-link-user-list' to={`/users/${user?.id}`}>{user?.username}</NavLink>
-        <p><strong>Name: </strong>{user?.firstname} {user?.lastname}</p>
+        {user?.firstname && <p><strong>Name: </strong>{user?.firstname} {user?.lastname}</p>}
         <p><strong>Email: </strong>{user?.email}</p>
-        <p><strong>Bio: </strong>{user?.bio}</p>
+        {user?.bio && <p><strong>Bio: </strong>{user?.bio}</p>}
       </li>
     );
   });

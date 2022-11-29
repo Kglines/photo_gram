@@ -30,7 +30,7 @@ const NavBar = () => {
     sessionLinks = (
       <ul className='nav-list'>
         <li className='nav-list-item'>
-          <NavLink to='/home'>
+          <NavLink className='logo' to='/home'>
             <p className='logo'>Photogram</p>
           </NavLink>
         </li>
@@ -89,18 +89,17 @@ const NavBar = () => {
                       <AiFillLinkedin className='nav-icon link-icon' />
                       LinkedIn
                     </a>
-
                   </div>
                   <div>
-                      <a
-                        className='modal-btn modal-cancel-btn link-btn'
-                        rel='noreferrer'
-                        target='_blank'
-                        href='https://github.com/Kglines/photo_gram'
-                      >
-                        <AiFillGithub className='nav-icon link-icon' />
-                        Github
-                      </a>
+                    <a
+                      className='modal-btn modal-cancel-btn link-btn'
+                      rel='noreferrer'
+                      target='_blank'
+                      href='https://github.com/Kglines/photo_gram'
+                    >
+                      <AiFillGithub className='nav-icon link-icon' />
+                      Github
+                    </a>
                   </div>
                 </div>
               </div>
