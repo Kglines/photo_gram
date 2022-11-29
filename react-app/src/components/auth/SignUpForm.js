@@ -7,6 +7,7 @@ const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
+  const [bio, setBio] = useState('')
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
@@ -15,7 +16,7 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(signUp(username, email, bio, password));
       if (data) {
         setErrors(data)
       }
@@ -31,6 +32,10 @@ const SignUpForm = () => {
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
+
+  const updateBio = (e) => {
+    setEmail(e.target.value);
+  }
 
   const updatePassword = (e) => {
     setPassword(e.target.value);
@@ -64,7 +69,7 @@ const SignUpForm = () => {
         />
       </div>
       <div>
-        <form className='login-form' onSubmit={onSignUp}>
+        <form className='signup-form' onSubmit={onSignUp}>
           <p id='login-logo' className='logo'>
             Photogram
           </p>
@@ -94,6 +99,15 @@ const SignUpForm = () => {
               value={email}
               placeholder='Email'
             ></input>
+          </div>
+          <div>
+            <textarea
+              type='text'
+              name='bio'
+              onChange={updateBio}
+              value={bio}
+              placeholder='Bio'
+            ></textarea>
           </div>
           <div>
             {/* <label>Password</label> */}

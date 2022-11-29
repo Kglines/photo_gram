@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, NavLink } from 'react-router-dom';
 import { login } from '../../store/session';
+import DemoLogin from './DemoLogin';
 import './LoginForm.css';
 
 const LoginForm = () => {
@@ -34,13 +35,27 @@ const LoginForm = () => {
   return (
     <div className='login-form-container'>
       <div>
-        <img className='login-image login-image-1' src='https://images.unsplash.com/photo-1645075408684-27156020be30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80' alt='polaroid' />
-        <img className='login-image login-image-2' src='https://images.unsplash.com/photo-1645075408684-27156020be30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80' alt='polaroid' />
-        <img className='login-image login-image-3' src='https://images.unsplash.com/photo-1645075408684-27156020be30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80' alt='polaroid' />
+        <img
+          className='login-image login-image-1'
+          src='https://images.unsplash.com/photo-1645075408684-27156020be30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
+          alt='polaroid'
+        />
+        <img
+          className='login-image login-image-2'
+          src='https://images.unsplash.com/photo-1645075408684-27156020be30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
+          alt='polaroid'
+        />
+        <img
+          className='login-image login-image-3'
+          src='https://images.unsplash.com/photo-1645075408684-27156020be30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
+          alt='polaroid'
+        />
       </div>
       <div>
         <form onSubmit={onLogin} className='login-form'>
-          <p id='login-logo' className='logo'>Photogram</p>
+          <p id='login-logo' className='logo'>
+            Photogram
+          </p>
           <div>
             {errors.map((error, ind) => (
               <div className='errors' key={ind}>
@@ -83,6 +98,11 @@ const LoginForm = () => {
             </NavLink>{' '}
           </p>
         </form>
+        <div className='demo-login'>
+          <p>-------- OR --------</p>
+          <p>Try it out</p>
+          <DemoLogin />
+        </div>
       </div>
     </div>
   );
