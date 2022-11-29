@@ -8,3 +8,10 @@
 .user-info-item{
     list-style: none;
 }
+
+.add-btn{
+    font-size: 30px;
+}
+.add-btn:hover{
+    cursor: pointer;
+}
