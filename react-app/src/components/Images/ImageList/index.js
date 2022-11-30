@@ -49,17 +49,18 @@ function ImageList() {
   }, [dispatch])
 
   // const imageUser = usersList.find(user => user.id === imagesArr.userId)
-  
+  console.log('WOMBAT = ', images[0])
   return (
     <div className='image-list-container'>
       {images?.map(image => (
         <div key={image?.id}>
-          {usersList?.forEach(users => {
+          {/* {usersList?.forEach(users => {
             if (users?.id === image?.user_id){
               user = users
             }
-          })}
-            <ImageListItem image={image} user={user} loadImages={loadImages}/>
+          })} */}
+          
+            <ImageListItem image={image} user={image.owner} loadImages={loadImages}/>
         </div>
       ))}
     </div>

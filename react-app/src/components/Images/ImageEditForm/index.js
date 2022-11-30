@@ -21,7 +21,7 @@ function ImageEditForm({ imageId, setEditModal, image }) {
     }
 
     const newImage = dispatch(fetchEditImage(payload, imageId))
-    .then(() => dispatch(fetchOneImage(imageId)))
+    // .then(() => dispatch(fetchOneImage(imageId)))
     .then(() => {
       setEditModal(false)
     })
