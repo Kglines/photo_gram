@@ -190,7 +190,7 @@ export const fetchDeleteLike = (imageId) => async (dispatch) => {
 
 // ******** REDUCER *********
 
-const initialState = {}
+const initialState = {all_images: {}, user_images: {}, one_image: {}}
 
 const imagesReducer = (state = initialState, action) => {
     let newState = {...state};
@@ -213,8 +213,12 @@ const imagesReducer = (state = initialState, action) => {
             newState = { ...state, [action.payload.id]: action.payload }
             return newState
         case EDIT_IMAGES:
-            newState = action.payload
+            newState.all_images[action.payload.id] = action.payload
+            newState.one_image.Image = action.payload
             return newState
+        // case EDIT_IMAGES:
+        //     newState = action.payload
+        //     return newState
         case DELETE_IMAGES:
             delete newState[action.payload]
             return newState

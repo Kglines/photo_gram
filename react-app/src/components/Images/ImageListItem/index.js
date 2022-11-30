@@ -26,7 +26,7 @@ function ImageListItem({ image, user, loadImages }) {
           .then(() => loadImages(userId))
           .then(() => loadImages(userId))
   };
-
+  // console.log('ANOTHER WOMBAT', image)
   const postDate = image?.updated_at ? image?.updated_at?.slice(0, 16) : image?.created_at?.slice(0, 16)
 
   return (

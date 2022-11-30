@@ -46,7 +46,8 @@ class Image(db.Model):
             'created_at': self.created_at,
             'updated_at': self.updated_at,
             'num_comments': self.num_comments(),
-            'num_likes': self.num_likes()
+            'num_likes': self.num_likes(),
+            
         }
 
 
@@ -65,4 +66,5 @@ class Image(db.Model):
                 'total': self.num_likes(),
                 'liked': self.liked()
             },
+            'owner': self.user.to_dict()
         }
