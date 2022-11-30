@@ -62,6 +62,9 @@ function UserEditForm({ setEditModal, user }) {
 
   return (
     <form onSubmit={handleSubmit} className='modal-container'>
+      {errors?.map(error => (
+        <li key={error}>{error}</li>
+      ))}
       <h2>Edit Your Profile</h2>
       <input
         className='modal-input-title'

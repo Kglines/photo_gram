@@ -72,6 +72,19 @@ function User() {
     <>
       <div>
         <div className='user-info-container'>
+          <div>
+            <button
+              className='user-edit-btn'
+              onClick={() => setEditModal(true)}
+            >
+              Edit Profile
+            </button>
+            {editModal && (
+              <Modal onClose={() => setEditModal(false)}>
+                <UserEditForm user={user} setEditModal={setEditModal} />
+              </Modal>
+            )}
+          </div>
           <div className='user-img-container'>
             <li>
               {/* <img
@@ -84,39 +97,30 @@ function User() {
           <div className='user-info'>
             <ul>
               <li className='user-info-item'>
-                {user?.firstname} {user?.lastname}
+                <strong>Username: </strong> {user?.username}
               </li>
+              {user?.firstname && <li className='user-info-item'>
+                <strong>Name: </strong> {user?.firstname} {user?.lastname}
+              </li>}
               <li className='user-info-item'>
-                <strong>Username</strong> {user?.username}
+                <strong>Email: </strong> {user?.email}
               </li>
+              {user?.bio ? (
+                <li className='user-info-item'>
+                  <strong>Bio: </strong> {user?.bio}
+                </li>
+              ) : null}
               <li className='user-info-item'>
-                <strong>Email</strong> {user?.email}
-              </li>
-              {user?.bio ? <li className='user-info-item'>
-                <strong>Bio</strong> {user?.bio}
-              </li>
-              :
-              null
-              }
-              <li className='user-info-item'>
-                <strong>{Images?.length}</strong> posts
+                <strong>Posts: </strong> {Images?.length}
               </li>
             </ul>
-          </div>
-          <div className='user-edit-btn'>
-            <button onClick={() => setEditModal(true)}>Edit Profile</button>
-            {editModal && (
-              <Modal onClose={() => setEditModal(false)}>
-                <UserEditForm user={user} setEditModal={setEditModal} />
-              </Modal>
-            )}
           </div>
         </div>
       </div>
 
       <div>
         {/* <button onClick={() => setShowModal(true)}> */}
-          <VscDiffAdded className='add-btn' onClick={() => setShowModal(true)} />
+        <VscDiffAdded className='add-btn' onClick={() => setShowModal(true)} />
         {/* </button> */}
         <div>Create</div>
         {showModal && (

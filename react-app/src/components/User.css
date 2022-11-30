@@ -46,3 +46,14 @@
 .user-link-user-list:hover{
     color: #0a95ff;
 }
+
+.user-edit-btn{
+    width: 60px;
+    background-color: transparent;
+    color: rgb(110, 110, 110);
+}
+.user-edit-btn:hover{
+    background-color: transparent;
+    color: #0a95ff;
+    cursor: pointer;
+}

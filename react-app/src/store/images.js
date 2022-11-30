@@ -188,6 +188,8 @@ export const fetchDeleteLike = (imageId) => async (dispatch) => {
     return res;
 }
 
+
+
 // ******** REDUCER *********
 
 const initialState = {all_images: {}, user_images: {}, one_image: {}}
