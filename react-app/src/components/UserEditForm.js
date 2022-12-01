@@ -1,12 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { fetchGetUser } from '../store/session';
 
 function UserEditForm({ setEditModal, user }) {
     const { userId } = useParams();
+    const dispatch = useDispatch();
     
+    const [newUser, setNewUser] = useState('')
     const [firstname, setFirstname] = useState(user?.firstname);
     const [lastname, setLastname] = useState(user?.lastname);
     const [bio, setBio] = useState(user?.bio);
+    const [profile_img, setProfile_img] = useState(user?.profile_img);
     const [imageLoading, setImageLoading] = useState(false);
     const [errors, setErrors] = useState([]);
 
@@ -19,19 +24,22 @@ function UserEditForm({ setEditModal, user }) {
         formData.append('bio', bio)
 
         setImageLoading(true);
+
         const res = await fetch(`/api/users/${userId}`, {
             method: 'PUT',
             body: formData
         });
 
         if (res.ok){
-            const user = await res.json();
-            setImageLoading(false);
-            setEditModal(false);
-
-            updatedUser()
-            updatedUser()
-            return user
+          const user = await res.json();
+          setImageLoading(false);
+          setEditModal(false);
+          // const refresh = dispatch(fetchGetUser(user.id));
+          console.log('USER USER EDIT FORM', user)
+          // console.log('refresh = ', refresh)
+          // updatedUser();
+          // updatedUser();
+          return user;
         } else {
             const data = await res.json();
             if(data && data.errors) setErrors(data.errors)
@@ -53,9 +61,6 @@ function UserEditForm({ setEditModal, user }) {
 
   return (
     <form onSubmit={handleSubmit} className='modal-container'>
-      {errors?.map(error => (
-        <li key={error}>{error}</li>
-      ))}
       <h2>Edit Your Profile</h2>
       <input
         className='modal-input-title'

@@ -6,4 +6,3 @@ class UserEditForm(FlaskForm):
     firstname = StringField('firstname', validators=[Length(max=40)])
     lastname = StringField('lastname', validators=[Length(max=40)])
     bio = StringField('bio', validators=[Length(max=500)])
-    profile_img = StringField('profile_img')
