@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Modal } from '../context/Modal';
-import { fetchCreateFollow, fetchFollows } from '../store/follows';
 import { fetchUserImages } from '../store/images';
 import ImageCreateForm from './Images/ImageCreateForm';
 import ImageListItem from './Images/ImageListItem';
@@ -14,34 +13,22 @@ function User() {
   const { userId } = useParams();
   const parsedId = parseInt(userId)
   const dispatch = useDispatch();
+
   const [user, setUser] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
+
   const userImages = Object.values(useSelector(state => state?.images?.user_images ? state.images?.user_images : state.images))
   const sessionUser = useSelector(state => state.session.user)
-  // const canLike = sessionUser.id !== user.id
-  // const follows = useSelector(state => state.follows)
 
-  // console.log('USER = ', user)
-  // console.log('SESSION USER = ', sessionUser)
-  // console.log('FOLLOWS', follows)
-
-  // useEffect(() => {
-  //   dispatch(fetchFollows(userId))
-  // }, [dispatch])
+  const isOwner = sessionUser.id === parsedId;
+  const { Images } = user
   
   useEffect(() => {
-    dispatch(fetchUserImages(parsedId));
-  }, [dispatch, parsedId])
+    dispatch(fetchUserImages(userId));
+  }, [dispatch, userId])
 
-  const { Images } = user
-  // console.log('IMAGE FROM USER = ', Images)
-  // const [images, setImages] = useState({});
 
-  
-  
-  // const fetchedImages = useSelector(state => state.images)
-  // console.log('FETCHED IMAGES = ', fetchedImages)
   useEffect(() => {
     if (!userId) {
       return;
@@ -51,7 +38,7 @@ function User() {
       const user = await response.json();
       setUser(user);
     })();
-  }, [userId, user]);
+  }, []);
 
   if (!user) {
     return null;
@@ -60,25 +47,12 @@ function User() {
   const loadImages = (userId) => {
     return dispatch(fetchUserImages(userId))
   }
-
-  // console.log('follow', userId)
-  // const handleFollow = (sessionUser, userId) => {
-  //   return dispatch(fetchCreateFollow(sessionUser, userId))
-  // }
-
-  // console.log('USER LOAD = ', loadImages)
   
   return (
     <>
       <div>
         <div className='user-info-container'>
           <div>
-            <button
-              className='user-edit-btn'
-              onClick={() => setEditModal(true)}
-            >
-              Edit Profile
-            </button>
             {editModal && (
               <Modal onClose={() => setEditModal(false)}>
                 <UserEditForm user={user} setEditModal={setEditModal} />
@@ -96,17 +70,32 @@ function User() {
           </div>
           <div className='user-info'>
             <ul>
-              <li className='user-info-item'>
-                <strong>Username: </strong> {user?.username}
+              <li className='user-info-item user-info-username'>
+              <div>
+                <strong>{user?.username}</strong>
+              </div>
+              <div className='user-info-edit-btn'>
+                {isOwner && (
+                  <button
+                    className='user-edit-btn'
+                    onClick={() => setEditModal(true)}
+                  >
+                    Update Profile
+                  </button>
+                )}
+
+              </div>
               </li>
-              {user?.firstname && <li className='user-info-item'>
-                <strong>Name: </strong> {user?.firstname} {user?.lastname}
-              </li>}
+              {user?.firstname && (
+                <li className='user-info-item'>
+                  <strong>Name: </strong> {user?.firstname} {user?.lastname}
+                </li>
+              )}
               <li className='user-info-item'>
                 <strong>Email: </strong> {user?.email}
               </li>
               {user?.bio ? (
-                <li className='user-info-item'>
+                <li className='user-info-item user-bio'>
                   <strong>Bio: </strong> {user?.bio}
                 </li>
               ) : null}
@@ -129,15 +118,14 @@ function User() {
           </Modal>
         )}
       </div>
-      <div>
-        {/* {canLike && (
-          <button onClick={handleFollow}>Follow</button>
-        )} */}
-      </div>
-      <div>
+      <div className='profile-image-list'>
         {userImages?.map((image) => (
           <div key={image?.id}>
-            <ImageListItem image={image} loadImages={loadImages} />
+            <ImageListItem 
+            image={image} 
+            loadImages={loadImages} 
+
+            />
           </div>
         ))}
       </div>

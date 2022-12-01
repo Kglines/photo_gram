@@ -1,6 +1,8 @@
 .user-info-container {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     list-style: none;
     width: 75%;
 }
@@ -9,11 +11,27 @@
     list-style: none;
 }
 
+.user-info-username{
+    display: flex;
+    flex-direction: row;
+    font-size: 40px;
+}
+
+.user-info-edit-btn{
+    margin-top: -20px;
+    margin-left: 30px;
+}
+
+.user-bio{
+    width: 400px;
+}
+
 .add-btn{
     font-size: 40px;
 }
 .add-btn:hover{
     cursor: pointer;
+    color: #0a95ff;
 }
 
 .user-list-card{
@@ -32,7 +50,7 @@
     gap: 10px;
     margin-left: -15%;
     list-style: none;
-    
+    overflow-y: auto;
 }
 
 .user-list-title{
@@ -48,6 +66,7 @@
 }
 
 .user-edit-btn{
+    margin-top: -20px;
     width: 60px;
     background-color: transparent;
     color: rgb(110, 110, 110);
@@ -56,4 +75,10 @@
     background-color: transparent;
     color: #0a95ff;
     cursor: pointer;
+    border: 2px solid #0a95ff;
+}
+
+.profile-image-list{
+    display: flex;
+    flex-direction: column-reverse;
 }

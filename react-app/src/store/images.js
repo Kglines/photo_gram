@@ -7,6 +7,8 @@ const EDIT_IMAGES = 'images/edit';
 const DELETE_IMAGES = 'images/delete';
 const CREATE_LIKE = 'like/create'
 const DELETE_LIKE = 'like/delete'
+const GET_COMMENTS = 'comments/get'
+const EDIT_COMMENT = 'comment/edit'
 
 // ******** Images Actions ********
 
@@ -72,6 +74,22 @@ export const deleteLike = (imageId) => {
     return {
         type: DELETE_LIKE,
         payload: imageId
+    }
+}
+
+// GET Comments
+export const getComments = (comments) => {
+    return {
+        type: GET_COMMENTS,
+        payload: comments
+    }
+}
+
+// EDIT Comment
+export const editComment = (comment) => {
+    return {
+        type: EDIT_COMMENT,
+        payload: comment
     }
 }
 
@@ -188,7 +206,33 @@ export const fetchDeleteLike = (imageId) => async (dispatch) => {
     return res;
 }
 
+// GET Comments THUNK
+export const fetchGetComments = (comment, imageId) => async (dispatch) => {
+    const res = await fetch(`/api/images/${imageId}/comments`);
 
+    if(res.ok){
+        const comments = await res.json();
+        dispatch(getComments(comments));
+        return comments;
+    };
+    return res;
+};
+
+// EDIT Comment THUNK
+export const fetchEditComment = (comment, imageId) => async (dispatch) => {
+    const res = await fetch(`/api/images/${imageId}/comments`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(comment),
+    });
+
+    if (res.ok) {
+      const comment = await res.json();
+      dispatch(editComment(comment));
+      return comment;
+    }
+    return res;
+}
 
 // ******** REDUCER *********
 
@@ -217,6 +261,12 @@ const imagesReducer = (state = initialState, action) => {
         case EDIT_IMAGES:
             newState.all_images[action.payload.id] = action.payload
             newState.one_image.Image = action.payload
+            return newState
+        case GET_COMMENTS:
+            newState = action.payload
+            return newState
+        case EDIT_COMMENT:
+            newState.one_image.Image.Comments[action.payload.id] = action.payload
             return newState
         // case EDIT_IMAGES:
         //     newState = action.payload

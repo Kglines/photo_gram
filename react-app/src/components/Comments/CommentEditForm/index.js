@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { fetchOneImage } from '../../../store/images'
 import { fetchEditComments } from '../../../store/comments'
-import { fetchEditComment } from '../../../store/images'
 
 function CommentEditForm({ setEditModal, comment}) {
     const dispatch = useDispatch()

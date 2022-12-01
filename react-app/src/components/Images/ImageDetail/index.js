@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { fetchOneImage } from '../../../store/images'
@@ -10,37 +10,18 @@ function ImageDetail() {
   const dispatch = useDispatch()
 
   const image = useSelector(state => state.images?.one_image)
-  // console.log('IMAGE DETAIL PAGE', image)
-  const [usersList, setUsersList] = useState([]);
-  
-  let user;
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch('/api/users/');
-      const responseData = await response.json();
-      setUsersList(responseData.users);
-    }
-    fetchData();
-  }, []);
 
   useEffect(() => {
     dispatch(fetchOneImage(imageId))
-  }, [dispatch, imageId])
+  }, [dispatch, imageId, image?.one_image?.Image?.Comments, image?.one_image?.Image.caption])
 
   const loadImage = (imageId) => {
     dispatch(fetchOneImage(imageId));
   }
 
-  usersList.map(users => {
-    if (users?.id === image?.Image?.user_id) {
-      return user = users;
-    }
-  })
-
   return (
     <div>
-      <Image image={image} user={user} loadImage={loadImage}/>
+      <Image image={image} user={image?.Image?.owner} loadImage={loadImage}/>
     </div>
   )
 }

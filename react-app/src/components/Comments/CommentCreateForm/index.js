@@ -24,10 +24,15 @@ function CommentCreateForm({ image }) {
           if (data && data.errors) setErrors(data.errors)
         })
         setComment('')
+        // console.log('ERRORS = ', errors)
         return newComment
     }
+
   return (
     <form className='comment-create-form-container' onSubmit={handleSubmit}>
+      {errors?.map(error => (
+        <li className='errors' key={error}>{error}</li>
+      ))}
         <input 
             type='text'
             placeholder='Add a Comment...'

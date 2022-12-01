@@ -5,6 +5,7 @@
     height: auto;
     margin-left: -100px;
     padding-top: 20px;
+    
 }
 
 .image-btn-container{
@@ -32,8 +33,9 @@
 .image-text-container{
     background-color: white;
     width: 343px;
-    height: auto;
+    height: 550px;
     
+    /* overflow: auto; */
 }
 
 .image-text-container-header{
@@ -46,24 +48,32 @@
 .caption-container {
     display: flex;
     padding-left: 10px;
+    
 }
 
 .caption{
     padding-left: 5px;
     padding-bottom: 30px;
+    overflow-wrap: break-word;
+    height: 45px;
+    /* word-break: break-all; */
+    overflow-y: auto;
 }
 
 .comment-container {
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid silver;
-    height: 300px;
+    height: 275px;
     overflow-y: auto;
     padding-left: 5px;
+    
 }
 
 .comment-container-content{
-    display:flex;
+    /* display:flex; */
+    /* height: auto; */
+    
 }
 
 .comment-user {
@@ -73,6 +83,8 @@
 
 .comment-body {
     padding-left: 5px;
+    overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 .image-icons-container-image{
@@ -82,6 +94,7 @@
     justify-content: space-between;
     width: 95%;
     padding-left: 10px;
+    /* height: 300px; */
 }
 
 .image-icons-res-image{

@@ -1,20 +1,15 @@
 import React from 'react'
 import { NavLink, useParams } from 'react-router-dom'
-import Likes from '../../Likes';
 import { FaHeart, FaRegComment, FaRegHeart } from 'react-icons/fa';
 import './ImageListItem.css'
 import { useDispatch } from 'react-redux';
-import { fetchAllImages, fetchCreateLike, fetchDeleteLike, fetchOneImage, fetchUserImages} from '../../../store/images.js'
+import { fetchCreateLike, fetchDeleteLike} from '../../../store/images.js'
 
 
 function ImageListItem({ image, user, loadImages }) {
   const dispatch = useDispatch()
   const { userId } = useParams()
   const liked = image?.Likes?.liked
-  
-  // console.log('Load Images liked', liked)
-  // console.log('Load Image User = ', userId)
-
 
   const handleClick = async (e) => {
     return liked
@@ -47,7 +42,6 @@ function ImageListItem({ image, user, loadImages }) {
         </NavLink>
         <div className='image-icons-container'>
           <div className='image-icons'>
-            
             {liked ? (
               <FaHeart
                 className='like-icon'
@@ -65,7 +59,6 @@ function ImageListItem({ image, user, loadImages }) {
             <div>
               <NavLink className='comment-link' to={`/images/${image?.id}`}>
                 <p>View Comments</p>
-                {/* <p>View all {image?.Comments?.length} Comments</p> */}
               </NavLink>
             </div>
             <div>
@@ -77,7 +70,9 @@ function ImageListItem({ image, user, loadImages }) {
             </div>
           </div>
         </div>
-        <p className='image-list-item-img-caption'>{image?.caption}</p>
+        <NavLink className='caption-link' to={`/images/${image?.id}`}>
+          <p className='image-list-item-img-caption'>{image?.caption}</p>
+        </NavLink>
         <div className='image-list-item-post-date'>{postDate}</div>
       </div>
     </div>

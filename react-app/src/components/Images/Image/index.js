@@ -7,24 +7,22 @@ import './Image.css'
 import { useDispatch, useSelector } from 'react-redux';
 import CommentCreateForm from '../../Comments/CommentCreateForm';
 import CommentList from '../../Comments/CommentList';
-import Likes from '../../Likes';
 import { fetchCreateLike } from '../../../store/images';
 import { fetchDeleteLike } from '../../../store/images';
-import { FaRegHeart, FaHeart, FaRegComment } from 'react-icons/fa';
+import { FaRegHeart, FaHeart } from 'react-icons/fa';
 
 function Image({ image, user, loadImage }) {
-  // console.log("USER IN IMAGE", user)
   const { imageId } = useParams()
   const dispatch = useDispatch()
   const [editModal, setEditModal] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  // const [isLoading, setIsLoading] = useState(false)
 
   const sessionUser = useSelector(state => state.session.user)
   const isOwner = sessionUser.id === image?.Image?.user_id
 
   const liked = image?.Image?.Likes?.liked
-  // console.log('Load Image = ', () => loadImage(imageId))
+
   const handleClick = async () => {
     return liked
       ? await dispatch(fetchDeleteLike(imageId))
@@ -109,13 +107,12 @@ function Image({ image, user, loadImage }) {
                 ) : (
                   <FaRegHeart className='like-icon' onClick={handleClick} />
                 )}
-                {/* <FaRegComment className='comment-icon' /> */}
               </div>
               <div className='image-icons-res-image'>
-                {image?.Image?.Likes?.total === 1 ? (
-                  <p>{image?.Image?.Likes?.total} Like</p>
+                {image?.Image?.num_likes === 1 ? (
+                  <p>{image?.Image?.num_likes} Like</p>
                 ) : (
-                  <p>{image?.Image?.Likes?.total} Likes</p>
+                  <p>{image?.Image?.num_likes} Likes</p>
                 )}
               </div>
             </div>
