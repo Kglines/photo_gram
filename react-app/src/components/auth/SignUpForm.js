@@ -7,7 +7,6 @@ const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-  const [bio, setBio] = useState('')
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
@@ -16,7 +15,7 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, bio, password));
+      const data = await dispatch(signUp(username, email, password));
       if (data) {
         setErrors(data)
       }
@@ -32,10 +31,6 @@ const SignUpForm = () => {
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
-
-  const updateBio = (e) => {
-    setBio(e.target.value);
-  }
 
   const updatePassword = (e) => {
     setPassword(e.target.value);
@@ -81,7 +76,6 @@ const SignUpForm = () => {
             ))}
           </div>
           <div>
-            {/* <label>User Name</label> */}
             <input
               type='text'
               name='username'
@@ -91,7 +85,6 @@ const SignUpForm = () => {
             ></input>
           </div>
           <div>
-            {/* <label>Email</label> */}
             <input
               type='text'
               name='email'
@@ -101,16 +94,6 @@ const SignUpForm = () => {
             ></input>
           </div>
           <div>
-            <textarea
-              type='text'
-              name='bio'
-              onChange={updateBio}
-              value={bio}
-              placeholder='Bio'
-            ></textarea>
-          </div>
-          <div>
-            {/* <label>Password</label> */}
             <input
               name='password'
               type='password'
@@ -120,7 +103,6 @@ const SignUpForm = () => {
             ></input>
           </div>
           <div>
-            {/* <label>Repeat Password</label> */}
             <input
               type='password'
               name='repeat_password'

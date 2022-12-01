@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { fetchAllImages, fetchCreateImage } from '../../../store/images'
+import { fetchAllImages } from '../../../store/images'
 import './ImageCreateForm.css'
 
 function ImageCreateForm({ setShowModal }) {
@@ -18,17 +18,12 @@ function ImageCreateForm({ setShowModal }) {
     const formData = new FormData();
     formData.append('caption', caption)
     formData.append('image_url', image_url);
-    // console.log('image_url', image_url)
-    // console.log('caption', caption)
-    // console.log('formdata', formData)
     setImageLoading(true);
     
     const res = await fetch('/api/images', {
       method: 'POST',
       body: formData
     })
-    // console.log('FORM DATA', formData)
-    // console.log('RES', res)
     if (res.ok) {
       await res.json();
       setImageLoading(false);
@@ -38,38 +33,20 @@ function ImageCreateForm({ setShowModal }) {
     } else {
       setImageLoading(false);
       const data = await res.json();
-      // console.log('error');
       if(data && data.errors) setErrors(data.errors)
     }
-    
-    // const createdImage = await dispatch(fetchCreateImage(formData))
-    //   .then((res) => {
-    //     setImageLoading(false)
-    //     setShowModal(false)
-    //     return res
-    //   })
-    //   .then((res) => {
-    //     console.log('RES = ', res)
-    //     history.push(`/images/${res.id}`)
-    //     return res
-    //   })
-    //   .catch(async (res) => {
-    //     const data = await res.json()
-    //     if(data && data.errors) setErrors(data.errors)
-    //   })
-    //   return createdImage
   }
 
   return (
     <div>
+      <form onSubmit={handleSubmit} className='modal-container'>
+        <h2 className='modal-form-title'>Share A New Image</h2>
       {errors &&
         errors.map((error) => (
           <div className='errors' key={error}>
             {error}
           </div>
         ))}
-      <form onSubmit={handleSubmit} className='modal-container'>
-        <h2 className='modal-form-title'>Share A New Image</h2>
         <input
           className='modal-input-title file-btn'
           type='file'
@@ -87,7 +64,7 @@ function ImageCreateForm({ setShowModal }) {
           required
         />
         <div>
-          <button className='modal-btn modal-submit-btn' type='submit'>
+          <button disabled={caption.length === 0} className='modal-btn modal-submit-btn' type='submit'>
             Share
           </button>
           <button

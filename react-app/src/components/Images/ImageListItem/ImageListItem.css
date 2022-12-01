@@ -78,7 +78,7 @@
     width: 275px;
 }
 
-.comment-link{
+.comment-link, .caption-link{
     text-decoration: none;
     color: black;
 }
@@ -94,7 +94,7 @@
 .image-list-item-img-caption {
     background-color: white;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

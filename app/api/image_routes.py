@@ -81,7 +81,7 @@ def edit_image(id):
         image.caption=form.data['caption']
         image.image_url=form.data['image_url']
         db.session.commit()
-        return image.to_dict(), 200
+        return image.image_details_to_dict(), 200
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -97,6 +97,14 @@ def delete_image(id):
     db.session.delete(image)
     db.session.commit()
     return {'Message': 'Successfully deleted.'}, 200
+
+
+# Get Comments for an image based on image id
+@image_routes.route('<int:id>/comments')
+@login_required
+def get_comments(id):
+    comments = Comment.query.get(id)
+    return {'Comments': [comment.to_dict() for comment in comments]}, 200
 
 
 # Create a Comment

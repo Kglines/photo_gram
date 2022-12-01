@@ -96,7 +96,11 @@ input {
 
 .modal-submit-btn {
   background-color: #0a95ff;
-  
+}
+
+.modal-submit-btn:disabled{
+  opacity: 0.7;
+  cursor: auto;
 }
 
 .modal-cancel-btn {

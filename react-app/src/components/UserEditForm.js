@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { fetchGetUser } from '../store/session';
 
 function UserEditForm({ setEditModal, user }) {
     const { userId } = useParams();
-    const dispatch = useDispatch();
-    // console.log('USER USER EDIT FORM', user)
-    const [newUser, setNewUser] = useState('')
+    
     const [firstname, setFirstname] = useState(user?.firstname);
     const [lastname, setLastname] = useState(user?.lastname);
     const [bio, setBio] = useState(user?.bio);
-    const [profile_img, setProfile_img] = useState(user?.profile_img);
     const [imageLoading, setImageLoading] = useState(false);
     const [errors, setErrors] = useState([]);
 
@@ -22,10 +17,8 @@ function UserEditForm({ setEditModal, user }) {
         formData.append('firstname', firstname)
         formData.append('lastname', lastname)
         formData.append('bio', bio)
-        // formData.append('image_url', profile_img)
 
         setImageLoading(true);
-        // const fetchUser = await fetch(`/api/users/${userId}`);
         const res = await fetch(`/api/users/${userId}`, {
             method: 'PUT',
             body: formData
@@ -35,9 +28,7 @@ function UserEditForm({ setEditModal, user }) {
             const user = await res.json();
             setImageLoading(false);
             setEditModal(false);
-            // const refresh = dispatch(fetchGetUser(user.id));
-            
-            // console.log('refresh = ', refresh)
+
             updatedUser()
             updatedUser()
             return user
@@ -62,6 +53,9 @@ function UserEditForm({ setEditModal, user }) {
 
   return (
     <form onSubmit={handleSubmit} className='modal-container'>
+      {errors?.map(error => (
+        <li key={error}>{error}</li>
+      ))}
       <h2>Edit Your Profile</h2>
       <input
         className='modal-input-title'

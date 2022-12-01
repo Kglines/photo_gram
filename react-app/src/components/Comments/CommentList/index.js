@@ -1,14 +1,9 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import CommentListItem from '../CommentListItem';
 import './CommentList.css';
 
 function CommentList({ comments }) {
-  const dispatch = useDispatch()
-
-  // const comments = useSelector(state => state.comments)
-  // console.log('COMMENTS COMMENT LIST = ', comments)
-
+  
   return (
     <div className='comment-container'>
       {comments?.map((comment) => (

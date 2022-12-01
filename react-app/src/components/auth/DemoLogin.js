@@ -22,6 +22,9 @@ const DemoLogin = () => {
 
   return (
     <form onSubmit={onLogin}>
+      {errors?.map(error => (
+        <li key={error}>{error}</li>
+      ))}
       <button className='login-btn' type='submit'>
         Demo User
       </button>
