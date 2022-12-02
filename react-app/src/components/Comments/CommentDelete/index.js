@@ -9,20 +9,22 @@ function CommentDelete({ comment, setDeleteModal }) {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    // console.log('COMMENT DELETE = ', comment)
-
     const [errors, setErrors] = useState([])
 
     const onDelete = () => {
-        dispatch(fetchDeleteComments(comment?.id))
-        .then(() => history.push(`/images/${imageId}`))
-        .then(dispatch(fetchOneImage(imageId)))
-        .then(dispatch(fetchOneImage(imageId)))
-        .then(() => setDeleteModal(false))
+        let delComment = dispatch(fetchDeleteComments(comment?.id))
+        // .then(() => history.push(`/images/${imageId}`))
+        // .then(() => dispatch(fetchOneImage(imageId)))
+        // .then(() => dispatch(fetchOneImage(imageId)))
+        // .then(() => dispatch(fetchOneImage(imageId)))
+        // .then(() => setDeleteModal(false))
         .catch(async (res) => {
             const data = await res.json()
             if (data?.errors) setErrors(data?.errors)
         })
+        // console.log('COMMENT DELETE = ', delComment);
+        setDeleteModal(false);
+        return delComment
     }
   return (
     <div className='modal-container'>

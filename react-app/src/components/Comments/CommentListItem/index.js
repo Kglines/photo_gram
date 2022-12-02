@@ -7,7 +7,7 @@ import CommentEditForm from '../CommentEditForm'
 import './CommentListItem.css'
 
 function CommentListItem({ comment }) {
-  
+ 
   const [editModal, setEditModal] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false)
 

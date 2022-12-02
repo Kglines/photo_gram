@@ -28,7 +28,7 @@ function User() {
     dispatch(fetchUserImages(userId));
   }, [dispatch, userId])
 
-
+  // console.log('USER from USER = ', user)
   useEffect(() => {
     if (!userId) {
       return;
