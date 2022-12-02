@@ -38,7 +38,7 @@ function User() {
       const user = await response.json();
       setUser(user);
     })();
-  }, [user]);
+  }, []);
 
   if (!user) {
     return null;

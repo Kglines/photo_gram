@@ -35,7 +35,7 @@ function UserEditForm({ setEditModal, user }) {
           setImageLoading(false);
           setEditModal(false);
           // const refresh = dispatch(fetchGetUser(user.id));
-          console.log('USER USER EDIT FORM', user)
+          // console.log('USER USER EDIT FORM', user)
           // console.log('refresh = ', refresh)
           // updatedUser();
           // updatedUser();

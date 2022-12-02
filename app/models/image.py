@@ -61,7 +61,7 @@ class Image(db.Model):
             'updated_at': self.updated_at,
             'num_comments': self.num_comments(),
             'num_likes': self.num_likes(),
-            'Comments': [comment.to_dict() for comment in self.comments],
+            'comments': [comment.to_dict() for comment in self.comments],
             'Likes': {
                 'total': self.num_likes(),
                 'liked': self.liked()

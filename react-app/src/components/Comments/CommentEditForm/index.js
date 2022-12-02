@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { fetchOneImage } from '../../../store/images'
+// import { fetchOneImage } from '../../../store/images'
 import { fetchEditComments } from '../../../store/comments'
 
 function CommentEditForm({ setEditModal, comment}) {
+  // console.log('EDIT COMMENT = ', comment)
     const dispatch = useDispatch()
-    const { imageId } = useParams()
+    // const { imageId } = useParams()
 
     const [body, setBody] = useState(comment?.body)
     const [errors, setErrors] = useState([])
@@ -19,29 +20,28 @@ function CommentEditForm({ setEditModal, comment}) {
         }
 
         const newComment = dispatch(fetchEditComments(payload, comment?.id))
-        .then(() => dispatch(fetchOneImage(imageId)))
         .then(() => setEditModal(false))
         .catch(async (res) => {
             const data = await res.json()
             if (data?.errors) setErrors(data?.errors)
         })
+        setBody('')
         return newComment
     }
   return (
     <form className='modal-container' onSubmit={handleSubmit}>
       <h2>Edit Comment</h2>
-      <input
-        className='modal-input-title'
-        type='text'
-        value={body}
-        onChange={(e) => setBody(e.target.value)}
-        name='comment'
-      />
       {errors?.map((error) => (
         <li className='errors' key={error}>
           {error}
         </li>
       ))}
+      <textarea
+        className='modal-input-title'
+        type='text'
+        value={body}
+        onChange={(e) => setBody(e.target.value)}
+      />
       <div>
         <button className='modal-btn modal-submit-btn'>Submit</button>
         <button

@@ -50,10 +50,17 @@ export const deleteComment = (id) => {
 
 // ******** Comments Thunks ********
 
-// Get all Comments Thunk
-// export const fetchAllComments = () => async (dispatch) => {
-//     const res = await fetch(`/api/comments`)
-// }
+// Get all Comments of an image based on image ID Thunk
+export const fetchAllComments = (imageId) => async (dispatch) => {
+    const res = await fetch(`/api/images/${imageId}/comments`)
+
+    if(res.ok){
+        const comments = await res.json()
+        dispatch(getAllComments(comments))
+        return comments
+    }
+    return res
+}
 
 // Get One Comment Thunk
 // export const fetchOneComment = () => async (dispatch) => {
@@ -62,6 +69,7 @@ export const deleteComment = (id) => {
 
 // Create Comments Thunk
 export const fetchCreateComments = (comment, imageId) => async (dispatch) => {
+    // console.log('COMMENT THUNK = ', comment)
     const res = await fetch(`/api/images/${imageId}/comments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -70,6 +78,7 @@ export const fetchCreateComments = (comment, imageId) => async (dispatch) => {
 
     if(res.ok){
         const comment = await res.json();
+        // console.log('MADE IT TO THE COMMENT THUNK IN COMMENTS STORE')
         dispatch(createComment(comment));
         return comment;
     };
@@ -114,11 +123,23 @@ const initialState = {}
 const commentsReducer = (state = initialState, action) => {
     let newState = {...state};
     switch (action.type) {
+        case GET_ALL_COMMENTS:
+            action.payload.Comments.forEach(comment => newState[comment.id] = comment)
+            // console.log('NEW STATE ACTION PAYLOAD = ', action.payload.Comments)
+            return newState;
         case CREATE_COMMENTS:
             newState = { ...state, [action.payload.id]: action.payload }
+            // console.log('NEW STATE CREATE COMMENTS IN REDUCER', newState)
             return newState
         case EDIT_COMMENTS:
-            newState = action.payload
+            // console.log('EDITING COMMENTS', {
+            //   ...state,
+            //   [action.payload.id]: action.payload,
+            // });
+            newState = {
+              ...state,
+              [action.payload.id]: action.payload,
+            };
             return newState
         case DELETE_COMMENTS:
             delete newState[action.payload]

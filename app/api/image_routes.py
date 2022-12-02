@@ -103,7 +103,10 @@ def delete_image(id):
 @image_routes.route('<int:id>/comments')
 @login_required
 def get_comments(id):
-    comments = Comment.query.get(id)
+    image = Image.query.get(id)
+    if image is None:
+        return {'errors': ['Image not found']}, 404
+    comments = Comment.query.filter(Comment.image_id == image.id).all()
     return {'Comments': [comment.to_dict() for comment in comments]}, 200
 
 

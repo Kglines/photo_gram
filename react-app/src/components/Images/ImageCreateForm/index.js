@@ -54,7 +54,7 @@ function ImageCreateForm({ setShowModal }) {
           onChange={(e) => setImage_url(e.target.files[0])}
           required
         />
-        <input
+        <textarea
           className='modal-input-title'
           type='text'
           value={caption}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { fetchCreateComments } from '../../../store/comments'
-import { fetchOneImage } from '../../../store/images'
+// import { fetchOneImage } from '../../../store/images'
 import './CommentCreateForm.css'
 
 function CommentCreateForm({ image }) {
@@ -18,13 +18,13 @@ function CommentCreateForm({ image }) {
       }
 
       const newComment = dispatch(fetchCreateComments(payload, image?.Image?.id))
-      .then(() => dispatch(fetchOneImage(image?.Image?.id)))
+      // .then(() => dispatch(fetchOneImage(image?.Image?.id)))
         .catch(async (res) => {
           const data = await res.json()
           if (data && data.errors) setErrors(data.errors)
         })
         setComment('')
-        // console.log('ERRORS = ', errors)
+        // console.log('NEW COMMENT = ', newComment)
         return newComment
     }
 
