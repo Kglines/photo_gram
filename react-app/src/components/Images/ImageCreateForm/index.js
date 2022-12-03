@@ -15,15 +15,18 @@ function ImageCreateForm({ setShowModal }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const formData = new FormData();
     formData.append('caption', caption)
     formData.append('image_url', image_url);
+
     setImageLoading(true);
     
     const res = await fetch('/api/images', {
       method: 'POST',
       body: formData
     })
+
     if (res.ok) {
       await res.json();
       setImageLoading(false);
@@ -37,16 +40,24 @@ function ImageCreateForm({ setShowModal }) {
     }
   }
 
+  const isDisabled = () => {
+    if(caption.length < 1 || caption[0].includes(' ')){
+      return true
+    } else {
+      return false
+    }
+  }
+
   return (
     <div>
       <form onSubmit={handleSubmit} className='modal-container'>
         <h2 className='modal-form-title'>Share A New Image</h2>
-      {errors &&
-        errors.map((error) => (
-          <div className='errors' key={error}>
-            {error}
-          </div>
-        ))}
+        {errors &&
+          errors.map((error) => (
+            <div className='errors' key={error}>
+              {error}
+            </div>
+          ))}
         <input
           className='modal-input-title file-btn'
           type='file'
@@ -64,7 +75,12 @@ function ImageCreateForm({ setShowModal }) {
           required
         />
         <div>
-          <button disabled={caption.length === 0} className='modal-btn modal-submit-btn' type='submit'>
+          <button
+            // disabled={caption?.length < 1 ? true : false}
+            disabled={isDisabled()}
+            className='modal-btn modal-submit-btn'
+            type='submit'
+          >
             Share
           </button>
           <button

@@ -40,6 +40,14 @@ function CommentEditForm({ setEditModal, comment}) {
         // return newComment
     }
 
+    const isDisabled = () => {
+      if (body.length < 1 || body[0].includes(' ')) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+
   return (
     <form className='modal-container' onSubmit={handleSubmit}>
       <h2>Edit Comment</h2>
@@ -55,7 +63,7 @@ function CommentEditForm({ setEditModal, comment}) {
         onChange={(e) => setBody(e.target.value)}
       />
       <div>
-        <button className='modal-btn modal-submit-btn'>Submit</button>
+        <button disabled={isDisabled()} className='modal-btn modal-submit-btn'>Submit</button>
         <button
           className='modal-btn modal-cancel-btn'
           onClick={() => setEditModal(false)}

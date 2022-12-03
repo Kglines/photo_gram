@@ -29,6 +29,14 @@ function CommentCreateForm({ image }) {
         })
     }
 
+    const isDisabled = () => {
+      if (comment.length < 1 || comment[0].includes(' ')) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+
   return (
     <div>
       <form className='comment-create-form-container' onSubmit={handleSubmit}>
@@ -41,7 +49,7 @@ function CommentCreateForm({ image }) {
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         />
-        <button disabled={comment?.length < 1 ? true : false}>Post</button>
+        <button disabled={isDisabled()}>Post</button>
       </form>
       <div>
         {errors.map((error) => (

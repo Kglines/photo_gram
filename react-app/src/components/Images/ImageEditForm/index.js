@@ -30,6 +30,15 @@ function ImageEditForm({ imageId, setEditModal, image }) {
     
     return newImage;
   }
+
+  const isDisabled = () => {
+    if (caption.length < 1 || caption[0].includes(' ')) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <form className='modal-container' onSubmit={handleSubmit}>
       <h2>Edit your caption</h2>
@@ -47,7 +56,7 @@ function ImageEditForm({ imageId, setEditModal, image }) {
         </li>
       ))}
       <div>
-        <button className='modal-btn modal-submit-btn'>Continue</button>
+        <button disabled={isDisabled()} className='modal-btn modal-submit-btn'>Continue</button>
         <button
           className='modal-btn modal-cancel-btn'
           onClick={() => setEditModal(false)}

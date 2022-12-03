@@ -63,6 +63,7 @@ input {
     font-size: 18px;
     width: 374px;
     border-radius: 10px;
+    white-space: pre-line;
 }
 
 .file-btn{
