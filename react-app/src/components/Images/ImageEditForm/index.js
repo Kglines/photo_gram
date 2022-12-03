@@ -33,7 +33,7 @@ function ImageEditForm({ imageId, setEditModal, image }) {
   return (
     <form className='modal-container' onSubmit={handleSubmit}>
       <h2>Edit your caption</h2>
-      <input
+      <textarea
         className='modal-input-title'
         type='text'
         value={caption}

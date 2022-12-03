@@ -71,20 +71,19 @@ function User() {
           <div className='user-info'>
             <ul>
               <li className='user-info-item user-info-username'>
-              <div>
-                <strong>{user?.username}</strong>
-              </div>
-              <div className='user-info-edit-btn'>
-                {isOwner && (
-                  <button
-                    className='user-edit-btn'
-                    onClick={() => setEditModal(true)}
-                  >
-                    Update Profile
-                  </button>
-                )}
-
-              </div>
+                <div>
+                  <strong>{user?.username}</strong>
+                </div>
+                <div className='user-info-edit-btn'>
+                  {isOwner && (
+                    <button
+                      className='user-edit-btn'
+                      onClick={() => setEditModal(true)}
+                    >
+                      Update Profile
+                    </button>
+                  )}
+                </div>
               </li>
               {user?.firstname && (
                 <li className='user-info-item'>
@@ -109,9 +108,19 @@ function User() {
 
       <div>
         {/* <button onClick={() => setShowModal(true)}> */}
-        <VscDiffAdded className='add-btn' onClick={() => setShowModal(true)} />
+
         {/* </button> */}
-        <div>Create</div>
+        {isOwner && (
+          <div className='user-profile-create'>
+            <div>
+              <VscDiffAdded
+                className='add-btn'
+                onClick={() => setShowModal(true)}
+              />
+            </div>
+            <div>Create</div>
+          </div>
+        )}
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
             <ImageCreateForm setShowModal={setShowModal} />
@@ -121,11 +130,7 @@ function User() {
       <div className='profile-image-list'>
         {userImages?.map((image) => (
           <div key={image?.id}>
-            <ImageListItem 
-            image={image} 
-            loadImages={loadImages} 
-
-            />
+            <ImageListItem image={image} loadImages={loadImages} />
           </div>
         ))}
       </div>
