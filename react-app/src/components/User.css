@@ -12,6 +12,10 @@
     list-style: none;
 }
 
+.user-profile-create{
+    margin-bottom: 20px;
+}
+
 .user-info-username{
     display: flex;
     flex-direction: row;
