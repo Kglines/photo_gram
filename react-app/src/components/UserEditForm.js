@@ -61,10 +61,9 @@ function UserEditForm({ setEditModal, user }) {
     // }
 
     const isDisabled = () => {
-      if (firstname.length < 1 
-        || firstname[0].includes(' ')
-        || lastname[0].includes(' ')
-        || bio[0].includes(' ')
+      if (firstname[0]?.includes(' ')
+        || lastname[0]?.includes(' ')
+        || bio[0]?.includes(' ')
         ) {
         return true;
       } else {
