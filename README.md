@@ -55,6 +55,31 @@ For this project, we used the following technologies:
 - Search bar to search for other users
 - Add hashtags
 
+## **Screen Shots**
+### Landing Page
+<img src='./react-app/public/screenShots/landing_page.png'>
+
+
+### Home Page (logged in)
+<img src='./react-app/public/screenShots/home.png'>
+
+
+### User List
+<img src='./react-app/public/screenShots/users.png'>
+
+
+### Your User Profile Page
+<img src='./react-app/public/screenShots/user-profile.png'>
+
+
+### An Individual Post with Comments and Likes
+<img src='./react-app/public/screenShots/post.png'>
+
+
+### Create a New Post
+<img src='./react-app/public/screenShots/new.png'>
+
+
 <!-- # Flask React Project
 
 This is the starter for the Flask React project.
