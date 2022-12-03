@@ -51,9 +51,6 @@ For this project, we used the following technologies:
 - Un-Follow other users
 - See the users that you're following -->
 
-## Future additions
-- Search bar to search for other users
-- Add hashtags
 
 ## **Screen Shots**
 ### Landing Page
@@ -79,6 +76,11 @@ For this project, we used the following technologies:
 ### Create a New Post
 <img src='./react-app/public/screenShots/new.png'>
 
+
+
+## Future additions
+- Search bar to search for other users
+- Add hashtags
 
 <!-- # Flask React Project
 
