@@ -12,29 +12,41 @@ function CommentEditForm({ setEditModal, comment}) {
     const [body, setBody] = useState(comment?.body)
     const [errors, setErrors] = useState([])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const payload = {
             body
         }
 
-        const newComment = dispatch(fetchEditComments(payload, comment?.id))
-        .then(() => setEditModal(false))
-        .catch(async (res) => {
+        dispatch(fetchEditComments(payload, comment?.id))
+        .then(async (res) => {
+          console.log('RES THE FIRST = ', res)
+          if (res.ok === false){
+            console.log('RES OK IS FALSE = ', res)
             const data = await res.json()
-            if (data?.errors) setErrors(data?.errors)
+            if (data.errors) setErrors(data.errors)
+          } else {
+            console.log('RES OK IS TRUE = ', res)
+            setErrors([])
+            setEditModal(false)
+          }
         })
-        setBody('')
-        return newComment
+        // .catch(async (res) => {
+        //     const data = await res.json()
+        //     if (data?.errors) setErrors(data?.errors)
+        // })
+        // setBody('')
+        // return newComment
     }
+
   return (
     <form className='modal-container' onSubmit={handleSubmit}>
       <h2>Edit Comment</h2>
       {errors?.map((error) => (
-        <li className='errors' key={error}>
+        <div className='errors' key={error}>
           {error}
-        </li>
+        </div>
       ))}
       <textarea
         className='modal-input-title'

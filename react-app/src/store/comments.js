@@ -78,7 +78,6 @@ export const fetchCreateComments = (comment, imageId) => async (dispatch) => {
 
     if(res.ok){
         const comment = await res.json();
-        // console.log('MADE IT TO THE COMMENT THUNK IN COMMENTS STORE')
         dispatch(createComment(comment));
         return comment;
     };
@@ -88,16 +87,17 @@ export const fetchCreateComments = (comment, imageId) => async (dispatch) => {
 // Edit A Comment Thunk
 export const fetchEditComments = (comment, commentId) => async (dispatch) => {
     const res = await fetch(`/api/comments/${commentId}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(comment)
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(comment)
     });
-
+    
     if(res.ok){
         const comment = await res.json();
         dispatch(editComment(comment));
         return comment;
     };
+    // console.log('RES IN EDIT COMMENTS THUNK = ', res)
     return res;
 }
 

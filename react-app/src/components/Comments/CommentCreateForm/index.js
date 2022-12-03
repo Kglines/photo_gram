@@ -10,28 +10,36 @@ function CommentCreateForm({ image }) {
     const [comment, setComment] = useState('')
     const [errors, setErrors] = useState([])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
 
       const payload = {
         body: comment
       }
 
-      const newComment = dispatch(fetchCreateComments(payload, image?.Image?.id))
+      dispatch(fetchCreateComments(payload, image?.Image?.id))
       // .then(() => dispatch(fetchOneImage(image?.Image?.id)))
-        .catch(async (res) => {
-          const data = await res.json()
-          if (data && data.errors) setErrors(data.errors)
+        .then(async (res) => {
+          console.log('RES First comment create = ', res)
+          if(res.ok === false) {
+            const data = await res.json()
+            if (data && data.errors) setErrors(data.errors)
+          }
+          else {
+            setComment('')
+            setErrors([])
+          }
         })
-        setComment('')
-        // console.log('NEW COMMENT = ', newComment)
-        return newComment
+        // .catch(async (res) => {
+        //   const data = await res.json()
+        //   if (data && data.errors) setErrors(data.errors)
+        // })
     }
 
   return (
     <form className='comment-create-form-container' onSubmit={handleSubmit}>
-      {errors?.map(error => (
-        <li className='errors' key={error}>{error}</li>
+      {errors.map(error => (
+        <div className='errors' key={error}>{error}</div>
       ))}
         <input 
             type='text'
