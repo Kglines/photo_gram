@@ -29,7 +29,7 @@ function UserEditForm({ setEditModal, user }) {
             method: 'PUT',
             body: formData
         });
-
+        // console.log('RES IN USER EDIT = ', userId)
         if (res.ok){
           const user = await res.json();
           setImageLoading(false);
@@ -39,6 +39,7 @@ function UserEditForm({ setEditModal, user }) {
           // console.log('refresh = ', refresh)
           // updatedUser();
           // updatedUser();
+          // console.log('USER IN USER EDIT = ', user)
           return user;
         } else {
             const data = await res.json();
@@ -62,6 +63,9 @@ function UserEditForm({ setEditModal, user }) {
   return (
     <form onSubmit={handleSubmit} className='modal-container'>
       <h2>Edit Your Profile</h2>
+      {errors?.map(error => (
+        <div className='errors' key={error}>{error}</div>
+      ))}
       <input
         className='modal-input-title'
         type='text'

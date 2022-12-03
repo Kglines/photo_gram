@@ -30,9 +30,9 @@ const NavBar = () => {
     sessionLinks = (
       <ul className='nav-list'>
         <li className='nav-list-item'>
-          <NavLink className='logo' to='/home'>
+          {/* <NavLink className='logo' to='/home'> */}
             <p className='logo'>Photogram</p>
-          </NavLink>
+          {/* </NavLink> */}
         </li>
         <li className='nav-list-item'>
           <button className='nav-btn' onClick={handleClick}>

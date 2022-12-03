@@ -21,13 +21,13 @@ function CommentEditForm({ setEditModal, comment}) {
 
         dispatch(fetchEditComments(payload, comment?.id))
         .then(async (res) => {
-          console.log('RES THE FIRST = ', res)
+          // console.log('RES THE FIRST = ', res)
           if (res.ok === false){
-            console.log('RES OK IS FALSE = ', res)
+            // console.log('RES OK IS FALSE = ', res)
             const data = await res.json()
             if (data.errors) setErrors(data.errors)
           } else {
-            console.log('RES OK IS TRUE = ', res)
+            // console.log('RES OK IS TRUE = ', res)
             setErrors([])
             setEditModal(false)
           }
