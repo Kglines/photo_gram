@@ -132,9 +132,9 @@ function Image({ image, user, loadImage }) {
                 )}
               </div>
             </div>
-          </div>
           <div>
             <CommentCreateForm className='comment-create-form' image={image} />
+          </div>
           </div>
         </div>
       </div>

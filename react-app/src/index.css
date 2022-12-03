@@ -38,4 +38,9 @@ body {
     color: red;
 }
 
+.comment-errors{
+    margin-left: 5px;
+    padding-left: 5px;
+    background-color: white;
+}
 
