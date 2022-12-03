@@ -40,9 +40,7 @@ def image_detail(id):
 def create_image():
     form = ImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    
     if "image_url" not in request.files:
-        print('ERROR ON LINE 45 OF IMAGE ROUTES')
         return {'errors': 'image url required'}, 400
     file = request.files['image_url']
 

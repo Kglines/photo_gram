@@ -1,5 +1,13 @@
+.comment-list-item-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 .comment {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin-bottom: -10px;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
