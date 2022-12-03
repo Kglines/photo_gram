@@ -60,16 +60,14 @@ function UserEditForm({ setEditModal, user }) {
     //     }
     // }
 
-    const isDisabled = () => {
-      if (firstname[0]?.includes(' ')
-        || lastname[0]?.includes(' ')
-        || bio[0]?.includes(' ')
-        ) {
-        return true;
-      } else {
-        return false;
-      }
-    };
+    // const isDisabled = () => {
+    //   if (bio[0]?.includes(' ')
+    //     ) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // };
 
   return (
     <form onSubmit={handleSubmit} className='modal-container'>
@@ -108,7 +106,7 @@ function UserEditForm({ setEditModal, user }) {
         onChange={(e) => setProfile_img(e.target.files[0])}
       /> */}
       <div>
-        <button disabled={isDisabled()} className='modal-btn modal-submit-btn' type='submit'>
+        <button className='modal-btn modal-submit-btn' type='submit'>
           Update
         </button>
         <button
