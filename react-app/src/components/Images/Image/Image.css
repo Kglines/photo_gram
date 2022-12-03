@@ -8,10 +8,6 @@
     
 }
 
-.image-btn-container{
-
-}
-
 .full-image{
     display: flex;
     flex-direction: row;
@@ -26,7 +22,6 @@
 }
 
 .image-pic-container{
-    /* width: 100px; */
     margin-bottom: -5px;
 }
 
@@ -34,8 +29,7 @@
     background-color: white;
     width: 343px;
     height: 550px;
-    
-    /* overflow: auto; */
+    word-break: break-word;
 }
 
 .image-text-container-header{
@@ -54,14 +48,8 @@
 
 .caption{
     padding-left: 5px;
-    /* padding-bottom: 10px; */
-    overflow-wrap: break-word;
     height: 55px;
-    /* min-height: 35px; */
-    /* max-height: 115px; */
-    /* word-break: break-all; */
     overflow-y: auto;
-    word-wrap: break-word;
     margin-top: -1px;
     color: rgb(69, 69, 69);
 }
@@ -71,17 +59,15 @@
     flex-direction: column;
     border-bottom: 1px solid silver;
     height: 315px;
-    /* min-height: 225px; */
-    /* max-height: 325px; */
     overflow-y: auto;
     padding-left: 5px;
     padding-right: 5px;
+    
 }
 
 .comment-container-content{
     display:flex;
     flex-direction: column;
-    /* height: auto; */
     
 }
 
@@ -99,9 +85,6 @@
 .comment-body {
     padding-left: 10px;
     margin-top: -1px;
-    word-break: break-all;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
 }
 
 .edit-comment-btns{
@@ -115,7 +98,6 @@
     justify-content: space-between;
     width: 95%;
     padding-left: 10px;
-    /* height: 300px; */
 }
 
 .image-icons-res-image{
