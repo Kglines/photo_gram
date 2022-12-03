@@ -48,17 +48,29 @@ function UserEditForm({ setEditModal, user }) {
        
     }
 
-    const updatedUser = async () => {
-        const res = await fetch(`/api/users/${userId}`);
+    // const updatedUser = async () => {
+    //     const res = await fetch(`/api/users/${userId}`);
 
-        if (res.ok){
-            const user = await res.json();
-            return user
-        } else {
-            const data = await res.json();
-            if(data && data.errors) setErrors(data.errors)
-        }
-    }
+    //     if (res.ok){
+    //         const user = await res.json();
+    //         return user
+    //     } else {
+    //         const data = await res.json();
+    //         if(data && data.errors) setErrors(data.errors)
+    //     }
+    // }
+
+    const isDisabled = () => {
+      if (firstname.length < 1 
+        || firstname[0].includes(' ')
+        || lastname[0].includes(' ')
+        || bio[0].includes(' ')
+        ) {
+        return true;
+      } else {
+        return false;
+      }
+    };
 
   return (
     <form onSubmit={handleSubmit} className='modal-container'>
@@ -97,7 +109,7 @@ function UserEditForm({ setEditModal, user }) {
         onChange={(e) => setProfile_img(e.target.files[0])}
       /> */}
       <div>
-        <button className='modal-btn modal-submit-btn' type='submit'>
+        <button disabled={isDisabled()} className='modal-btn modal-submit-btn' type='submit'>
           Update
         </button>
         <button
