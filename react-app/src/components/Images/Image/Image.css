@@ -38,10 +38,21 @@
 }
 
 .image-text-container-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     border-bottom: 1px solid silver;
-    padding-top: 5px;
+    margin-top: 10px;
+    padding-top: 15px;
     padding-left: 10px;
-    height: 40px;
+    height: 30px;
+}
+
+.image-btn-container{
+    display: flex;
+    flex-direction: row;
+    width: 120px;
+    margin-top: -20px;
 }
 
 .caption-container {
@@ -53,7 +64,7 @@
 
 .caption{
     padding-left: 5px;
-    height: 60px;
+    height: 95px;
     overflow-y: auto;
     margin-top: -1px;
     color: rgb(69, 69, 69);
@@ -64,7 +75,7 @@
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid silver;
-    height: 360px;
+    height: 455px;
     overflow-y: auto;
     padding-left: 5px;
     padding-right: 5px;

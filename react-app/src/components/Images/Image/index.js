@@ -41,7 +41,7 @@ function Image({ image, user, loadImage, isLoading }) {
 
   return (
     <div className='image-container'>
-      <div className='image-btn-container'>
+      {/* <div className='image-btn-container'>
         {isOwner && (
           <button className='edit-btn' onClick={() => setEditModal(true)}>
             Edit
@@ -70,9 +70,8 @@ function Image({ image, user, loadImage, isLoading }) {
             />
           </Modal>
         )}
-      </div>
+      </div> */}
       <div className='full-image'>
-          
         <div className='image-pic-container'>
           {isLoading && <p>Loading...</p>}
           <img
@@ -84,22 +83,60 @@ function Image({ image, user, loadImage, isLoading }) {
         <div className='image-text-container'>
           <div className='image-text-container-header'>
             <NavLink to={`/users/${user?.id}`} className='user-link'>
-              {user?.profile_img && (
+              {/* {user?.profile_img && (
                 <img
                   className='profile-img'
                   src={user?.profile_img}
                   alt={user?.username}
                 />
-              )}
-              <p>{user?.username}</p>
+              )} */}
+              <div>
+                <span>{user?.username}</span>
+              </div>
             </NavLink>
+              <div className='image-btn-container'>
+                {isOwner && (
+                  <button
+                    className='edit-btn'
+                    onClick={() => setEditModal(true)}
+                  >
+                    Edit
+                  </button>
+                )}
+                {editModal && (
+                  <Modal onClose={() => setEditModal(false)}>
+                    <ImageEditForm
+                      setEditModal={setEditModal}
+                      imageId={imageId}
+                      image={image}
+                    />
+                  </Modal>
+                )}
+                {isOwner && (
+                  <button
+                    className='delete-btn'
+                    onClick={() => setDeleteModal(true)}
+                  >
+                    Delete
+                  </button>
+                )}
+                {deleteModal && (
+                  <Modal onClose={() => setDeleteModal(false)}>
+                    <ImageDelete
+                      setDeleteModal={setDeleteModal}
+                      imageId={imageId}
+                      image={image}
+                    />
+                  </Modal>
+                )}
+              </div>
           </div>
-          <div className='caption-container'>
+          {/* <div className='caption-container'>
             <NavLink className='user-link' to={`/users/${user?.id}`}>
               <p>{user?.username}</p>
             </NavLink>
             <p className='caption'>{image?.Image?.caption}</p>
-          </div>
+          </div> */}
           <div className='comment-container'>
             <CommentList comments={comments} image={image} />
           </div>
@@ -124,9 +161,12 @@ function Image({ image, user, loadImage, isLoading }) {
                 )}
               </div>
             </div>
-          <div>
-            <CommentCreateForm className='comment-create-form' image={image} />
-          </div>
+            <div>
+              <CommentCreateForm
+                className='comment-create-form'
+                image={image}
+              />
+            </div>
           </div>
         </div>
       </div>
