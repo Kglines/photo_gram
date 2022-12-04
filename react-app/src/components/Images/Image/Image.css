@@ -1,10 +1,15 @@
+.image-detail-container{
+    width: 950px;
+    margin-left: -50px;
+}
+
 .image-container{
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 1000px;
     height: auto;
     margin-left: -100px;
-    padding-top: 20px;
+    padding-top: 40px;
     
 }
 
@@ -16,7 +21,7 @@
 
 .image-pic {
     width: 500px;
-    height: 550px;
+    height: 600px;
     object-fit: cover;
     object-position: center;
 }
@@ -27,8 +32,8 @@
 
 .image-text-container{
     background-color: white;
-    width: 343px;
-    height: 550px;
+    width: 400px;
+    height: 600px;
     word-break: break-word;
 }
 
@@ -48,17 +53,18 @@
 
 .caption{
     padding-left: 5px;
-    height: 55px;
+    height: 60px;
     overflow-y: auto;
     margin-top: -1px;
     color: rgb(69, 69, 69);
+    margin-bottom: 0px;
 }
 
 .comment-container {
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid silver;
-    height: 315px;
+    height: 360px;
     overflow-y: auto;
     padding-left: 5px;
     padding-right: 5px;

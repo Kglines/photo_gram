@@ -7,29 +7,23 @@ import './Image.css'
 import { useDispatch, useSelector } from 'react-redux';
 import CommentCreateForm from '../../Comments/CommentCreateForm';
 import CommentList from '../../Comments/CommentList';
-import { fetchCreateLike, fetchGetComments } from '../../../store/images';
+import { fetchCreateLike } from '../../../store/images';
 import { fetchDeleteLike } from '../../../store/images';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { fetchAllComments } from '../../../store/comments';
 
-function Image({ image, user, loadImage }) {
+function Image({ image, user, loadImage, isLoading }) {
   const { imageId } = useParams()
   const dispatch = useDispatch()
   const [editModal, setEditModal] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false)
   
-  // console.log('IMAGE PAGE IMAGE = ', image)
   const comments = Object.values(useSelector(state => state.comments))
-  // console.log('Comments in IMAGE = ', comments, imageId)
-  // useEffect(() => {
-  //   dispatch(fetchGetComments(imageId))
-  // }, [dispatch])
 
   useEffect(() => {
     dispatch(fetchAllComments(imageId))
   }, [dispatch, imageId])
 
-  // console.log('image comments', imageComments)
   const sessionUser = useSelector(state => state.session.user)
   const isOwner = sessionUser.id === image?.Image?.user_id
 
@@ -44,9 +38,6 @@ function Image({ image, user, loadImage }) {
           .then(() => loadImage(imageId))
           .then(() => loadImage(imageId))
   };
-
-  // console.log('USER from IMAGE = ', user)
-  // console.log('SESSIONUSER from IMAGE = ', sessionUser)
 
   return (
     <div className='image-container'>
@@ -81,7 +72,9 @@ function Image({ image, user, loadImage }) {
         )}
       </div>
       <div className='full-image'>
+          
         <div className='image-pic-container'>
+          {isLoading && <p>Loading...</p>}
           <img
             className='image-pic'
             src={image?.Image?.image_url}
@@ -108,7 +101,6 @@ function Image({ image, user, loadImage }) {
             <p className='caption'>{image?.Image?.caption}</p>
           </div>
           <div className='comment-container'>
-            {/* <CommentList comments={image?.Image?.Comments} /> */}
             <CommentList comments={comments} image={image} />
           </div>
           <div>

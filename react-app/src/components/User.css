@@ -47,12 +47,15 @@
     background-color: white;
     border-radius: 5px;
     box-shadow: 1px 1px 10px silver;
+    overflow-y: auto;
+    word-break: break-word;
 }
 
 .user-list{
     display: grid;
     grid-template-columns: repeat(3, 300px);
     grid-template-rows: auto;
+    height: 800px;
     gap: 10px;
     margin-left: -15%;
     list-style: none;
