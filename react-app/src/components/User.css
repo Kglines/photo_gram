@@ -55,7 +55,7 @@
     display: grid;
     grid-template-columns: repeat(3, 300px);
     grid-template-rows: auto;
-    height: 800px;
+    /* height: 800px; */
     gap: 10px;
     margin-left: -15%;
     list-style: none;
