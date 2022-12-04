@@ -11,9 +11,9 @@ class User(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    firstname = db.Column(db.String(40))
-    lastname = db.Column(db.String(40))
-    username = db.Column(db.String(40), nullable=False, unique=True)
+    firstname = db.Column(db.String(25))
+    lastname = db.Column(db.String(25))
+    username = db.Column(db.String(25), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     bio = db.Column(db.String(500))
