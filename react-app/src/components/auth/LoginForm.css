@@ -117,3 +117,10 @@
     text-align: center;
     padding: 5px 50px;
 }
+
+.login-about-links{
+    color: black;
+    font-size: 26px;
+    margin-right: 10px;
+    padding-left: 10px;
+}

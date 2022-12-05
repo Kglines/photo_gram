@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, NavLink } from 'react-router-dom';
 import { login } from '../../store/session';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import DemoLogin from './DemoLogin';
 import './LoginForm.css';
 
@@ -102,6 +103,22 @@ const LoginForm = () => {
           <p>-------- OR --------</p>
           <p>Try it out</p>
           <DemoLogin />
+          <a
+            className='login-about-links'
+            rel='noreferrer'
+            target='_blank'
+            href='https://github.com/Kglines/photo_gram'
+          >
+            <FaGithub />
+          </a>
+          <a
+            className='login-about-links'
+            rel='noreferrer'
+            target='_blank'
+            href='https://www.linkedin.com/in/keith-glines-70b28b30'
+          >
+            <FaLinkedin />
+          </a>
         </div>
       </div>
     </div>
