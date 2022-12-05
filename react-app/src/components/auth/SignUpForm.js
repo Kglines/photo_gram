@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, NavLink } from 'react-router-dom';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { signUp } from '../../store/session';
 
 const SignUpForm = () => {
@@ -136,6 +137,22 @@ const SignUpForm = () => {
               Login
             </NavLink>{' '}
           </p>
+          <a
+            className='login-about-links'
+            rel='noreferrer'
+            target='_blank'
+            href='https://github.com/Kglines/photo_gram'
+          >
+            <FaGithub />
+          </a>
+          <a
+            className='login-about-links'
+            rel='noreferrer'
+            target='_blank'
+            href='https://www.linkedin.com/in/keith-glines-70b28b30'
+          >
+            <FaLinkedin />
+          </a>
         </form>
       </div>
     </div>
