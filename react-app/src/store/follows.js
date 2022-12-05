@@ -62,11 +62,11 @@ export const fetchFollowers = (userId) => async (dispatch) => {
 };
 
 // Create Follow
-export const fetchCreateFollow = (follows_id, userId) => async (dispatch) => {
+export const fetchCreateFollow = (follows, userId) => async (dispatch) => {
     const res = await fetch(`/api/users/${userId}/follows`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: follows_id,
+      body: follows,
     });
     if(res.ok){
         const follow = await res.json();

@@ -87,7 +87,7 @@ def edit_user(id):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 # Create a Follow
-@user_routes.route('<int:id>/follow', methods=['POST'])
+@user_routes.route('/<int:id>/follows', methods=['POST'])
 @login_required
 def follow(id):
     user = User.query.get(id)
@@ -97,14 +97,15 @@ def follow(id):
         return {'errors': ['User not able to follow yourself']}, 401
     follow = Follow.query.filter(Follow.follows_id == current_user.id, Follow.user_id == user.id).first()
     if follow is None:
-        return {'errors': 'Not able to follow'}, 401
-    follow = Follow(
-        follows_id=current_user.id,
-        user_id=user.id
-    )
-    db.session.add(follow)
-    db.session.commit()
-    return {'follows': [follow.to_dict() for follow in user.follows]}
+        follow = Follow(
+            follows_id=current_user.id,
+            user_id=user.id
+        )
+        db.session.add(follow)
+        db.session.commit()
+        return follow.to_dict()
+    return {'errors': ['Not able to follow']}, 401
+    
 
 # Unfollow/Delete a follow
 @user_routes.route('/<int:id>/unfollow', methods=['DELETE'])
