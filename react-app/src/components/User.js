@@ -8,6 +8,7 @@ import ImageListItem from './Images/ImageListItem';
 import './User.css'
 import UserEditForm from './UserEditForm';
 import { VscDiffAdded } from 'react-icons/vsc';
+import { fetchCreateFollow } from '../store/follows';
 
 function User() {
   const { userId } = useParams();
@@ -20,7 +21,7 @@ function User() {
 
   const userImages = Object.values(useSelector(state => state?.images?.user_images ? state.images?.user_images : state.images))
   const sessionUser = useSelector(state => state.session.user)
-
+  console.log('session user = ', sessionUser, user.Follows)
   const isOwner = sessionUser.id === parsedId;
   const { Images } = user
   
@@ -47,6 +48,15 @@ function User() {
   const loadImages = (userId) => {
     return dispatch(fetchUserImages(userId))
   }
+
+  // const createFollows = () => {
+  //   const payload = {
+  //     user_id: user?.id,
+  //     follows_id: sessionUser?.id
+  //   }
+  //   dispatch(fetchCreateFollow(payload, user?.id))
+  //   console.log('payload', payload)
+  // }
   
   return (
     <>
@@ -83,6 +93,9 @@ function User() {
                       Update Profile
                     </button>
                   )}
+                  {/* {!isOwner && (
+                    <button onClick={createFollows}>Follow</button>
+                  )} */}
                 </div>
               </li>
               {user?.firstname && (
