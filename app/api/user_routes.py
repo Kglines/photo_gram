@@ -95,11 +95,11 @@ def follow(id):
         return {'errors': ['User not found.']}, 404
     if user.id == current_user.id:
         return {'errors': ['User not able to follow yourself']}, 401
-    follow = Follow.query.filter(Follow.follows_id == current_user.id, Follow.user_id == user.id).first()
+    follow = Follow.query.filter(Follow.follows_id == user.id, Follow.user_id == current_user.id).first()
     if follow is None:
         follow = Follow(
-            follows_id=current_user.id,
-            user_id=user.id
+            follows_id=user.id,
+            user_id=current_user.id
         )
         db.session.add(follow)
         db.session.commit()

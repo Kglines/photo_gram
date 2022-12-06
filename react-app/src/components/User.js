@@ -8,7 +8,7 @@ import ImageListItem from './Images/ImageListItem';
 import './User.css'
 import UserEditForm from './UserEditForm';
 import { VscDiffAdded } from 'react-icons/vsc';
-import { fetchCreateFollow } from '../store/follows';
+import { fetchCreateFollow, fetchDeleteFollow } from '../store/follows';
 
 function User() {
   const { userId } = useParams();
@@ -18,16 +18,17 @@ function User() {
   const [user, setUser] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
+  const [follows, setFollows] = useState(false);
 
   const userImages = Object.values(useSelector(state => state?.images?.user_images ? state.images?.user_images : state.images))
   const sessionUser = useSelector(state => state.session.user)
-  console.log('session user = ', sessionUser, user.Follows)
+  // console.log('session user = ', sessionUser, user.Follows)
   const isOwner = sessionUser.id === parsedId;
   const { Images } = user
   
   useEffect(() => {
     dispatch(fetchUserImages(userId));
-  }, [dispatch, userId])
+  }, [dispatch])
 
   
   useEffect(() => {
@@ -49,14 +50,29 @@ function User() {
     return dispatch(fetchUserImages(userId))
   }
 
+  // console.log('SESSION', sessionUser)
+  // console.log('USER', user)
+
   // const createFollows = () => {
   //   const payload = {
-  //     user_id: user?.id,
-  //     follows_id: sessionUser?.id
+  //     user_id: sessionUser?.id,
+  //     follows_id: user?.id
   //   }
   //   dispatch(fetchCreateFollow(payload, user?.id))
-  //   console.log('payload', payload)
+  //   setFollows(true);
   // }
+
+  // const deleteFollows = (userId) => {
+  //   dispatch(fetchDeleteFollow(userId));
+  //   setFollows(false);
+  // }
+
+  // user?.Follows?.map(follow => {
+  //   console.log('FOLLOW IN FOLLOWS MAP', follow.follows_id)
+  //   if(follow.follows_id === user?.id){
+  //     console.log("MATCH")
+  //   }
+  // })
   
   return (
     <>
@@ -93,8 +109,15 @@ function User() {
                       Update Profile
                     </button>
                   )}
+                  {/* {follows ? <button onClick={deleteFollows}>unfollow</button> : <button onClick={createFollows}>follow</button>} */}
                   {/* {!isOwner && (
-                    <button onClick={createFollows}>Follow</button>
+                    user?.Follows?.map(follow => {
+                      if(follow.follows_id === user.id){
+                        return <button>unfollow</button>
+                      } else {
+                      return <button onClick={createFollows}>Follow</button>
+                      }
+                    })
                   )} */}
                 </div>
               </li>
