@@ -24,6 +24,7 @@ function UsersList() {
         <p><strong>Email: </strong>{user?.email}</p>
         {user?.bio && <p><strong>Bio: </strong>{user?.bio}</p>}
         <p><strong>Posts: </strong>{user?.Images?.length}</p>
+        <p><strong>Following: </strong>{user?.Follows?.length}</p>
       </li>
     );
   });
