@@ -100,8 +100,13 @@
     font-size: 18px;
 }
 
+.login-btn:hover{
+    cursor: pointer;
+}
+
 .login-btn:disabled{
     opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .login-link{
