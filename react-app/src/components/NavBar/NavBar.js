@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { NavLink, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import ImageCreateForm from '../Images/ImageCreateForm';
 import { Modal } from '../../context/Modal'
@@ -30,12 +30,13 @@ const NavBar = () => {
     sessionLinks = (
       <ul className='nav-list'>
         <li className='nav-list-item'>
-          {/* <NavLink className='logo' to='/home'> */}
             <p className='logo'>Photogram</p>
-          {/* </NavLink> */}
         </li>
         <li className='nav-list-item'>
-          <button className='nav-btn' onClick={handleClick}>
+          <button 
+            className='nav-btn' 
+            onClick={handleClick}
+          >
             <BsHouseDoorFill className='nav-icon' />
             Home
           </button>
@@ -55,7 +56,10 @@ const NavBar = () => {
           )}
         </li>
         <li className='nav-list-item'>
-          <button className='nav-btn' onClick={() => history.push('/users')}>
+          <button 
+            className='nav-btn' 
+            onClick={() => history.push('/users')}
+          >
             <MdOutlineExplore className='nav-icon' />
             Explore
           </button>
@@ -70,7 +74,10 @@ const NavBar = () => {
           </button>
         </li>
         <li className='nav-list-item'>
-          <button className='nav-btn' onClick={() => setAboutModal(true)}>
+          <button 
+            className='nav-btn' 
+            onClick={() => setAboutModal(true)}
+          >
             <BsInfoSquare className='nav-icon' />
             About
           </button>
@@ -113,54 +120,10 @@ const NavBar = () => {
     );
   } else {
     sessionLinks = null
-    // (
-      // <ul>
-      //   <li>
-      //     <NavLink to='/' exact={true} activeClassName='active'>
-      //       Home
-      //     </NavLink>
-      //   </li>
-      //   <li>
-      //     <NavLink to='/login' exact={true} activeClassName='active'>
-      //       Login
-      //     </NavLink>
-      //   </li>
-        // <li>
-        //   <NavLink to='/sign-up' exact={true} activeClassName='active'>
-        //     Sign Up
-        //   </NavLink>
-        // </li>
-      // </ul>
-    // )
   }
 
   return (
     <nav>
-      <ul>
-        {/* <li>
-          <NavLink to='/' exact={true} activeClassName='active'>
-            Home
-          </NavLink>
-        </li> */}
-        {/* <li>
-          <NavLink to='/login' exact={true} activeClassName='active'>
-            Login
-          </NavLink>
-        </li> */}
-        {/* <li>
-          <NavLink to='/sign-up' exact={true} activeClassName='active'>
-            Sign Up
-          </NavLink>
-        </li> */}
-        {/* <li>
-          <NavLink to='/users' exact={true} activeClassName='active'>
-            Users
-          </NavLink>
-        </li> */}
-        {/* <li>
-          <LogoutButton />
-        </li> */}
-      </ul>
       {sessionLinks}
     </nav>
   );

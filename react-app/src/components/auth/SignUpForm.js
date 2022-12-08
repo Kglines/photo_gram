@@ -22,11 +22,15 @@ const SignUpForm = () => {
       }
     } else {
       setErrors(['Passwords must match.'])
+      // setUsername('');
+      // setEmail('');
+      // setPassword('');
+      // setRepeatPassword('');
     }
-    setUsername('')
-    setEmail('')
-    setPassword('')
-    setRepeatPassword('')
+    // setUsername('')
+    // setEmail('')
+    // setPassword('')
+    // setRepeatPassword('')
   };
 
   const updateUsername = (e) => {
@@ -123,8 +127,7 @@ const SignUpForm = () => {
               username.length === 0 ||
               email.length === 0 ||
               password.length === 0 ||
-              repeatPassword.length === 0 ||
-              errors.length > 0
+              repeatPassword.length === 0
             }
             type='submit'
           >

@@ -52,12 +52,12 @@
 }
 
 .user-list{
+    margin-left: -15%;
     display: grid;
     grid-template-columns: repeat(3, 300px);
     grid-template-rows: auto;
     /* height: 800px; */
     gap: 10px;
-    margin-left: -15%;
     list-style: none;
     overflow-y: auto;
 }
@@ -65,6 +65,7 @@
 .user-list-title{
     text-align: center;
     margin-left: -25%;
+    margin-top: -0.18px;
 }
 .user-link-user-list{
     color: rgb(110, 110, 110);
@@ -85,6 +86,16 @@
     color: #0a95ff;
     cursor: pointer;
     border: 2px solid #0a95ff;
+}
+
+.follow-btn{
+    background-color: #0a95ff;
+    color: white;
+}
+
+.unfollow-btn{
+    background-color: transparent;
+    color: #0a95ff;
 }
 
 .profile-image-list{
