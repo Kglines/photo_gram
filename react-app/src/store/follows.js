@@ -42,17 +42,20 @@ export const deleteFollows = (id) => {
 export const fetchFollows = (userId) => async (dispatch) => {
     const res = await fetch(`/api/users/${userId}/follows`);
     // console.log('FOLLOWS THUNK = ', userId)
+    // console.log('RES in Follows = ', res)
     if(res.ok){
         const follows = await res.json();
-        dispatch(getFollowers(follows));
+        // console.log('FOLLOWS IN FOLLOWS = ', follows)
+        dispatch(getFollows(follows));
         return follows;
     };
     return res;
 };
 
+// GET Followers
 export const fetchFollowers = (userId) => async (dispatch) => {
     const res = await fetch(`/api/users/${userId}/followers`);
-
+    
     if(res.ok){
         const followers = await res.json();
         dispatch(getFollowers(followers));
@@ -63,7 +66,7 @@ export const fetchFollowers = (userId) => async (dispatch) => {
 
 // Create Follow
 export const fetchCreateFollow = (follows, userId) => async (dispatch) => {
-    const res = await fetch(`/api/users/${userId}/follows`, {
+    const res = await fetch(`/api/follows/users/${userId}/follow`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: follows,
@@ -77,8 +80,8 @@ export const fetchCreateFollow = (follows, userId) => async (dispatch) => {
 };
 
 // DELETE Follow
-export const fetchDeleteFollow = (userId) => async (dispatch) => {
-    const res = await fetch(`/api/users/${userId}/unfollow`, {
+export const fetchDeleteFollow = (followsId) => async (dispatch) => {
+    const res = await fetch(`/api/follows/${followsId}`, {
         method: 'DELETE'
     });
 
@@ -97,7 +100,7 @@ const followsReducer = (state = initialState, action) => {
     let newState = {...state}
     switch(action.type){
         case GET_FOLLOWS:
-            // action.payload.forEach(follow => newState[follow.id] = follow)
+            action.payload.follows.forEach(follow => newState[follow.id] = follow)
             return newState
         case GET_FOLLOWERS:
             // action.payload.forEach(followers => newState[followers.id] = followers)

@@ -37,36 +37,6 @@ def user(id):
     return user.user_details_to_dict()
 
 
-# Edit a User
-# @user_routes.route('/<int:id>', methods=['PUT'])
-# @login_required
-# def edit_user(id):
-#     user = User.query.get(id)
-#     if user is None:
-#         return {'errors': ['User not found.']}, 404
-#     if user.id != current_user.id:
-#         return {'errors': ['Unauthorized, please sign in.']}, 401
-#     form = UserEditForm()
-#     form['csrf_token'].data = request.cookies['csrf_token']
-#     # if "profile_img" not in request.files:
-#     #     return {'errors': 'image url required'}, 400
-#     file = request.files['profile_img']
-#     if form.validate_on_submit():
-#         user.firstname=form.data['firstname']
-#         user.lastname=form.data['lastname']
-#         user.bio=form.data['bio']
-#         user.profile_img=form.data['profile_img']
-#         if not allowed_file(file.filename):
-#                 return {'errors': 'file type not permitted'}, 400
-#         file.filename = get_unique_filename(file.filename)
-#         upload = upload_file_to_s3(file)
-#         if 'url' not in upload:
-#             return upload, 400
-#         user.profile_img =upload['url']
-#         db.session.commit()
-#         return user.to_dict(), 200
-#     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-
 # Edit a User - no image
 @user_routes.route('/<int:id>', methods=['PUT'])
 @login_required
@@ -116,7 +86,7 @@ def unfollow(id):
         return {'errors': ['User not found']}, 404
     if user.id == current_user.id:
         return {'errors': ['Not able to unfollow']}, 401
-    follow = Follow.query.filter(Follow.follows_id == current_user.id, Follow.user_id == user.id).first()
+    follow = Follow.query.filter(Follow.follows_id == user.id, Follow.user_id == current_user.id).first()
     if follow is None:
         return {'errors': ['Not currently following']}, 401
     db.session.delete(follow)
@@ -128,4 +98,4 @@ def unfollow(id):
 @login_required
 def follows(id):
     user = User.query.get(id)
-    return {'follows': user.user_details_to_dict()}
+    return {'follows': [follow.to_dict() for follow in user.follows]}, 200

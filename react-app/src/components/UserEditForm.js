@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchGetUser } from '../store/session';
+import { fetchUserImages } from '../store/images';
+import { fetchEditUser, fetchGetUser } from '../store/session';
 
 function UserEditForm({ setEditModal, user }) {
     const { userId } = useParams();
     const dispatch = useDispatch();
-    
-    const [newUser, setNewUser] = useState('')
+
     const [firstname, setFirstname] = useState(user?.firstname);
     const [lastname, setLastname] = useState(user?.lastname);
     const [bio, setBio] = useState(user?.bio);
@@ -15,38 +15,75 @@ function UserEditForm({ setEditModal, user }) {
     const [imageLoading, setImageLoading] = useState(false);
     const [errors, setErrors] = useState([]);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = (e) => {
+      e.preventDefault();
 
-        const formData = new FormData();
-        formData.append('firstname', firstname)
-        formData.append('lastname', lastname)
-        formData.append('bio', bio)
+      const payload = {
+        firstname,
+        lastname,
+        bio
+      }
 
-        setImageLoading(true);
+      dispatch(fetchEditUser(payload, userId))
+        .then(async (res) => {
+          if(res.ok === false){
+            const data = await res.json()
+            if(data.errors) setErrors(data.errors)
+          } else {
+            setErrors([])
+            setEditModal(false)
+          }
+        })
 
-        const res = await fetch(`/api/users/${userId}`, {
-            method: 'PUT',
-            body: formData
-        });
-        // console.log('RES IN USER EDIT = ', userId)
-        if (res.ok){
-          const user = await res.json();
-          setImageLoading(false);
-          setEditModal(false);
-          // const refresh = dispatch(fetchGetUser(user.id));
-          // console.log('USER USER EDIT FORM', user)
-          // console.log('refresh = ', refresh)
-          // updatedUser();
-          // updatedUser();
-          // console.log('USER IN USER EDIT = ', user)
-          return user;
-        } else {
-            const data = await res.json();
-            if(data && data.errors) setErrors(data.errors)
-        }
-       
+
+
+
+        // .then(() => setEditModal(false))
+        // .catch(async (res) => {
+        //   const data = await res.json();
+        //   if (data && data?.errors) setErrors(data?.errors);
+        // });
+        // console.log('NEW USER = ', newUser)
+        // return newUser
     }
+
+    // useEffect(() => {
+    //   // dispatch(fetchUserImages(userId))
+    //   dispatch(fetchGetUser(userId))
+    // }, [dispatch])
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+
+    //     const formData = new FormData();
+    //     formData.append('firstname', firstname)
+    //     formData.append('lastname', lastname)
+    //     formData.append('bio', bio)
+
+    //     setImageLoading(true);
+
+    //     const res = await fetch(`/api/users/${userId}`, {
+    //         method: 'PUT',
+    //         body: formData
+    //     });
+    //     // console.log('RES IN USER EDIT = ', userId)
+    //     if (res.ok){
+    //       const user = await res.json();
+    //       setImageLoading(false);
+    //       setEditModal(false);
+    //       // const refresh = dispatch(fetchGetUser(user.id));
+    //       // console.log('USER USER EDIT FORM', user)
+    //       // console.log('refresh = ', refresh)
+    //       // updatedUser();
+    //       // updatedUser();
+    //       // console.log('USER IN USER EDIT = ', user)
+    //       return user;
+    //     } else {
+    //         const data = await res.json();
+    //         if(data && data.errors) setErrors(data.errors)
+    //     }
+       
+    // }
 
     // const updatedUser = async () => {
     //     const res = await fetch(`/api/users/${userId}`);

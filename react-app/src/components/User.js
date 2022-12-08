@@ -8,7 +8,9 @@ import ImageListItem from './Images/ImageListItem';
 import './User.css'
 import UserEditForm from './UserEditForm';
 import { VscDiffAdded } from 'react-icons/vsc';
-import { fetchCreateFollow, fetchDeleteFollow } from '../store/follows';
+import { fetchCreateFollow, fetchDeleteFollow, fetchFollows } from '../store/follows';
+import { fetchGetUser } from '../store/session';
+import Follow from './Follow';
 
 function User() {
   const { userId } = useParams();
@@ -18,29 +20,48 @@ function User() {
   const [user, setUser] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
-  const [follows, setFollows] = useState(false);
+  const [errors, setErrors] = useState([])
+  const [isMounted, setIsMounted] = useState(false)
 
+  
   const userImages = Object.values(useSelector(state => state?.images?.user_images ? state.images?.user_images : state.images))
   const sessionUser = useSelector(state => state.session.user)
-  // console.log('session user = ', sessionUser, user.Follows)
-  const isOwner = sessionUser.id === parsedId;
+  // const userFollows = useSelector(state => state.follows)
+  
+  let imageOwner;
+  imageOwner = userImages[0]?.owner
+
+
+  const isOwner = sessionUser.id === imageOwner?.id;
+  
   const { Images } = user
   
   useEffect(() => {
     dispatch(fetchUserImages(userId));
-  }, [dispatch])
+  }, [dispatch, userId])
 
-  
+
   useEffect(() => {
-    if (!userId) {
-      return;
-    }
-    (async () => {
+    setIsMounted(true)
+    const fetchData = async () => {
       const response = await fetch(`/api/users/${userId}`);
       const user = await response.json();
-      setUser(user);
-    })();
-  }, [user, userId]);
+      
+      setUser(user)
+    }
+    fetchData()
+    .catch(async (res) => {
+      const data = await res.json()
+      if(data && data.errors) setErrors(data.errors)
+    })
+    return () => {setIsMounted(false)}
+  }, [dispatch, userId])
+
+
+  useEffect(() => {
+    dispatch(fetchFollows(sessionUser.id))
+  }, [dispatch])
+  
 
   if (!user) {
     return null;
@@ -49,30 +70,6 @@ function User() {
   const loadImages = (userId) => {
     return dispatch(fetchUserImages(userId))
   }
-
-  // console.log('SESSION', sessionUser)
-  // console.log('USER', user)
-
-  // const createFollows = () => {
-  //   const payload = {
-  //     user_id: sessionUser?.id,
-  //     follows_id: user?.id
-  //   }
-  //   dispatch(fetchCreateFollow(payload, user?.id))
-  //   setFollows(true);
-  // }
-
-  // const deleteFollows = (userId) => {
-  //   dispatch(fetchDeleteFollow(userId));
-  //   setFollows(false);
-  // }
-
-  // user?.Follows?.map(follow => {
-  //   console.log('FOLLOW IN FOLLOWS MAP', follow.follows_id)
-  //   if(follow.follows_id === user?.id){
-  //     console.log("MATCH")
-  //   }
-  // })
   
   return (
     <>
@@ -81,7 +78,7 @@ function User() {
           <div>
             {editModal && (
               <Modal onClose={() => setEditModal(false)}>
-                <UserEditForm user={user} setEditModal={setEditModal} />
+                <UserEditForm user={sessionUser} setEditModal={setEditModal} />
               </Modal>
             )}
           </div>
@@ -97,46 +94,73 @@ function User() {
           <div className='user-info'>
             <ul>
               <li className='user-info-item user-info-username'>
+              {isOwner ? (
+                <div>
+                  <strong>{sessionUser?.username}</strong>
+                </div>
+
+              ) : (
                 <div>
                   <strong>{user?.username}</strong>
                 </div>
+              )}
                 <div className='user-info-edit-btn'>
-                  {isOwner && (
+                  {isOwner ? (
                     <button
                       className='user-edit-btn'
                       onClick={() => setEditModal(true)}
                     >
                       Update Profile
                     </button>
+                  ) : (
+                  <Follow 
+                    user={user} 
+                    sessionUser={sessionUser} 
+                  />
                   )}
-                  {/* {follows ? <button onClick={deleteFollows}>unfollow</button> : <button onClick={createFollows}>follow</button>} */}
-                  {/* {!isOwner && (
-                    user?.Follows?.map(follow => {
-                      if(follow.follows_id === user.id){
-                        return <button>unfollow</button>
-                      } else {
-                      return <button onClick={createFollows}>Follow</button>
-                      }
-                    })
-                  )} */}
                 </div>
               </li>
-              {user?.firstname && (
-                <li className='user-info-item'>
-                  <strong>Name: </strong> {user?.firstname} {user?.lastname}
-                </li>
+              {isOwner &&  (
+                <div>
+                  {user?.firstname && (
+                    <li className='user-info-item'>
+                      <strong>Name: </strong> {sessionUser?.firstname} {sessionUser?.lastname}
+                    </li>
+                  )}
+                  <li className='user-info-item'>
+                    <strong>Email: </strong> {sessionUser?.email}
+                  </li>
+                  {user?.bio ? (
+                    <li className='user-info-item user-bio'>
+                      <strong>Bio: </strong> {sessionUser?.bio}
+                    </li>
+                  ) : null}
+                  <li className='user-info-item'>
+                    <strong>Posts: </strong> {Images?.length}
+                  </li>
+                </div>
               )}
-              <li className='user-info-item'>
-                <strong>Email: </strong> {user?.email}
-              </li>
-              {user?.bio ? (
-                <li className='user-info-item user-bio'>
-                  <strong>Bio: </strong> {user?.bio}
-                </li>
-              ) : null}
-              <li className='user-info-item'>
-                <strong>Posts: </strong> {Images?.length}
-              </li>
+              {!isOwner &&  (
+                <div>
+                  {user?.firstname && (
+                    <li className='user-info-item'>
+                      <strong>Name: </strong> {user?.firstname}{' '}
+                      {user?.lastname}
+                    </li>
+                  )}
+                  <li className='user-info-item'>
+                    <strong>Email: </strong> {user?.email}
+                  </li>
+                  {user?.bio ? (
+                    <li className='user-info-item user-bio'>
+                      <strong>Bio: </strong> {user?.bio}
+                    </li>
+                  ) : null}
+                  <li className='user-info-item'>
+                    <strong>Posts: </strong> {Images?.length}
+                  </li>
+                </div>
+              )}
             </ul>
           </div>
         </div>
@@ -164,6 +188,7 @@ function User() {
         )}
       </div>
       <div className='profile-image-list'>
+        {errors?.map(error => <p key={error} className='errors'>{error}</p>)}
         {userImages?.map((image) => (
           <div key={image?.id}>
             <ImageListItem image={image} loadImages={loadImages} />

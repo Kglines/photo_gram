@@ -2,6 +2,7 @@
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
 const GET_USER = 'user/get'
+const EDIT_USER = 'user/edit'
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -19,6 +20,13 @@ export const getUser = (user) => {
   }
 }
 
+export const editUser = (user) => {
+  return {
+    type: EDIT_USER,
+    payload: user
+  }
+}
+
 export const fetchGetUser = (userId) => async (dispatch) => {
   const res = await fetch(`/api/users/${userId}`);
 
@@ -26,6 +34,21 @@ export const fetchGetUser = (userId) => async (dispatch) => {
     const user = await res.json();
     dispatch(getUser(user));
     return user
+  };
+  return res;
+};
+
+export const fetchEditUser = (user, userId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(user),
+  });
+
+  if (res.ok){
+    const user = await res.json();
+    dispatch(editUser(user))
+    return user;
   };
   return res;
 };
@@ -117,8 +140,17 @@ export const signUp = (username, email, password) => async (dispatch) => {
 }
 
 export default function reducer(state = initialState, action) {
+  let newState = {...state}
   switch (action.type) {
     case SET_USER:
+      return { user: action.payload }
+    case GET_USER:
+      // newState.otherUser = {}
+      // newState.otherUser = action.payload
+      newState = action.payload
+      return newState
+      // return { user: action.payload.id }
+    case EDIT_USER:
       return { user: action.payload }
     case REMOVE_USER:
       return { user: null }
