@@ -3,7 +3,7 @@
 .nav-list {
     list-style: none;
     background-color: white;
-    width: 15%;
+    max-width: 15%;
     position: fixed;
     left: 0;
     height: 100vh;
