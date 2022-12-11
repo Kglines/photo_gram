@@ -15,7 +15,7 @@ function UsersList() {
 
   
   const userComponents = users.map((user) => {
-    console.log('USER in USER LIST = ', user)
+    // console.log('USER in USER LIST = ', user)
     return (
       <li className='user-list-card' key={user?.id}>
         <NavLink className='user-link-user-list' to={`/users/${user?.id}`}>{user?.username}</NavLink>

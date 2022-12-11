@@ -9,20 +9,20 @@ function Following({ user, setFollowingModal }) {
     const dispatch = useDispatch()
     const history = useHistory()
     const follows = useSelector(state => state.follows)
-    console.log('FOLLOWS IN FOLLOWING = ', follows?.follows?.follows?.map(follow => {
-        // if(follow?.follows_id === user.id)
-        return follow
-        // return follow.user.username
-    }))
+    // console.log('FOLLOWS IN FOLLOWING = ', follows?.follows?.follows?.map(follow => {
+    //     // if(follow?.follows_id === user.id)
+    //     return follow
+    //     // return follow.user.username
+    // }))
 
-    console.log('USER IN FOLLOWING = ', user)
+    // console.log('USER IN FOLLOWING = ', user)
     useEffect(() => {
         dispatch(fetchUserFollows())
     }, [dispatch])
 
 
     const isFollows = follows?.follows?.follows?.length;
-    console.log('FOLLOWS LENGTH = ', isFollows)
+    // console.log('FOLLOWS LENGTH = ', isFollows)
 
   return (
     <div className='following-modal'>
@@ -31,7 +31,7 @@ function Following({ user, setFollowingModal }) {
         follows?.follows?.follows?.map((follow) => (
             
           <div className='following-modal-list' key={follow?.id}>
-          {console.log('FOLLOW MAP IN FOLLOW MAP = ', follow?.user)}
+          {/* {console.log('FOLLOW MAP IN FOLLOW MAP = ', follow?.user)} */}
             <div>
               <NavLink
                 to={`/users/${follow?.follows_id}`}

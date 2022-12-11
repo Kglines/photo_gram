@@ -8,10 +8,10 @@ function Followers({ user, setFollowersModal }) {
     const dispatch = useDispatch()
 
     const followers = useSelector(state => state.follows)
-    console.log('FOLLOWERS = ', followers)
+    // console.log('FOLLOWERS = ', followers)
 
     const isFollowers = followers?.followers?.followers.length
-    console.log('is followers ', isFollowers)
+    // console.log('is followers ', isFollowers)
 
     useEffect(() => {
         dispatch(fetchFollowers(user.id))

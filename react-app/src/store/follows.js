@@ -51,10 +51,10 @@ export const deleteFollows = (id) => {
 export const fetchFollows = (userId) => async (dispatch) => {
     const res = await fetch(`/api/users/${userId}/follows`);
     // console.log('FOLLOWS THUNK = ', userId)
-    console.log('RES in Follows = ', res)
+    // console.log('RES in Follows = ', res)
     if(res.ok){
         const follows = await res.json();
-        console.log('FOLLOWS IN FOLLOWS THUNK = ', follows)
+        // console.log('FOLLOWS IN FOLLOWS THUNK = ', follows)
         dispatch(getFollows(follows));
         return follows;
     };
@@ -97,7 +97,7 @@ export const fetchCreateFollow = (follows, userId) => async (dispatch) => {
         dispatch(createFollows(follow));
         return follow;
     };
-    console.log('RES RES RES', res)
+    // console.log('RES RES RES', res)
     return res;
 };
 
@@ -106,7 +106,7 @@ export const fetchDeleteFollow = (followId) => async (dispatch) => {
     const res = await fetch(`/api/follows/${followId}`, {
         method: 'DELETE'
     })
-    console.log('res inside delete thunk ', res)
+    // console.log('res inside delete thunk ', res)
     if(res.ok){
         const follow = await res.json();
         dispatch(deleteFollows(followId));
@@ -136,7 +136,7 @@ const followsReducer = (state = initialState, action) => {
             newState = {...state, [action.payload.id]: action.payload}
             return newState
         case DELETE_FOLLOWS:
-            console.log(newState[action.payload]);
+            // console.log(newState[action.payload]);
             delete newState[action.payload]
             return newState
         default:

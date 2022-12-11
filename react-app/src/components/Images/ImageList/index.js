@@ -4,9 +4,13 @@ import { fetchAllImages } from '../../../store/images';
 import ImageListItem from '../ImageListItem';
 import './ImageList.css'
 
-function ImageList() {
+function ImageList({ user }) {
   const images = Object.values(useSelector(state => state.images?.all_images ? state.images?.all_images : state.images))
 
+  // console.log('USER IN IMAGE LIST = ', user, images)
+
+  // const imageUser = images.find(image => image.owner.id === user.id)
+  // console.log("IMAGE USER = ", imageUser)
   const dispatch = useDispatch()
 
   const loadImages = () => {
@@ -21,6 +25,7 @@ function ImageList() {
     <div className='image-list-container'>
       {images?.map(image => (
         <div key={image?.id}>
+          {/* {console.log('IMAGE IN IMAGE LIST = ', image)} */}
             <ImageListItem image={image} user={image.owner} loadImages={loadImages}/>
         </div>
       ))}

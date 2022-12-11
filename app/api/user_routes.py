@@ -34,7 +34,7 @@ def user(id):
     Query for a user by id and returns that user in a dictionary
     """
     user = User.query.get(id)
-    print('**********************************', user)
+    # print('**********************************', user)
     return user.user_details_to_dict(), 200
 
 
@@ -113,5 +113,5 @@ def followers(id):
 @login_required
 def user_images(id):
     user = User.query.get(id)
-    print('*********************************', user)
+    # print('*********************************', user)
     return user.user_details_to_dict()

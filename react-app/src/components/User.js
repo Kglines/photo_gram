@@ -13,6 +13,8 @@ import { fetchGetUser } from '../store/session';
 import Follow from './Follow/Follow';
 import Following from './Follow/Following';
 import Followers from './Follow/Followers';
+import ImageList from './Images/ImageList';
+import UserImages from './UserImages';
 
 function User() {
   const { userId } = useParams();
@@ -22,16 +24,17 @@ function User() {
   const [user, setUser] = useState();
   const [showModal, setShowModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
+  const [liked, setLiked] = useState(false);
   const [followingModal, setFollowingModal] = useState(false);
   const [followersModal, setFollowersModal] = useState(false);
   const [errors, setErrors] = useState([])
   const [isMounted, setIsMounted] = useState(false)
 
-  console.log('USER IN USER = ', user)
+  // console.log('USER IN USER = ', user)
   // const userImages = Object.values(useSelector(state => state?.images?.user_images ? state.images?.user_images : state.images))
   const sessionUser = useSelector(state => state.session.user)
   // const userFollows = useSelector(state => state.follows)
-  console.log('SESSION USER = ', sessionUser)
+  // console.log('SESSION USER = ', sessionUser)
   // let imageOwner;
   // imageOwner = userImages[0]?.owner
 
@@ -44,23 +47,37 @@ function User() {
   //   dispatch(fetchUserImages(userId));
   // }, [dispatch, userId])
 
+  const imageLikes = user?.Images?.map(image => (
+    image?.Likes
+  ))
+  const likeArr = imageLikes?.forEach(like => {
+      // console.log('LIKe LIKE LIKE = ', like)
+      // if(like.liked){
+      //   setLiked(true)
+      // } else {
+      //   setLiked(false)
+      // }
+    }
+  )
+
+  // console.log('IMAGE LIKES ****', imageLikes)
+
 
   useEffect(() => {
     setIsMounted(true)
     const fetchData = async () => {
       const response = await fetch(`/api/users/${userId}`);
       const user = await response.json();
-      console.log('USER IN FETCH IN USER = ', user)
+      // console.log('USER IN FETCH IN USER = ', user)
       setUser(user)
     }
     fetchData()
-    fetchData()
-    .catch(async (res) => {
-      const data = await res.json()
-      if(data && data.errors) setErrors(data.errors)
-    })
+    // .catch(async (res) => {
+    //   const data = await res.json()
+    //   if(data && data.errors) setErrors(data.errors)
+    // })
     return () => {setIsMounted(false)}
-  }, [dispatch, userId])
+  }, [dispatch, userId, user])
 
   // useEffect(() => {
   //   dispatch(fetchGetUser(userId))
@@ -79,6 +96,7 @@ function User() {
   const loadImages = (userId) => {
     return dispatch(fetchUserImages(userId))
   }
+
   
   return (
     <>
@@ -238,10 +256,16 @@ function User() {
             {error}
           </p>
         ))}
-        {user?.Images?.map((image) => (
+        {/* {user?.Images?.map((image) => (
           <div key={image?.id}>
             <ImageListItem image={image} loadImages={loadImages} />
           </div>
+        ))} */}
+        {/* {user && 
+        <ImageList user={user} />
+        } */}
+        {user?.Images?.map(image => (
+          <UserImages key={image.id} image={image} loadImages={loadImages} user={sessionUser} />
         ))}
       </div>
     </>
