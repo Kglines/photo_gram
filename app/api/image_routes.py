@@ -128,6 +128,19 @@ def create_comment(id):
         return comment.to_dict(), 200
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
+
+# GET Likes from an Image ID
+@image_routes.route('/<int:id>/likes')
+@login_required
+def get_likes(id):
+    image = Image.query.get(id)
+    if image is None:
+        return {'errors': ['Image not found']}, 404
+    likes = Like.query.filter(Like.image_id == image.id).all()
+    # print('*************************************', likes)
+    return {'Likes': [like.to_dict() for like in likes]}, 200
+
+
 # Create a Like
 @image_routes.route('/<int:id>/like', methods=['POST'])
 @login_required
@@ -136,14 +149,16 @@ def like_image(id):
     if image is None:
         return {'errors': ['Image not found']}, 404
     like = Like.query.filter(Like.user_id == current_user.id).filter(Like.image_id == image.id).first()
+    # print('*************************************', like)
     if like is None:
         like = Like(
             user_id=current_user.id,
             image_id=image.id
         )
+        # print('*************************************', like)
         db.session.add(like)
         db.session.commit()
-        return {"Message": "Image liked" }
+        return like.to_dict()
     return {"errors": ["Already liked image"]}, 401
 
 # Delete a Like
@@ -154,6 +169,7 @@ def unlike_image(id):
     if image is None:
         return {'errors': ['Image not found']}, 404
     like = Like.query.filter(Like.user_id == current_user.id).filter(Like.image_id == image.id).first()
+    # print('************************************* DELETE', like)
     if like is None:
         return {"errors": "Image not found."}
     db.session.delete(like)

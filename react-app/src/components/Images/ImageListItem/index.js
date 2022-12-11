@@ -11,6 +11,10 @@ function ImageListItem({ image, user, loadImages }) {
   const { userId } = useParams()
   const liked = image?.Likes?.liked
 
+  // console.log('IMAGE LIST ITEM IMAGE = ', image)
+  // console.log('IMAGE LIST ITEM LOADIMAGEs = ', loadImages)
+  // console.log('USER IN IMAGE LIST ITEM = ', user)
+
   const handleClick = async (e) => {
     return liked
       ? await dispatch(fetchDeleteLike(image?.id))

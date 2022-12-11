@@ -17,7 +17,7 @@ function Image({ image, user, loadImage, isLoading }) {
   const dispatch = useDispatch()
   const [editModal, setEditModal] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false)
-  
+  // console.log('!!!!!!!!!!!!! USER ', user)
   const comments = Object.values(useSelector(state => state.comments))
 
   useEffect(() => {

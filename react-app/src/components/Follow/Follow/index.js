@@ -10,10 +10,10 @@ function Follow({ user, sessionUser }) {
     const parsedId = parseInt(userId)
 
     const userFollows = Object.values(useSelector(state => state.follows))
-    console.log('USER FOLLOWS IN FOLLOW = ', userFollows)
+    // console.log('USER FOLLOWS IN FOLLOW = ', userFollows)
 
     const isFoll = userFollows.find(follow => follow?.follows_id === user?.id)
-    console.log('IS FOLL IN FOLLOW = ', isFoll)
+    // console.log('IS FOLL IN FOLLOW = ', isFoll)
     // const followsId = isFoll.id
 
     useEffect(() => {
