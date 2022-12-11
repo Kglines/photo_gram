@@ -18,7 +18,7 @@ function UserImages({ image, loadImages, user }) {
     // console.log('IMAGES SELECTOR = ', images.map(image => myLikes = image.Likes))
     // console.log('*$*$*$*$**$* ', image)
 
-    // console.log('########### # My Likes', myLikes?.liked)
+    // console.log('########### # My Likes', myLikes)
     // useEffect(() => {
     //     dispatch(fetchAllLikes(image?.id))
     // }, [dispatch, image?.id])
@@ -127,7 +127,7 @@ function UserImages({ image, loadImages, user }) {
           </NavLink>
           <div className='image-icons-container'>
             <div className='image-icons'>
-              {myLikes?.liked ? (
+              {liked ? (
                 <FaHeart
                   className='like-icon'
                   style={{ color: 'red' }}
