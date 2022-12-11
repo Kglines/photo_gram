@@ -8,11 +8,11 @@ function UserEditForm({ setEditModal, user }) {
     const { userId } = useParams();
     const dispatch = useDispatch();
 
-    const [firstname, setFirstname] = useState(user?.firstname);
-    const [lastname, setLastname] = useState(user?.lastname);
-    const [bio, setBio] = useState(user?.bio);
-    const [profile_img, setProfile_img] = useState(user?.profile_img);
-    const [imageLoading, setImageLoading] = useState(false);
+    const [firstname, setFirstname] = useState(user?.firstname || '');
+    const [lastname, setLastname] = useState(user?.lastname || '');
+    const [bio, setBio] = useState(user?.bio || '');
+    // const [profile_img, setProfile_img] = useState(user?.profile_img);
+    // const [imageLoading, setImageLoading] = useState(false);
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = (e) => {
@@ -31,6 +31,9 @@ function UserEditForm({ setEditModal, user }) {
             if(data.errors) setErrors(data.errors)
           } else {
             setErrors([])
+            setFirstname('')
+            setLastname('')
+            setBio('')
             setEditModal(false)
           }
         })
