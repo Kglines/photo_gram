@@ -5,6 +5,7 @@
     align-items: center;
     list-style: none;
     margin-left: -25%;
+    margin-bottom: 30px;
     width: 100%;
 }
 
@@ -14,6 +15,34 @@
 
 .user-profile-create{
     margin-bottom: 20px;
+}
+
+.user-profile-btns{
+    display: flex;
+    flex-direction: row;
+    width: 450px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.follows-btns {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.following-btn button, .followers-btn button{
+    width: 100px;
+    height: 40px;
+    color: #838c95;
+    font-size: 18px;
+    border: none;
+}
+
+.following-btn button:hover, .followers-btn button:hover {
+    cursor: pointer;
+    color:#0a95ff;
+    border-bottom: 2px solid #0a95ff;
 }
 
 .user-info-username{

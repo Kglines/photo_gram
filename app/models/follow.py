@@ -22,3 +22,20 @@ class Follow(db.Model):
             'user_id': self.user_id,
             'follows_id': self.follows_id
         }
+
+
+    def follow_details_to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'follows_id': self.follows_id,
+            'user': self.followers.to_dict()
+        }
+
+    def followers_details_to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'follows_id': self.follows_id,
+            'user': self.user.to_dict()
+        }

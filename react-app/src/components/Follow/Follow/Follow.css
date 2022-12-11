@@ -1,0 +1,30 @@
+.follow-btn-container{
+    margin-top: 12px;
+}
+
+.follow, .unfollow {
+    width: 100px;
+    border-radius: 20px;
+    height: 40px;
+    font-size: 16px;
+    box-shadow: 1px 5px 10px silver;
+}
+
+.follow {
+    background-color: #0a95ff;
+    color: white
+}
+
+.follow:hover{
+    cursor: pointer;
+    background-color: #2c80c0;;
+}
+
+.unfollow{
+    color: #0a95ff;
+}
+
+.unfollow:hover{
+    cursor: pointer;
+    background-color: rgba(227, 231, 235, 0.817);
+}

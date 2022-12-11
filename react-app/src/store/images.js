@@ -22,7 +22,7 @@ export const getAllImages = (images) => {
 
 // GET User Images
 export const getUserImages = (images) => {
-    // console.log('USER IMAGE ACTION')
+    console.log('USER IMAGE ACTION')
     return {
         type: GET_USER_IMAGES,
         payload: images
@@ -109,10 +109,10 @@ export const fetchAllImages = () => async (dispatch) => {
 
 // GET USER Images Thunk
 export const fetchUserImages = (userId) => async (dispatch) => {
-    const res = await fetch(`/api/users/${userId}`);
-    // console.log('USER IMAGE FETCH THUNK', res)
+    const res = await fetch(`/api/users/${userId}/images`);
     if(res.ok){
         const images = await res.json();
+        console.log('USER IMAGE FETCH THUNK', images)
         dispatch(getUserImages(images));
         return images;
     };

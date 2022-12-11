@@ -1,0 +1,43 @@
+.following-modal{
+    max-height: 600px;
+    overflow: auto;
+}
+
+.following-title{
+    margin: 10px;
+}
+
+.following-modal-list {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    
+}
+
+.following-modal-item-names{
+    display: flex;
+    flex-direction: row;
+    /* margin-top: -30px; */
+    width: 80px;
+    text-align: left;
+    margin: -30px 45px;
+    color: rgba(118, 115, 115, 0.61)
+}
+
+.following-modal-item{
+    padding-right: 5px;
+}
+
+.following-modal-btn {
+    display: flex;
+    justify-content: end;
+    flex-direction: row;
+    align-items: flex-end;
+    margin-left: 40px;
+    text-align: end;
+}
+
+.no-follows{
+    margin: 20px;
+}

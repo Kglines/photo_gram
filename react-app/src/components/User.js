@@ -10,35 +10,39 @@ import UserEditForm from './UserEditForm';
 import { VscDiffAdded } from 'react-icons/vsc';
 import { fetchCreateFollow, fetchDeleteFollow, fetchFollows } from '../store/follows';
 import { fetchGetUser } from '../store/session';
-import Follow from './Follow';
+import Follow from './Follow/Follow';
+import Following from './Follow/Following';
+import Followers from './Follow/Followers';
 
 function User() {
   const { userId } = useParams();
   const parsedId = parseInt(userId)
   const dispatch = useDispatch();
 
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState();
   const [showModal, setShowModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
+  const [followingModal, setFollowingModal] = useState(false);
+  const [followersModal, setFollowersModal] = useState(false);
   const [errors, setErrors] = useState([])
   const [isMounted, setIsMounted] = useState(false)
 
-  
-  const userImages = Object.values(useSelector(state => state?.images?.user_images ? state.images?.user_images : state.images))
+  console.log('USER IN USER = ', user)
+  // const userImages = Object.values(useSelector(state => state?.images?.user_images ? state.images?.user_images : state.images))
   const sessionUser = useSelector(state => state.session.user)
   // const userFollows = useSelector(state => state.follows)
-  
-  let imageOwner;
-  imageOwner = userImages[0]?.owner
+  console.log('SESSION USER = ', sessionUser)
+  // let imageOwner;
+  // imageOwner = userImages[0]?.owner
 
 
-  const isOwner = sessionUser.id === imageOwner?.id;
+  const isOwner = sessionUser?.id === user?.id;
   
-  const { Images } = user
+  // const { Images } = user
   
-  useEffect(() => {
-    dispatch(fetchUserImages(userId));
-  }, [dispatch, userId])
+  // useEffect(() => {
+  //   dispatch(fetchUserImages(userId));
+  // }, [dispatch, userId])
 
 
   useEffect(() => {
@@ -46,9 +50,10 @@ function User() {
     const fetchData = async () => {
       const response = await fetch(`/api/users/${userId}`);
       const user = await response.json();
-      
+      console.log('USER IN FETCH IN USER = ', user)
       setUser(user)
     }
+    fetchData()
     fetchData()
     .catch(async (res) => {
       const data = await res.json()
@@ -57,10 +62,14 @@ function User() {
     return () => {setIsMounted(false)}
   }, [dispatch, userId])
 
+  // useEffect(() => {
+  //   dispatch(fetchGetUser(userId))
+  // }, [])
 
-  useEffect(() => {
-    dispatch(fetchFollows(sessionUser.id))
-  }, [dispatch])
+
+  // useEffect(() => {
+  //   dispatch(fetchFollows(sessionUser.id))
+  // }, [dispatch])
   
 
   if (!user) {
@@ -94,58 +103,66 @@ function User() {
           <div className='user-info'>
             <ul>
               <li className='user-info-item user-info-username'>
-              {isOwner ? (
-                <div>
-                  <strong>{sessionUser?.username}</strong>
-                </div>
-
-              ) : (
-                <div>
-                  <strong>{user?.username}</strong>
-                </div>
-              )}
+                {isOwner ? (
+                  <div>
+                    <strong>{sessionUser?.username}</strong>
+                  </div>
+                ) : (
+                  <div>
+                    <strong>{user?.username}</strong>
+                  </div>
+                )}
                 <div className='user-info-edit-btn'>
-                  {isOwner ? (
+                  {/* {isOwner ? (
                     <button
                       className='user-edit-btn'
                       onClick={() => setEditModal(true)}
                     >
                       Update Profile
                     </button>
-                  ) : (
-                  <Follow 
-                    user={user} 
-                    sessionUser={sessionUser} 
-                  />
+                  ) 
+                  : 
+                  (
+                    <Follow user={user} sessionUser={sessionUser} />
+                  )
+                  
+                  } */}
+                  {isOwner && (
+                    <button
+                      className='user-edit-btn'
+                      onClick={() => setEditModal(true)}
+                    >
+                      Update Profile
+                    </button>
                   )}
                 </div>
               </li>
-              {isOwner &&  (
+              {isOwner && (
                 <div>
-                  {user?.firstname && (
+                  {sessionUser?.firstname && (
                     <li className='user-info-item'>
-                      <strong>Name: </strong> {sessionUser?.firstname} {sessionUser?.lastname}
+                      <strong>Name: </strong> {sessionUser?.firstname}{' '}
+                      {sessionUser?.lastname}
                     </li>
                   )}
                   <li className='user-info-item'>
                     <strong>Email: </strong> {sessionUser?.email}
                   </li>
-                  {user?.bio ? (
+                  {sessionUser?.bio ? (
                     <li className='user-info-item user-bio'>
                       <strong>Bio: </strong> {sessionUser?.bio}
                     </li>
                   ) : null}
                   <li className='user-info-item'>
-                    <strong>Posts: </strong> {Images?.length}
+                    <strong>Posts: </strong> {user?.Images?.length}
                   </li>
                 </div>
               )}
-              {!isOwner &&  (
+              {!isOwner && (
                 <div>
                   {user?.firstname && (
                     <li className='user-info-item'>
-                      <strong>Name: </strong> {user?.firstname}{' '}
-                      {user?.lastname}
+                      <strong>Name: </strong> {user?.firstname} {user?.lastname}
                     </li>
                   )}
                   <li className='user-info-item'>
@@ -157,7 +174,7 @@ function User() {
                     </li>
                   ) : null}
                   <li className='user-info-item'>
-                    <strong>Posts: </strong> {Images?.length}
+                    <strong>Posts: </strong> {user?.Images?.length}
                   </li>
                 </div>
               )}
@@ -166,7 +183,7 @@ function User() {
         </div>
       </div>
 
-      <div>
+      <div className='user-profile-btns'>
         {/* <button onClick={() => setShowModal(true)}> */}
 
         {/* </button> */}
@@ -186,10 +203,42 @@ function User() {
             <ImageCreateForm setShowModal={setShowModal} />
           </Modal>
         )}
+        {/* <div className='follows-btns'>
+          {isOwner && (
+            <div className='following-btn'>
+              <button onClick={() => setFollowingModal(true)}>Following</button>
+              {followingModal && (
+                <Modal onClose={() => setFollowingModal(false)}>
+                  <Following
+                    setFollowingModal={setFollowingModal}
+                    user={user}
+                  />
+                </Modal>
+              )}
+            </div>
+          )}
+          {isOwner && (
+            <div className='followers-btn'>
+              <button onClick={() => setFollowersModal(true)}>Followers</button>
+              {followersModal && (
+                <Modal onClose={() => setFollowersModal(false)}>
+                  <Followers
+                    setFollowersModal={setFollowersModal}
+                    user={user}
+                  />
+                </Modal>
+              )}
+            </div>
+          )}
+        </div> */}
       </div>
       <div className='profile-image-list'>
-        {errors?.map(error => <p key={error} className='errors'>{error}</p>)}
-        {userImages?.map((image) => (
+        {errors?.map((error) => (
+          <p key={error} className='errors'>
+            {error}
+          </p>
+        ))}
+        {user?.Images?.map((image) => (
           <div key={image?.id}>
             <ImageListItem image={image} loadImages={loadImages} />
           </div>

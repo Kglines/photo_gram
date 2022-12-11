@@ -24,7 +24,7 @@ def users():
     Query for all users and returns them in a list of user dictionaries
     """
     users = User.query.all()
-    return {'users': [user.user_details_to_dict() for user in users]}
+    return {'users': [user.user_details_to_dict() for user in users]}, 200
 
 
 @user_routes.route('/<int:id>')
@@ -34,7 +34,8 @@ def user(id):
     Query for a user by id and returns that user in a dictionary
     """
     user = User.query.get(id)
-    return user.user_details_to_dict()
+    print('**********************************', user)
+    return user.user_details_to_dict(), 200
 
 
 # Edit a User - no image
@@ -99,3 +100,18 @@ def unfollow(id):
 def follows(id):
     user = User.query.get(id)
     return {'follows': [follow.to_dict() for follow in user.follows]}, 200
+
+# Get Followers
+@user_routes.route('/<int:id>/followers')
+@login_required
+def followers(id):
+    user = User.query.get(id)
+    return {'followers': [follower.to_dict() for follower in user.followers]}, 200
+
+
+@user_routes.route('/<int:id>/images')
+@login_required
+def user_images(id):
+    user = User.query.get(id)
+    print('*********************************', user)
+    return user.user_details_to_dict()
