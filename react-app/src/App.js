@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
-import NavBar from './components/NavBar/NavBar';
+// import LoginForm from './components/auth/LoginForm';
+// import SignUpForm from './components/auth/SignUpForm';
+// import NavBar from './components/NavBar/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
-import ImageDetail from './components/Images/ImageDetail';
-import ImageList from './components/Images/ImageList';
+// import ImageDetail from './components/Images/ImageDetail';
+// import ImageList from './components/Images/ImageList';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -25,6 +25,13 @@ function App() {
   if (!loaded) {
     return null;
   }
+
+  const LoginForm = lazy(() => import("./components/auth/LoginForm"));
+  const NavBar = lazy(() => import('./components/NavBar/NavBar'));
+  const SignUpForm = lazy(() => import('./components/auth/SignUpForm'));
+  const ImageDetail = lazy(() => import('./components/Images/ImageDetail'));
+  const ImageList = lazy(() => import('./components/Images/ImageList'));
+
 
   return (
     <BrowserRouter>
