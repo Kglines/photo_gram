@@ -33,7 +33,7 @@ function User() {
   // console.log('USER IN USER = ', user)
   // const userImages = Object.values(useSelector(state => state?.images?.user_images ? state.images?.user_images : state.images))
   const sessionUser = useSelector(state => state.session.user)
-  // const userFollows = useSelector(state => state.follows)
+  const userFollows = useSelector(state => state.follows)
   // console.log('SESSION USER = ', sessionUser)
   // let imageOwner;
   // imageOwner = userImages[0]?.owner
@@ -131,7 +131,7 @@ function User() {
                   </div>
                 )}
                 <div className='user-info-edit-btn'>
-                  {/* {isOwner ? (
+                  {isOwner ? (
                     <button
                       className='user-edit-btn'
                       onClick={() => setEditModal(true)}
@@ -144,15 +144,15 @@ function User() {
                     <Follow user={user} sessionUser={sessionUser} />
                   )
                   
-                  } */}
-                  {isOwner && (
+                  }
+                  {/* {isOwner && (
                     <button
                       className='user-edit-btn'
                       onClick={() => setEditModal(true)}
                     >
                       Update Profile
                     </button>
-                  )}
+                  )} */}
                 </div>
               </li>
               {isOwner && (
@@ -221,7 +221,7 @@ function User() {
             <ImageCreateForm setShowModal={setShowModal} />
           </Modal>
         )}
-        {/* <div className='follows-btns'>
+        <div className='follows-btns'>
           {isOwner && (
             <div className='following-btn'>
               <button onClick={() => setFollowingModal(true)}>Following</button>
@@ -248,7 +248,7 @@ function User() {
               )}
             </div>
           )}
-        </div> */}
+        </div>
       </div>
       <div className='profile-image-list'>
         {errors?.map((error) => (
