@@ -30,7 +30,7 @@ function User() {
   const [errors, setErrors] = useState([])
   const [isMounted, setIsMounted] = useState(false)
 
-  // console.log('USER IN USER = ', user)
+  // console.log('USER IN USER = ', user?.bio)
   // const userImages = Object.values(useSelector(state => state?.images?.user_images ? state.images?.user_images : state.images))
   const sessionUser = useSelector(state => state.session.user)
   const userFollows = useSelector(state => state.follows)
@@ -77,7 +77,7 @@ function User() {
     //   if(data && data.errors) setErrors(data.errors)
     // })
     return () => {setIsMounted(false)}
-  }, [dispatch, userId, user])
+  }, [dispatch, userId, user?.bio, user?.firstname, user?.lastname])
 
   // useEffect(() => {
   //   dispatch(fetchGetUser(userId))

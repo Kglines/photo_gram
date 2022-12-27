@@ -28,6 +28,19 @@ function ImageListItem({ image, user, loadImages }) {
   // console.log('ANOTHER WOMBAT', image)
   const postDate = image?.updated_at ? image?.updated_at?.slice(0, 16) : image?.created_at?.slice(0, 16)
 
+  // Intersection Observer...adds class to each img element to gradually reveal the image
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('show');
+      } else {
+        entry.target.classList.remove('show');
+      }
+    })
+  })
+  const hiddenElements = document.querySelectorAll('.image-list-item-img');
+  hiddenElements.forEach(el => observer.observe(el));
+
   return (
     <div className='image-list-item-container'>
       <NavLink className='user-link' to={`/users/${user?.id}`}>
@@ -38,11 +51,14 @@ function ImageListItem({ image, user, loadImages }) {
           className='image-list-item-img-link'
           to={`/images/${image?.id}`}
         >
+       
           <img
             className='image-list-item-img'
             src={image?.image_url}
             alt={image?.caption}
           />
+      
+       
         </NavLink>
         <div className='image-icons-container'>
           <div className='image-icons'>
