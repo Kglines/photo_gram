@@ -17,30 +17,30 @@ def seed_users():
         )
     KateC = User(
         username='KateC', firstname='Kate', lastname='C.', email='kate@aa.io', password='password',
-        bio="I'm Kate. I'm a great mom with a new direction in life as a Software Engineer!", profileImg="" 
+        bio="I'm Kate. I'm a great mom with a new direction in life as a Software Engineer!", profile_img=""
         )
     MarielV = User(
         username='MarielV', firstname='Mariel', lastname='V.', email='mariel@aa.io', password='password',
-        bio="Hi, I'm Mariel. I'm bilingual, a UI/UX designer, and an amazing Software Engineer!", profileImg=""
+        bio="Hi, I'm Mariel. I'm bilingual, a UI/UX designer, and an amazing Software Engineer!", profile_img=""
         )
     AustinF = User(
         username='AustinF', firstname='Austin', lastname='F.', email='austin@aa.io', password='password',
-        bio="Hey there, I'm Austin. I live in Minnesota and it's cold outside, but I heat things up with the speed of my fingers on my keyboard as a Software Engineer!", profileImg=''
+        bio="Hey there, I'm Austin. I live in Minnesota and it's cold outside, but I heat things up with the speed of my fingers on my keyboard as a Software Engineer!", profile_img=""
         )
     IsaacD = User(
-        username='IsaacD', firstname='Isaac', lastname='D.', email='isaac@aa.io', password='password', bio="I'm Isaac. I live in sunny Florida. I'm the best dad ever...I have a t-shirt that proves it. I'm also a pretty amazing Software Engineer!", profileImg=""
+        username='IsaacD', firstname='Isaac', lastname='D.', email='isaac@aa.io', password='password', bio="I'm Isaac. I live in sunny Florida. I'm the best dad ever...I have a t-shirt that proves it. I'm also a pretty amazing Software Engineer!", profile_img=""
         )
     PeterM = User(
         username='PeterM', firstname='Peter', lastname='M.', email='peter@aa.io', password='password',
-        bio="Hi, I'm Peter. I'm a new dad, for the second time, which is really exciting. The second most exciting thing right is that I'm a new Software Engineer!", profileImg=""
+        bio="Hi, I'm Peter. I'm a new dad, for the second time, which is really exciting. The second most exciting thing right is that I'm a new Software Engineer!", profile_img=""
         )
     ScottyW = User(
         username='ScottyW', firstname='Scotty', lastname='W.', email='scotty@aa.io', password='password',
-        bio="Hi there, I'm Scotty. I work in the tech field already but I'm really excited about being a brand new Software Engineer! Look out VR World, here I come!!!", profileImg=""
+        bio="Hi there, I'm Scotty. I work in the tech field already but I'm really excited about being a brand new Software Engineer! Look out VR World, here I come!!!", profile_img=""
         )
     Boots = User(
         username='Boots', firstname="Keith", lastname='G.', email='keith@aa.io', password='password',
-        bio="Hi, I'm Keith, but people call me Boots. It's a nickname from my baseball team. I look forward to playing baseball this season. I took off last year as I was becoming a Software Engineer!", profileImg=""
+        bio="Hi, I'm Keith, but people call me Boots. It's a nickname from my baseball team. I look forward to playing baseball this season. I took off last year as I was becoming a Software Engineer!", profile_img=""
         )
 
     db.session.add(demo)
