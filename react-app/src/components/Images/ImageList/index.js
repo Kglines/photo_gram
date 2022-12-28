@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllImages } from '../../../store/images';
 import ImageListItem from '../ImageListItem';
+
 import './ImageList.css'
 
 function ImageList({ user }) {
@@ -23,14 +24,17 @@ function ImageList({ user }) {
 
   return (
     <div className='image-list-container'>
-      {images?.map(image => (
+      {images?.map((image) => (
         <div key={image?.id}>
-          {/* {console.log('IMAGE IN IMAGE LIST = ', image)} */}
-            <ImageListItem image={image} user={image.owner} loadImages={loadImages}/>
+            <ImageListItem
+              image={image}
+              user={image?.owner}
+              loadImages={loadImages}
+            />
         </div>
       ))}
     </div>
-  )
+  );
 }
 
 export default ImageList
