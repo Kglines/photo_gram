@@ -76,7 +76,6 @@ function ImageCreateForm({ setShowModal }) {
         />
         <div>
           <button
-            // disabled={caption?.length < 1 ? true : false}
             disabled={isDisabled()}
             className='modal-btn modal-submit-btn'
             type='submit'

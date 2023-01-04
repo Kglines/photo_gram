@@ -76,11 +76,6 @@ function User() {
           </div>
           <div className='user-img-container'>
             <li>
-              {/* <img
-                className='profile-pic'
-                src={user?.profile_img}
-                alt={user?.username}
-              /> */}
             </li>
           </div>
           <div className='user-info'>

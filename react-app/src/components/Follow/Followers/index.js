@@ -5,17 +5,16 @@ import { fetchFollowers } from '../../../store/follows'
 import Follow from '../Follow'
 
 function Followers({ user, setFollowersModal }) {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
-    const followers = useSelector(state => state.follows)
-    // console.log('FOLLOWERS = ', followers)
+    const followers = useSelector(state => state.follows);
 
-    const isFollowers = followers?.followers?.followers.length
-    // console.log('is followers ', isFollowers)
+    const isFollowers = followers?.followers?.followers.length;
 
     useEffect(() => {
         dispatch(fetchFollowers(user.id))
     }, [dispatch])
+    
   return (
     <div className='following-modal'>
       <h2 className='following-title'>Followers List:</h2>

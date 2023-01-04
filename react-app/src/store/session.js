@@ -145,11 +145,8 @@ export default function reducer(state = initialState, action) {
     case SET_USER:
       return { user: action.payload }
     case GET_USER:
-      // newState.otherUser = {}
-      // newState.otherUser = action.payload
       newState = action.payload
       return newState
-      // return { user: action.payload.id }
     case EDIT_USER:
       return { user: action.payload }
     case REMOVE_USER:

@@ -62,14 +62,8 @@ export const fetchAllComments = (imageId) => async (dispatch) => {
     return res
 }
 
-// Get One Comment Thunk
-// export const fetchOneComment = () => async (dispatch) => {
-
-// }
-
 // Create Comments Thunk
 export const fetchCreateComments = (comment, imageId) => async (dispatch) => {
-    // console.log('COMMENT THUNK = ', comment)
     const res = await fetch(`/api/images/${imageId}/comments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -97,7 +91,6 @@ export const fetchEditComments = (comment, commentId) => async (dispatch) => {
         dispatch(editComment(comment));
         return comment;
     };
-    // console.log('RES IN EDIT COMMENTS THUNK = ', res)
     return res;
 }
 
@@ -125,17 +118,11 @@ const commentsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_ALL_COMMENTS:
             action.payload.Comments.forEach(comment => newState[comment.id] = comment)
-            // console.log('NEW STATE ACTION PAYLOAD = ', action.payload.Comments)
             return newState;
         case CREATE_COMMENTS:
             newState = { ...state, [action.payload.id]: action.payload }
-            // console.log('NEW STATE CREATE COMMENTS IN REDUCER', newState)
             return newState
         case EDIT_COMMENTS:
-            // console.log('EDITING COMMENTS', {
-            //   ...state,
-            //   [action.payload.id]: action.payload,
-            // });
             newState = {
               ...state,
               [action.payload.id]: action.payload,
