@@ -1,28 +1,20 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink, useHistory } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { fetchUserFollows } from '../../../store/follows'
 import Follow from '../Follow/';
 import './Following.css'
 
 function Following({ user, setFollowingModal }) {
     const dispatch = useDispatch()
-    const history = useHistory()
-    const follows = useSelector(state => state.follows)
-    // console.log('FOLLOWS IN FOLLOWING = ', follows?.follows?.follows?.map(follow => {
-    //     // if(follow?.follows_id === user.id)
-    //     return follow
-    //     // return follow.user.username
-    // }))
 
-    // console.log('USER IN FOLLOWING = ', user)
+    const follows = useSelector(state => state.follows)
     useEffect(() => {
         dispatch(fetchUserFollows())
     }, [dispatch])
 
 
     const isFollows = follows?.follows?.follows?.length;
-    // console.log('FOLLOWS LENGTH = ', isFollows)
 
   return (
     <div className='following-modal'>
@@ -31,7 +23,6 @@ function Following({ user, setFollowingModal }) {
         follows?.follows?.follows?.map((follow) => (
             
           <div className='following-modal-list' key={follow?.id}>
-          {/* {console.log('FOLLOW MAP IN FOLLOW MAP = ', follow?.user)} */}
             <div>
               <NavLink
                 to={`/users/${follow?.follows_id}`}
@@ -59,9 +50,6 @@ function Following({ user, setFollowingModal }) {
       ) : (
         <p className='no-follows'>You're not following anyone yet!</p>
       )}
-      {/* {user?.Follows?.map(follow => (
-            <div key={follow.id}>{follow.username}</div>
-        ))} */}
     </div>
   );
 }

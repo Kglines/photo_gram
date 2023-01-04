@@ -7,8 +7,6 @@ const EDIT_IMAGES = 'images/edit';
 const DELETE_IMAGES = 'images/delete';
 const CREATE_LIKE = 'like/create'
 const DELETE_LIKE = 'like/delete'
-// const GET_COMMENTS = 'comments/get'
-// const EDIT_COMMENT = 'comment/edit'
 
 // ******** Images Actions ********
 
@@ -22,7 +20,6 @@ export const getAllImages = (images) => {
 
 // GET User Images
 export const getUserImages = (images) => {
-    // console.log('USER IMAGE ACTION')
     return {
         type: GET_USER_IMAGES,
         payload: images
@@ -77,22 +74,6 @@ export const deleteLike = (imageId) => {
     }
 }
 
-// // GET Comments
-// export const getComments = (comments) => {
-//     return {
-//         type: GET_COMMENTS,
-//         payload: comments
-//     }
-// }
-
-// // EDIT Comment
-// export const editComment = (comment) => {
-//     return {
-//         type: EDIT_COMMENT,
-//         payload: comment
-//     }
-// }
-
 // ******** Image Thunks ********
 
 // GET all Images Thunk
@@ -110,9 +91,9 @@ export const fetchAllImages = () => async (dispatch) => {
 // GET USER Images Thunk
 export const fetchUserImages = (userId) => async (dispatch) => {
     const res = await fetch(`/api/users/${userId}/images`);
+
     if(res.ok){
         const images = await res.json();
-        // console.log('USER IMAGE FETCH THUNK', images)
         dispatch(getUserImages(images));
         return images;
     };
@@ -133,13 +114,11 @@ export const fetchOneImage = (imageId) => async (dispatch) => {
 
 // Create Image Thunk
 export const fetchCreateImage = (image) => async (dispatch) => {
-    // console.log('CREATE THUNK', image)
     const res = await fetch(`/api/images`, {
       method: 'POST',
-    //   headers: { 'Content-Type': 'multipart/form-data' },
       body: image,
     });
-    // console.log('CREATE THUNK RES = ', res)
+
     if(res.ok){
         const image = await res.json();
         dispatch(createImages(image));
@@ -184,10 +163,9 @@ export const fetchCreateLike = (imageId) => async (dispatch) => {
         method: 'POST'
     })
     if (res.ok){
-        const like = await res.json()
-        // console.log('RES IN CREATE LIKE THUNK = ', like)
-        dispatch(createLike(like))
-        return like
+        const like = await res.json();
+        dispatch(createLike(like));
+        return like;
     }
     return res;
 }
@@ -200,41 +178,12 @@ export const fetchDeleteLike = (imageId) => async (dispatch) => {
 
     
     if (res.ok){
-        const like = await res.json()
-        // console.log('DELETE LIKE RES = ', like)
-        dispatch(deleteLike(like))
-        return like
+        const like = await res.json();
+        dispatch(deleteLike(like));
+        return like;
     }
     return res;
 }
-
-// // GET Comments THUNK
-// export const fetchGetComments = (imageId) => async (dispatch) => {
-//     const res = await fetch(`/api/images/${imageId}/comments`);
-
-//     if(res.ok){
-//         const comments = await res.json();
-//         dispatch(getComments(comments));
-//         return comments;
-//     };
-//     return res;
-// };
-
-// EDIT Comment THUNK
-// export const fetchEditComment = (comment, imageId) => async (dispatch) => {
-//     const res = await fetch(`/api/images/${imageId}/comments`, {
-//       method: 'PUT',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify(comment),
-//     });
-
-//     if (res.ok) {
-//       const comment = await res.json();
-//       dispatch(editComment(comment));
-//       return comment;
-//     }
-//     return res;
-// }
 
 // ******** REDUCER *********
 
@@ -245,11 +194,9 @@ const imagesReducer = (state = initialState, action) => {
     switch(action.type){
         case GET_ALL_IMAGES:
             newState.all_images = {}
-            // console.log('ALL IMAGES PAYLOAD', action.payload.Images.forEach(image => newState[image.id] = image))
             action.payload.Images.forEach(image => newState.all_images[image.id] = image)
             return newState
         case GET_USER_IMAGES:
-            // console.log('USER IMAGE REDUCER', action.payload)
             newState.user_images = {}
             action.payload.Images.forEach(image => newState.user_images[image.id] = image)
             return newState
@@ -264,19 +211,6 @@ const imagesReducer = (state = initialState, action) => {
             newState.all_images[action.payload.id] = action.payload
             newState.one_image.Image = action.payload
             return newState
-        // case GET_COMMENTS:
-        //     newState = action.payload
-        //     return newState
-        // case EDIT_COMMENT:
-        //     newState.one_image.Image.Comments[action.payload.id] = action.payload
-        //     return newState
-        // case EDIT_IMAGES:
-        //     newState = action.payload
-        //     return newState
-        // case CREATE_LIKE:
-        //     newState = action.payload
-        //     console.log('STATE = ', newState)
-        //     return newState
         case DELETE_IMAGES:
             delete newState[action.payload]
             return newState

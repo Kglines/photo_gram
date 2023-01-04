@@ -47,14 +47,13 @@ export const deleteFollows = (id) => {
 
 
 // ******** FOLLOWS THUNKS ********
+
 // GET Follows
 export const fetchFollows = (userId) => async (dispatch) => {
     const res = await fetch(`/api/users/${userId}/follows`);
-    // console.log('FOLLOWS THUNK = ', userId)
-    // console.log('RES in Follows = ', res)
+
     if(res.ok){
         const follows = await res.json();
-        // console.log('FOLLOWS IN FOLLOWS THUNK = ', follows)
         dispatch(getFollows(follows));
         return follows;
     };
@@ -97,7 +96,6 @@ export const fetchCreateFollow = (follows, userId) => async (dispatch) => {
         dispatch(createFollows(follow));
         return follow;
     };
-    // console.log('RES RES RES', res)
     return res;
 };
 
@@ -106,7 +104,6 @@ export const fetchDeleteFollow = (followId) => async (dispatch) => {
     const res = await fetch(`/api/follows/${followId}`, {
         method: 'DELETE'
     })
-    // console.log('res inside delete thunk ', res)
     if(res.ok){
         const follow = await res.json();
         dispatch(deleteFollows(followId));
@@ -125,18 +122,13 @@ const followsReducer = (state = initialState, action) => {
             action.payload.follows.forEach(follow => newState[follow.id] = follow)
             return newState
         case GET_USER_FOLLOWS:
-            // action.payload.forEach(follow => newState[follow.id] = follow)
-            // return newState
             return { follows: action.payload }
         case GET_FOLLOWERS:
-            // action.payload.forEach(followers => newState[followers.id] = followers)
-            // return newState
             return { followers: action.payload }
         case CREATE_FOLLOWS:
             newState = {...state, [action.payload.id]: action.payload}
             return newState
         case DELETE_FOLLOWS:
-            // console.log(newState[action.payload]);
             delete newState[action.payload]
             return newState
         default:

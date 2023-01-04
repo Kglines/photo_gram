@@ -11,10 +11,6 @@ function ImageListItem({ image, user, loadImages }) {
   const { userId } = useParams()
   const liked = image?.Likes?.liked
 
-  // console.log('IMAGE LIST ITEM IMAGE = ', image)
-  // console.log('IMAGE LIST ITEM LOADIMAGEs = ', loadImages)
-  // console.log('USER IN IMAGE LIST ITEM = ', user)
-
   const handleClick = async (e) => {
     return liked
       ? await dispatch(fetchDeleteLike(image?.id))
@@ -25,10 +21,9 @@ function ImageListItem({ image, user, loadImages }) {
           .then(() => loadImages(userId))
           .then(() => loadImages(userId))
   };
-  // console.log('ANOTHER WOMBAT', image)
+
   const postDate = image?.updated_at ? image?.updated_at?.slice(0, 16) : image?.created_at?.slice(0, 16)
 
-  // Intersection Observer...adds class to each img element to gradually reveal the image
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if(entry.isIntersecting){

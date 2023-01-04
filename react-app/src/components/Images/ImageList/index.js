@@ -5,13 +5,10 @@ import ImageListItem from '../ImageListItem';
 
 import './ImageList.css'
 
-function ImageList({ user }) {
+function ImageList() {
+
   const images = Object.values(useSelector(state => state.images?.all_images ? state.images?.all_images : state.images))
 
-  // console.log('USER IN IMAGE LIST = ', user, images)
-
-  // const imageUser = images.find(image => image.owner.id === user.id)
-  // console.log("IMAGE USER = ", imageUser)
   const dispatch = useDispatch()
 
   const loadImages = () => {
