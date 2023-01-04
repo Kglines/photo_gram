@@ -1,10 +1,18 @@
 const GET_LIKES = 'likes/get'
+const GET_IMAGE_LIKES = 'image-likes/get'
 const CREATE_LIKE = 'like/create'
 const DELETE_LIKE = 'like/delete'
 
 export const getLikes = (likes) => {
     return {
         type: GET_LIKES,
+        payload: likes
+    }
+}
+
+export const getImageLikes = (likes) => {
+    return {
+        type: GET_IMAGE_LIKES,
         payload: likes
     }
 }
@@ -25,8 +33,8 @@ export const deleteLike = (id) => {
 }
 
 export const fetchAllLikes = (imageId) => async (dispatch) => {
-    const res = await fetch(`/api/images/${imageId}/likes`)
-    // console.log('^^^^^^^^^^^^^^^^ all likes res ', res)
+    const res = await fetch(`/api/likes`)
+    console.log('^^^^^^^^^^^^^^^^ all likes res ', res)
     if(res.ok){
         const likes = await res.json()
         dispatch(getLikes(likes))
@@ -35,8 +43,19 @@ export const fetchAllLikes = (imageId) => async (dispatch) => {
     return res
 }
 
+export const fetchImageLikes = (imageId) => async (dispatch) => {
+    const res = await fetch(`/api/likes/images/${imageId}`)
+
+    if (res.ok){
+        const likes = await res.json()
+        dispatch(getImageLikes(likes))
+        return likes
+    }
+    return res;
+}
+
 export const fetchCreateLike = (imageId, like) => async (dispatch) => {
-    const res = await fetch(`/api/likes/${imageId}/like`, {
+    const res = await fetch(`/api/likes/images/${imageId}`, {
         method: 'POST',
         body: like
     })
@@ -64,8 +83,8 @@ export const fetchCreateLike = (imageId, like) => async (dispatch) => {
 //     return res
 // }
 
-export const fetchDeleteLike = (imageId) => async (dispatch) => {
-    const res = await fetch(`/api/images/${imageId}/like`, {
+export const fetchDeleteLike = (likeId) => async (dispatch) => {
+    const res = await fetch(`/api/likes/${likeId}`, {
         method: 'DELETE'
     })
     if(res.ok){
@@ -83,6 +102,9 @@ const likesReducer = (state = initialState, action) => {
     switch(action.type){
         case GET_LIKES:
             return action.payload
+        case GET_IMAGE_LIKES:
+            newState = action.payload;
+            return newState;
         case CREATE_LIKE:
             newState = action.payload
             // console.log('****** CREATE LIKE REDUCER = ', newState)

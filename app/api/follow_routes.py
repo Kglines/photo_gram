@@ -19,7 +19,6 @@ def validation_errors_to_error_messages(validation_errors):
 @login_required
 def get_follows():
     follows = Follow.query.all()
-    # return {'Follows': [follow.to_dict() for follow in follows]}, 200
     return {follow.to_dict() for follow in follows}, 200
     
 
@@ -72,5 +71,3 @@ def user_follows():
 def get_followers(id):
     user = User.query.get(id)
     return {'followers': [follower.followers_details_to_dict() for follower in user.followers]}
-    # followers = Follow.query.filter(Follow.user_id == current_user.id).all()
-    # return {'followers': [follower.follow_details_to_dict() for follower in followers]}

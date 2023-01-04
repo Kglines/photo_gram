@@ -40,9 +40,6 @@ function CommentCreateForm({ image }) {
   return (
     <div>
       <form className='comment-create-form-container' onSubmit={handleSubmit}>
-        {/* {errors.map(error => (
-          <div className='errors comment-errors' key={error}>{error}</div>
-        ))} */}
         <input
           type='text'
           placeholder='Add a Comment...'

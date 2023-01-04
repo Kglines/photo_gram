@@ -137,25 +137,22 @@ def get_likes(id):
     if image is None:
         return {'errors': ['Image not found']}, 404
     likes = Like.query.filter(Like.image_id == image.id).all()
-    # print('*************************************', likes)
     return {'Likes': [like.to_dict() for like in likes]}, 200
 
 
 # Create a Like
-@image_routes.route('/<int:id>/like', methods=['POST'])
+@image_routes.route('/<int:id>/likes', methods=['POST'])
 @login_required
 def like_image(id):
     image = Image.query.get(id)
     if image is None:
         return {'errors': ['Image not found']}, 404
     like = Like.query.filter(Like.user_id == current_user.id).filter(Like.image_id == image.id).first()
-    # print('*************************************', like)
     if like is None:
         like = Like(
             user_id=current_user.id,
             image_id=image.id
         )
-        # print('*************************************', like)
         db.session.add(like)
         db.session.commit()
         return like.to_dict()
@@ -169,7 +166,6 @@ def unlike_image(id):
     if image is None:
         return {'errors': ['Image not found']}, 404
     like = Like.query.filter(Like.user_id == current_user.id).filter(Like.image_id == image.id).first()
-    # print('************************************* DELETE', like)
     if like is None:
         return {"errors": "Image not found."}
     db.session.delete(like)

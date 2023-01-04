@@ -4,90 +4,55 @@ import { useParams } from 'react-router-dom';
 import { Modal } from '../context/Modal';
 import { fetchUserImages } from '../store/images';
 import ImageCreateForm from './Images/ImageCreateForm';
-import ImageListItem from './Images/ImageListItem';
-import './User.css'
+import './User.css';
 import UserEditForm from './UserEditForm';
 import { VscDiffAdded } from 'react-icons/vsc';
-import { fetchCreateFollow, fetchDeleteFollow, fetchFollows } from '../store/follows';
-import { fetchGetUser } from '../store/session';
 import Follow from './Follow/Follow';
 import Following from './Follow/Following';
 import Followers from './Follow/Followers';
-import ImageList from './Images/ImageList';
 import UserImages from './UserImages';
+
 
 function User() {
   const { userId } = useParams();
-  const parsedId = parseInt(userId)
   const dispatch = useDispatch();
 
   const [user, setUser] = useState();
   const [showModal, setShowModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
-  const [liked, setLiked] = useState(false);
   const [followingModal, setFollowingModal] = useState(false);
   const [followersModal, setFollowersModal] = useState(false);
   const [errors, setErrors] = useState([])
   const [isMounted, setIsMounted] = useState(false)
 
-  // console.log('USER IN USER = ', user?.bio)
-  // const userImages = Object.values(useSelector(state => state?.images?.user_images ? state.images?.user_images : state.images))
-  const sessionUser = useSelector(state => state.session.user)
-  const userFollows = useSelector(state => state.follows)
-  // console.log('SESSION USER = ', sessionUser)
-  // let imageOwner;
-  // imageOwner = userImages[0]?.owner
+  const [images, setImages] = useState([]);
 
-
-  const isOwner = sessionUser?.id === user?.id;
+  const myImages = Object.values(useSelector(state => state.images.user_images))
   
-  // const { Images } = user
-  
-  // useEffect(() => {
-  //   dispatch(fetchUserImages(userId));
-  // }, [dispatch, userId])
 
-  const imageLikes = user?.Images?.map(image => (
-    image?.Likes
-  ))
-  const likeArr = imageLikes?.forEach(like => {
-      // console.log('LIKe LIKE LIKE = ', like)
-      // if(like.liked){
-      //   setLiked(true)
-      // } else {
-      //   setLiked(false)
-      // }
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await dispatch(fetchUserImages(userId));
+      setImages(response)
     }
-  )
-
-  // console.log('IMAGE LIKES ****', imageLikes)
-
+    fetchData()
+      
+  }, [dispatch, userId])
+ 
+  const sessionUser = useSelector(state => state.session.user)
+  
+  const isOwner = sessionUser?.id === user?.id;
 
   useEffect(() => {
     setIsMounted(true)
     const fetchData = async () => {
       const response = await fetch(`/api/users/${userId}`);
       const user = await response.json();
-      // console.log('USER IN FETCH IN USER = ', user)
       setUser(user)
     }
     fetchData()
-    // .catch(async (res) => {
-    //   const data = await res.json()
-    //   if(data && data.errors) setErrors(data.errors)
-    // })
     return () => {setIsMounted(false)}
-  }, [dispatch, userId, user?.bio, user?.firstname, user?.lastname])
-
-  // useEffect(() => {
-  //   dispatch(fetchGetUser(userId))
-  // }, [])
-
-
-  // useEffect(() => {
-  //   dispatch(fetchFollows(sessionUser.id))
-  // }, [dispatch])
-  
+  }, [dispatch, userId, user?.bio, user?.firstname, user?.lastname, images])
 
   if (!user) {
     return null;
@@ -138,13 +103,9 @@ function User() {
                     >
                       Update Profile
                     </button>
-                  ) 
-                  : 
-                  (
+                  ) : (
                     <Follow user={user} sessionUser={sessionUser} />
-                  )
-                  
-                  }
+                  )}
                   {/* {isOwner && (
                     <button
                       className='user-edit-btn'
@@ -211,6 +172,7 @@ function User() {
               <VscDiffAdded
                 className='add-btn'
                 onClick={() => setShowModal(true)}
+                title='Create Post'
               />
             </div>
             <div>Create</div>
@@ -264,9 +226,23 @@ function User() {
         {/* {user && 
         <ImageList user={user} />
         } */}
-        {user?.Images?.map(image => (
-          <UserImages key={image.id} image={image} loadImages={loadImages} user={sessionUser} />
+        {/* {user?.Images?.map(image => (
+          <>
+          <UserImages key={image?.id} image={image} loadImages={loadImages} user={sessionUser} />
+
+          </>
+        ))} */}
+        {myImages?.map((image) => (
+          <>
+            <UserImages
+              key={image?.id}
+              image={image}
+              loadImages={loadImages}
+              user={sessionUser}
+            />
+          </>
         ))}
+        {/* <UserImages loadImages={loadImages} /> */}
       </div>
     </>
   );

@@ -5,24 +5,16 @@ import { fetchDeleteComments } from '../../../store/comments'
 import { fetchOneImage } from '../../../store/images';
 
 function CommentDelete({ comment, setDeleteModal }) {
-    const { imageId } = useParams()
     const dispatch = useDispatch()
-    const history = useHistory()
 
     const [errors, setErrors] = useState([])
 
     const onDelete = () => {
         let delComment = dispatch(fetchDeleteComments(comment?.id))
-        // .then(() => history.push(`/images/${imageId}`))
-        // .then(() => dispatch(fetchOneImage(imageId)))
-        // .then(() => dispatch(fetchOneImage(imageId)))
-        // .then(() => dispatch(fetchOneImage(imageId)))
-        // .then(() => setDeleteModal(false))
         .catch(async (res) => {
             const data = await res.json()
             if (data?.errors) setErrors(data?.errors)
         })
-        // console.log('COMMENT DELETE = ', delComment);
         setDeleteModal(false);
         return delComment
     }

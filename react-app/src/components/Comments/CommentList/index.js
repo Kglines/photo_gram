@@ -4,7 +4,6 @@ import CommentListItem from '../CommentListItem';
 import './CommentList.css';
 
 function CommentList({ comments, image }) {
-  // console.log(image)
   const imageComments = comments.filter(
     (comment) => {
     return comment?.image_id === image?.Image?.id

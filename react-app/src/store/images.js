@@ -180,7 +180,7 @@ export const fetchDeleteImage = (imageId) => async (dispatch) => {
 
 // Create Like Thunk
 export const fetchCreateLike = (imageId) => async (dispatch) => {
-    let res = await fetch(`/api/images/${imageId}/like`, {
+    let res = await fetch(`/api/images/${imageId}/likes`, {
         method: 'POST'
     })
     if (res.ok){
