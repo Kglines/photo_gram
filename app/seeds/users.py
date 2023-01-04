@@ -13,7 +13,7 @@ def seed_users():
         username='bobbie', firstname="Bobbie", lastname="Brown", email='bobbie@aa.io', password='password', bio="They call me Bobbie.", profile_img=""
         )
     EllieB = User(
-        username='Ellie', firstname='Ellie', lastname='B.', email='ellie@aa.io', password='password', bio="I'm Ellie. I'm in love with my dentist and I can't get enough of beefy nacho feet. I'm also a great Software Engineer!!!", profile_img=""
+        username='EllieB', firstname='Ellie', lastname='B.', email='ellie@aa.io', password='password', bio="I'm Ellie. I'm in love with my dentist and I can't get enough of beefy nacho feet. I'm also a great Software Engineer!!!", profile_img=""
         )
     KateC = User(
         username='KateC', firstname='Kate', lastname='C.', email='kate@aa.io', password='password',
