@@ -5,9 +5,8 @@ import { useParams } from 'react-router-dom'
 import { fetchEditComments } from '../../../store/comments'
 
 function CommentEditForm({ setEditModal, comment}) {
-  // console.log('EDIT COMMENT = ', comment)
+  
     const dispatch = useDispatch()
-    // const { imageId } = useParams()
 
     const [body, setBody] = useState(comment?.body)
     const [errors, setErrors] = useState([])
@@ -21,23 +20,14 @@ function CommentEditForm({ setEditModal, comment}) {
 
         dispatch(fetchEditComments(payload, comment?.id))
         .then(async (res) => {
-          // console.log('RES THE FIRST = ', res)
           if (res.ok === false){
-            // console.log('RES OK IS FALSE = ', res)
             const data = await res.json()
             if (data.errors) setErrors(data.errors)
           } else {
-            // console.log('RES OK IS TRUE = ', res)
             setErrors([])
             setEditModal(false)
           }
         })
-        // .catch(async (res) => {
-        //     const data = await res.json()
-        //     if (data?.errors) setErrors(data?.errors)
-        // })
-        // setBody('')
-        // return newComment
     }
 
     const isDisabled = () => {

@@ -1,106 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { FaHeart, FaRegComment, FaRegHeart } from 'react-icons/fa'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
-import { fetchUserImages } from '../store/images'
 import { fetchCreateLike, fetchDeleteLike } from '../store/images'
-import { fetchAllLikes } from '../store/likes'
 
-function UserImages({ image, loadImages, user }) {
+
+function UserImages({ image, loadImages }) {
   const dispatch = useDispatch();
   const { userId } = useParams();
 
-  let myLikes;
-  // console.log('USER USER USER USER ', user)
-  const images = Object.values(
-    useSelector((state) => state.images.user_images)
-  );
-  const likes = useSelector((state) => state.likes);
-  // console.log('LIKES SELECTOR = ', likes)
-  // console.log('IMAGES SELECTOR = ', images.map(image => myLikes = image.Likes))
-  // console.log('*$*$*$*$**$* ', image)
 
-  // console.log('########### # My Likes', myLikes)
-  // useEffect(() => {
-  //     dispatch(fetchAllLikes(image?.id))
-  // }, [dispatch, image?.id])
-
-  // const [isLiked, setIsLiked] = useState(false)
-  // console.log('LIKES SELECTOR = ', likes?.likes?.Likes)
-  // console.log('*******************************', isLiked)
-
-  // console.log('LIKES MAP ===== ', likes?.likes?.Likes?.find(like => (
-  //     // like?.image_id === image?.id
-  //     like
-  // )))
-  const liked = image?.Likes?.liked;
-  // console.log('** ** ** ** ', liked)
-
-  useEffect(() => {
-    dispatch(fetchAllLikes(image?.id));
-  }, [dispatch, image.id]);
-
-  useEffect(() => {
-    dispatch(fetchUserImages(userId));
-  }, [userId, dispatch, user]);
-
-  // console.log('USER IMAGES LIKED OR NOT = ', liked)
-
-  // const handleCreate = async (e) => {
-  // e.preventDefault();
-
-  // const res = await fetch(`/api/likes/${image.id}/like`, {
-  //     method: 'POST',
-  //     body: {
-  //         user_id: user.id,
-  //         image_id: image.id
-  //     }
-  // });
-  // console.log('**** ***** *** *** handle create', res);
-  // if(res.ok){
-  //     const like = await res.json()
-  //     // dispatch(fetchCreateLike(like))
-  //     console.log('LIKE INSIDE RES ', like)
-  //     dispatch(createLike(like))
-  //     return like
-  // }
-  // loadImages(image?.id)
-  // loadImages(image?.id)
-  // return res
-  // }
-
-  // const handleDelete = async (e) => {
-  //     e.preventDefault();
-
-  // const res = await fetch(`/api/likes/${like.id}`, {
-  //     method: 'DELETE'
-  // })
-  // console.log('**** ***** *** *** handle delete', res)
-  // if(res.ok){
-  //     const like = await res.json()
-  //     // dispatch(fetchDeleteLike(like))
-  //     dispatch(deleteLike(like))
-  //     return like
-
-  // }
-  // loadImages(image?.id);
-  // loadImages(image?.id);
-  // return res
-  // }
-
+  const isLiked = image?.Likes?.liked
+  
   const handleClick = async (e) => {
     e.preventDefault();
-    return liked
-      ? await dispatch(fetchDeleteLike(image?.id, image.like))
+    // Delete a like ff the image has already been liked, 
+    return isLiked
+      ? await dispatch(fetchDeleteLike(image?.id))
           .then(() => loadImages(userId))
           .then(() => loadImages(userId))
-      : //   .then(() => dispatch(fetchUserImages(userId)))
-        //   .then(() => dispatch(fetchUserImages(userId)))
+      : 
+      // Create a like if the image has not been liked
         await dispatch(fetchCreateLike(image?.id))
           .then(() => loadImages(userId))
           .then(() => loadImages(userId));
-    //   .then(() => dispatch(fetchUserImages(userId)))
-    //   .then(() => dispatch(fetchUserImages(userId)));
   };
 
   const postDate = image?.updated_at
@@ -139,7 +62,7 @@ function UserImages({ image, loadImages, user }) {
           </NavLink>
           <div className='image-icons-container'>
             <div className='image-icons'>
-              {liked ? (
+              {isLiked ? (
                 <FaHeart
                   className='like-icon'
                   style={{ color: 'red' }}

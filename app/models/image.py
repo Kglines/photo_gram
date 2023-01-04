@@ -64,7 +64,8 @@ class Image(db.Model):
             'comments': [comment.to_dict() for comment in self.comments],
             'Likes': {
                 'total': self.num_likes(),
-                'liked': self.liked()
+                'liked': self.liked(),
+                'image_id': self.id
             },
             'owner': self.user.to_dict()
         }

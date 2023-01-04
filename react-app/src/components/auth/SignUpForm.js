@@ -22,15 +22,7 @@ const SignUpForm = () => {
       }
     } else {
       setErrors(['Passwords must match.'])
-      // setUsername('');
-      // setEmail('');
-      // setPassword('');
-      // setRepeatPassword('');
     }
-    // setUsername('')
-    // setEmail('')
-    // setPassword('')
-    // setRepeatPassword('')
   };
 
   const updateUsername = (e) => {

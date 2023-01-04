@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { Modal } from '../../../context/Modal';
 import ImageEditForm from '../ImageEditForm';
 import ImageDelete from '../ImageDelete';
-import './Image.css'
+import './Image.css';
 import { useDispatch, useSelector } from 'react-redux';
 import CommentCreateForm from '../../Comments/CommentCreateForm';
 import CommentList from '../../Comments/CommentList';
@@ -13,21 +13,22 @@ import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { fetchAllComments } from '../../../store/comments';
 
 function Image({ image, user, loadImage, isLoading }) {
-  const { imageId } = useParams()
-  const dispatch = useDispatch()
-  const [editModal, setEditModal] = useState(false)
-  const [deleteModal, setDeleteModal] = useState(false)
-  // console.log('!!!!!!!!!!!!! USER ', user)
-  const comments = Object.values(useSelector(state => state.comments))
+  const { imageId } = useParams();
+  const dispatch = useDispatch();
+
+  const [editModal, setEditModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+
+  const comments = Object.values(useSelector(state => state.comments));
+  const sessionUser = useSelector(state => state.session.user);
 
   useEffect(() => {
-    dispatch(fetchAllComments(imageId))
+    dispatch(fetchAllComments(imageId));
   }, [dispatch, imageId])
 
-  const sessionUser = useSelector(state => state.session.user)
-  const isOwner = sessionUser.id === image?.Image?.user_id
+  const isOwner = sessionUser.id === image?.Image?.user_id;
 
-  const liked = image?.Image?.Likes?.liked
+  const liked = image?.Image?.Likes?.liked;
 
   const handleClick = async () => {
     return liked
@@ -41,36 +42,6 @@ function Image({ image, user, loadImage, isLoading }) {
 
   return (
     <div className='image-container'>
-      {/* <div className='image-btn-container'>
-        {isOwner && (
-          <button className='edit-btn' onClick={() => setEditModal(true)}>
-            Edit
-          </button>
-        )}
-        {editModal && (
-          <Modal onClose={() => setEditModal(false)}>
-            <ImageEditForm
-              setEditModal={setEditModal}
-              imageId={imageId}
-              image={image}
-            />
-          </Modal>
-        )}
-        {isOwner && (
-          <button className='delete-btn' onClick={() => setDeleteModal(true)}>
-            Delete
-          </button>
-        )}
-        {deleteModal && (
-          <Modal onClose={() => setDeleteModal(false)}>
-            <ImageDelete
-              setDeleteModal={setDeleteModal}
-              imageId={imageId}
-              image={image}
-            />
-          </Modal>
-        )}
-      </div> */}
       <div className='full-image'>
         <div className='image-pic-container'>
           {isLoading && <p>Loading...</p>}
@@ -83,13 +54,6 @@ function Image({ image, user, loadImage, isLoading }) {
         <div className='image-text-container'>
           <div className='image-text-container-header'>
             <NavLink to={`/users/${user?.id}`} className='user-link'>
-              {/* {user?.profile_img && (
-                <img
-                  className='profile-img'
-                  src={user?.profile_img}
-                  alt={user?.username}
-                />
-              )} */}
               <div>
                 <span>{user?.username}</span>
               </div>
@@ -131,12 +95,6 @@ function Image({ image, user, loadImage, isLoading }) {
                 )}
               </div>
           </div>
-          {/* <div className='caption-container'>
-            <NavLink className='user-link' to={`/users/${user?.id}`}>
-              <p>{user?.username}</p>
-            </NavLink>
-            <p className='caption'>{image?.Image?.caption}</p>
-          </div> */}
           <div className='comment-container'>
             <CommentList comments={comments} image={image} />
           </div>
