@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { fetchCreateComments } from '../../../store/comments'
+import EmojiPicker from 'emoji-picker-react'
+import { BsEmojiSmile } from 'react-icons/bs'
 import './CommentCreateForm.css'
 
 function CommentCreateForm({ image }) {
@@ -8,6 +10,7 @@ function CommentCreateForm({ image }) {
   const dispatch = useDispatch()
     const [comment, setComment] = useState('')
     const [errors, setErrors] = useState([])
+    const [showPicker, setShowPicker] = useState(false)
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -37,9 +40,30 @@ function CommentCreateForm({ image }) {
       }
     };
 
+    const emojiClick = (emojiObject) => {
+      console.log(emojiObject)
+      setComment(prevInput => prevInput + emojiObject)
+      setShowPicker(false)
+    }
+
   return (
     <div>
       <form className='comment-create-form-container' onSubmit={handleSubmit}>
+        <span className='emoji-container'>
+          {showPicker && (
+            <EmojiPicker
+              onEmojiClick={(e) => emojiClick(e.emoji)}
+              emojiStyle={{ position: 'relative', top: '-425px' }}
+              theme='facebook'
+              className='emoji-picker'
+              
+            />
+          )}
+          <BsEmojiSmile
+            className='show-emoji'
+            onClick={() => setShowPicker(!showPicker)}
+          />
+        </span>
         <input
           type='text'
           placeholder='Add a Comment...'
