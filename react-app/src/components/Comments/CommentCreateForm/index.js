@@ -41,7 +41,6 @@ function CommentCreateForm({ image }) {
     };
 
     const emojiClick = (emojiObject) => {
-      console.log(emojiObject)
       setComment(prevInput => prevInput + emojiObject)
       setShowPicker(false)
     }

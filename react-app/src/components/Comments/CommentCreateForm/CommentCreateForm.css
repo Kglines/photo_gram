@@ -7,8 +7,9 @@
 }
 
 .show-emoji {
-    padding-left: 5px;
+    padding-left: 2px;
     height: 25px;
+    width: 25px;
     margin-bottom: -8px;
     position: absolute;
     top: 0;
