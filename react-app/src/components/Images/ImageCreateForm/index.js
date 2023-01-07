@@ -17,7 +17,7 @@ function ImageCreateForm({ setShowModal }) {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append('caption', caption)
+    formData.append('caption', caption);
     formData.append('image_url', image_url);
 
     setImageLoading(true);
