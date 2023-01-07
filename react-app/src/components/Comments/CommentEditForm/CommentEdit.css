@@ -1,0 +1,12 @@
+#edit-comment-emojis {
+    position: relative;
+    bottom: -600px;
+    /* padding-top: 100px; */
+    margin-top: -125px;
+    padding-bottom: 145px;
+    z-index: 0;
+}
+
+.show-emoji-edit{
+    z-index: 12;
+}

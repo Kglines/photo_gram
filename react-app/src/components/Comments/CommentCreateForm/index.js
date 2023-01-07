@@ -52,9 +52,9 @@ function CommentCreateForm({ image }) {
         <span className='emoji-container'>
           {showPicker && (
             <EmojiPicker
+              
               onEmojiClick={(e) => emojiClick(e.emoji)}
-              emojiStyle={{ position: 'relative', top: '-425px' }}
-              theme='facebook'
+              emojiStyle='native'
               className='emoji-picker'
               
             />

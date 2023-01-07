@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
-// import { fetchOneImage } from '../../../store/images'
 import { fetchEditComments } from '../../../store/comments'
+import EmojiPicker from 'emoji-picker-react'
+import { BsEmojiSmile } from 'react-icons/bs'
+import './CommentEdit.css'
 
 function CommentEditForm({ setEditModal, comment}) {
   
@@ -10,6 +11,7 @@ function CommentEditForm({ setEditModal, comment}) {
 
     const [body, setBody] = useState(comment?.body)
     const [errors, setErrors] = useState([])
+    const [showPicker, setShowPicker] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -38,6 +40,12 @@ function CommentEditForm({ setEditModal, comment}) {
       }
     };
 
+    const emojiClick = (emojiObject) => {
+      console.log(emojiObject);
+      setBody((prevInput) => prevInput + emojiObject);
+      setShowPicker(false);
+    };
+
   return (
     <form className='modal-container' onSubmit={handleSubmit}>
       <h2>Edit Comment</h2>
@@ -52,8 +60,31 @@ function CommentEditForm({ setEditModal, comment}) {
         value={body}
         onChange={(e) => setBody(e.target.value)}
       />
+      {showPicker && (
+        <span id='edit-comment-emojis'>
+          <EmojiPicker
+            onEmojiClick={(e) => emojiClick(e.emoji)}
+            emojiStyle='native'
+            height={'400px'}
+          />
+        </span>
+      )}
       <div>
-        <button disabled={isDisabled()} className='modal-btn modal-submit-btn'>Submit</button>
+        <span>
+          <BsEmojiSmile
+            className='show-emoji-edit'
+            style={{
+              width: '30px',
+              height: '30px',
+              marginBottom: '-10px',
+              marginRight: '10px',
+            }}
+            onClick={() => setShowPicker(!showPicker)}
+          />
+        </span>
+        <button disabled={isDisabled()} className='modal-btn modal-submit-btn'>
+          Submit
+        </button>
         <button
           className='modal-btn modal-cancel-btn'
           onClick={() => setEditModal(false)}
