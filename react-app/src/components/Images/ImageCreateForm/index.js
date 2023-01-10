@@ -66,23 +66,26 @@ function ImageCreateForm({ setShowModal }) {
               {error}
             </div>
           ))}
-        <input
-          className='modal-input-title file-btn'
-          type='file'
-          accept='image/*'
-          onChange={(e) => setImage_url(e.target.files[0])}
-          required
-        />
-        <textarea
-          className='modal-input-title'
-          type='text'
-          value={caption}
-          onChange={(e) => setCaption(e.target.value)}
-          name='caption'
-          placeholder='Caption goes here...'
-          required
-        />
+        {imageLoading ? <p>Loading...</p>
+        : 
         <div>
+          <input
+            className='modal-input-title file-btn'
+            type='file'
+            accept='image/*'
+            onChange={(e) => setImage_url(e.target.files[0])}
+            required
+          />
+          <textarea
+            className='modal-input-title'
+            type='text'
+            value={caption}
+            onChange={(e) => setCaption(e.target.value)}
+            name='caption'
+            placeholder='Caption goes here...'
+            required
+          />
+          <div>
             <span>
               {showPicker && (
                 <EmojiPicker
@@ -98,21 +101,22 @@ function ImageCreateForm({ setShowModal }) {
                 onClick={() => setShowPicker(!showPicker)}
               />
             </span>
-          <button
-            disabled={isDisabled()}
-            className='modal-btn modal-submit-btn'
-            type='submit'
-          >
-            Share
-          </button>
-          <button
-            className='modal-btn modal-cancel-btn'
-            onClick={() => setShowModal(false)}
-          >
-            Cancel
-          </button>
+            <button
+              disabled={isDisabled()}
+              className='modal-btn modal-submit-btn'
+              type='submit'
+            >
+              Share
+            </button>
+            <button
+              className='modal-btn modal-cancel-btn'
+              onClick={() => setShowModal(false)}
+            >
+              Cancel
+            </button>
+          </div>
         </div>
-        {imageLoading && <p>Loading...</p>}
+        }
       </form>
     </div>
   );

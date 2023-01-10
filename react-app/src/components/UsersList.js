@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import SearchBar from './SearchBar';
 
 function UsersList() {
   const [users, setUsers] = useState([]);
@@ -30,6 +31,7 @@ function UsersList() {
   return (
     <>
       <h1 className='user-list-title'>User List: </h1>
+      <SearchBar userList={users} />
       <ul className='user-list'>{userComponents}</ul>
     </>
   );

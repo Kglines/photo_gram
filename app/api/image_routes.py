@@ -1,4 +1,5 @@
 from flask import Blueprint, request
+from sqlalchemy import desc
 from app.models import db, Image, Comment, Like
 from app.forms import ImageForm, CommentForm
 from flask_login import current_user, login_required
@@ -22,7 +23,9 @@ def validation_errors_to_error_messages(validation_errors):
 @image_routes.route('')
 @login_required
 def all_images():
-    images = Image.query.order_by(Image.created_at.desc())
+    images = Image.query.order_by(desc(Image.created_at))
+    # images = Image.query.order_by(Image.created_at.desc())
+    print('************************ = ', images)
     return {'Images': [image.image_details_to_dict() for image in images]}, 200
 
 
