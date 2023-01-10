@@ -1,4 +1,6 @@
+import EmojiPicker from 'emoji-picker-react'
 import React, { useState } from 'react'
+import { BsEmojiSmile } from 'react-icons/bs'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { fetchAllImages } from '../../../store/images'
@@ -12,6 +14,7 @@ function ImageCreateForm({ setShowModal }) {
   const [image_url, setImage_url] = useState(null)
   const [imageLoading, setImageLoading] = useState(false)
   const [errors, setErrors] = useState([])
+  const [showPicker, setShowPicker] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,6 +51,11 @@ function ImageCreateForm({ setShowModal }) {
     }
   }
 
+  const emojiClick = (emojiObject) => {
+    setCaption((prevInput) => prevInput + emojiObject);
+    setShowPicker(false);
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit} className='modal-container'>
@@ -75,6 +83,21 @@ function ImageCreateForm({ setShowModal }) {
           required
         />
         <div>
+            <span>
+              {showPicker && (
+                <EmojiPicker
+                  emojiStyle='native'
+                  onEmojiClick={(e) => emojiClick(e.emoji)}
+                  id='create-image-emoji-picker'
+                  height={'350px'}
+                  searchDisabled={true}
+                />
+              )}
+              <BsEmojiSmile
+                className='show-emoji-create-image'
+                onClick={() => setShowPicker(!showPicker)}
+              />
+            </span>
           <button
             disabled={isDisabled()}
             className='modal-btn modal-submit-btn'

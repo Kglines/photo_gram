@@ -51,11 +51,10 @@ function CommentCreateForm({ image }) {
         <span className='emoji-container'>
           {showPicker && (
             <EmojiPicker
-              
               onEmojiClick={(e) => emojiClick(e.emoji)}
               emojiStyle='native'
               className='emoji-picker'
-              
+              searchDisabled={true}
             />
           )}
           <BsEmojiSmile
