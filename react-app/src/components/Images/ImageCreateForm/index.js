@@ -1,4 +1,6 @@
+import EmojiPicker from 'emoji-picker-react'
 import React, { useState } from 'react'
+import { BsEmojiSmile } from 'react-icons/bs'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { fetchAllImages } from '../../../store/images'
@@ -12,6 +14,7 @@ function ImageCreateForm({ setShowModal }) {
   const [image_url, setImage_url] = useState(null)
   const [imageLoading, setImageLoading] = useState(false)
   const [errors, setErrors] = useState([])
+  const [showPicker, setShowPicker] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,6 +51,11 @@ function ImageCreateForm({ setShowModal }) {
     }
   }
 
+  const emojiClick = (emojiObject) => {
+    setCaption((prevInput) => prevInput + emojiObject);
+    setShowPicker(false);
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit} className='modal-container'>
@@ -58,38 +66,57 @@ function ImageCreateForm({ setShowModal }) {
               {error}
             </div>
           ))}
-        <input
-          className='modal-input-title file-btn'
-          type='file'
-          accept='image/*'
-          onChange={(e) => setImage_url(e.target.files[0])}
-          required
-        />
-        <textarea
-          className='modal-input-title'
-          type='text'
-          value={caption}
-          onChange={(e) => setCaption(e.target.value)}
-          name='caption'
-          placeholder='Caption goes here...'
-          required
-        />
+        {imageLoading ? <p>Loading...</p>
+        : 
         <div>
-          <button
-            disabled={isDisabled()}
-            className='modal-btn modal-submit-btn'
-            type='submit'
-          >
-            Share
-          </button>
-          <button
-            className='modal-btn modal-cancel-btn'
-            onClick={() => setShowModal(false)}
-          >
-            Cancel
-          </button>
+          <input
+            className='modal-input-title file-btn'
+            type='file'
+            accept='image/*'
+            onChange={(e) => setImage_url(e.target.files[0])}
+            required
+          />
+          <textarea
+            className='modal-input-title'
+            type='text'
+            value={caption}
+            onChange={(e) => setCaption(e.target.value)}
+            name='caption'
+            placeholder='Caption goes here...'
+            required
+          />
+          <div>
+            <span>
+              {showPicker && (
+                <EmojiPicker
+                  emojiStyle='native'
+                  onEmojiClick={(e) => emojiClick(e.emoji)}
+                  id='create-image-emoji-picker'
+                  height={'350px'}
+                  searchDisabled={true}
+                />
+              )}
+              <BsEmojiSmile
+                className='show-emoji-create-image'
+                onClick={() => setShowPicker(!showPicker)}
+              />
+            </span>
+            <button
+              disabled={isDisabled()}
+              className='modal-btn modal-submit-btn'
+              type='submit'
+            >
+              Share
+            </button>
+            <button
+              className='modal-btn modal-cancel-btn'
+              onClick={() => setShowModal(false)}
+            >
+              Cancel
+            </button>
+          </div>
         </div>
-        {imageLoading && <p>Loading...</p>}
+        }
       </form>
     </div>
   );

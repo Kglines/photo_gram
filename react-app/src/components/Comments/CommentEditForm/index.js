@@ -66,6 +66,7 @@ function CommentEditForm({ setEditModal, comment}) {
             onEmojiClick={(e) => emojiClick(e.emoji)}
             emojiStyle='native'
             height={'400px'}
+            searchDisabled={true}
           />
         </span>
       )}

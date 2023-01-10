@@ -1,0 +1,15 @@
+.show-emoji-create-image{
+    width: 30px;
+    height: 30px;
+    margin-bottom: -10px;
+    margin-right: 5px;
+    position: sticky;
+}
+
+.show-emoji-create-image:hover{
+    cursor: pointer;
+}
+
+#create-image-emoji-picker{
+    height: 200px;
+}

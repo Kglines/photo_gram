@@ -121,6 +121,7 @@ const commentsReducer = (state = initialState, action) => {
             return newState;
         case CREATE_COMMENTS:
             newState = { ...state, [action.payload.id]: action.payload }
+            console.log('**** **** **** = ', newState)
             return newState
         case EDIT_COMMENTS:
             newState = {
