@@ -3,7 +3,7 @@ import { FaHeart, FaRegComment, FaRegHeart } from 'react-icons/fa'
 import { useDispatch } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
 import { fetchCreateLike, fetchDeleteLike } from '../store/images'
-
+import './User.css';
 
 function UserImages({ image, loadImages }) {
   const dispatch = useDispatch();
