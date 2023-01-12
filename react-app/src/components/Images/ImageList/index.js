@@ -7,8 +7,8 @@ import ImageListItem from '../ImageListItem';
 import './ImageList.css'
 
 function ImageList() {
-
-  const images = Object.values(useSelector(state => state.images?.all_images ? state.images?.all_images : state.images))
+  const images = Object.values(useSelector(state => state.images?.all_images))
+  // const images = Object.values(useSelector(state => state.images?.all_images ? state.images?.all_images : state.images))
   const follows = useSelector(state => state.follows)
   const sessionUser = useSelector(state => state.session.user)
 

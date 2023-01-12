@@ -10,13 +10,13 @@ const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Suspense fallback={<h1>Loading...</h1>}>
+    {/* <Suspense fallback={<h1>Loading...</h1>}> */}
       <Provider store={store}>
         <ModalProvider>
             <App />
         </ModalProvider>
       </Provider>
-    </Suspense>
+    {/* </Suspense> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
