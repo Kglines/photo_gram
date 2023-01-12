@@ -41,7 +41,6 @@ function CommentEditForm({ setEditModal, comment}) {
     };
 
     const emojiClick = (emojiObject) => {
-      console.log(emojiObject);
       setBody((prevInput) => prevInput + emojiObject);
       setShowPicker(false);
     };

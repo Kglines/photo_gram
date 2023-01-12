@@ -31,4 +31,4 @@ function ImageDetail() {
   )
 }
 
-export default ImageDetail
+export default ImageDetail;

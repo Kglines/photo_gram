@@ -7,27 +7,23 @@ import ImageListItem from '../ImageListItem';
 import './ImageList.css'
 
 function ImageList() {
-
-  const images = Object.values(useSelector(state => state.images?.all_images ? state.images?.all_images : state.images))
+  const images = Object.values(useSelector(state => state.images?.all_images))
+  // const images = Object.values(useSelector(state => state.images?.all_images ? state.images?.all_images : state.images))
   const follows = useSelector(state => state.follows)
-
-//  follows?.follows?.follows?.forEach(follow => 
-//     {
-//       console.log(follow?.user?.id)
-//     }
-//   )
+  const sessionUser = useSelector(state => state.session.user)
 
   const displayImages = []
 
-  // console.log('DISPLAY   ', displayImages)
   images?.forEach(image => {
     follows?.follows?.follows?.forEach(follow => {
       if (image?.owner?.id === follow?.user?.id) {
         displayImages.push(image)
-      }
-    })
-  })
-  // console.log(images)
+      };
+    });
+    if (sessionUser.id === image.user_id){
+      displayImages.push(image)
+    };
+  });
 
   const dispatch = useDispatch()
 

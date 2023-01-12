@@ -75,8 +75,7 @@ function User() {
             )}
           </div>
           <div className='user-img-container'>
-            <li>
-            </li>
+            <li></li>
           </div>
           <div className='user-info'>
             <ul>
@@ -101,14 +100,6 @@ function User() {
                   ) : (
                     <Follow user={user} sessionUser={sessionUser} />
                   )}
-                  {/* {isOwner && (
-                    <button
-                      className='user-edit-btn'
-                      onClick={() => setEditModal(true)}
-                    >
-                      Update Profile
-                    </button>
-                  )} */}
                 </div>
               </li>
               {isOwner && (
@@ -156,11 +147,7 @@ function User() {
           </div>
         </div>
       </div>
-
       <div className='user-profile-btns'>
-        {/* <button onClick={() => setShowModal(true)}> */}
-
-        {/* </button> */}
         {isOwner && (
           <div className='user-profile-create'>
             <div>
@@ -213,31 +200,15 @@ function User() {
             {error}
           </p>
         ))}
-        {/* {user?.Images?.map((image) => (
-          <div key={image?.id}>
-            <ImageListItem image={image} loadImages={loadImages} />
-          </div>
-        ))} */}
-        {/* {user && 
-        <ImageList user={user} />
-        } */}
-        {/* {user?.Images?.map(image => (
-          <>
-          <UserImages key={image?.id} image={image} loadImages={loadImages} user={sessionUser} />
-
-          </>
-        ))} */}
         {myImages?.map((image) => (
-          <>
+          <div key={image?.id}>
             <UserImages
-              key={image?.id}
               image={image}
               loadImages={loadImages}
               user={sessionUser}
             />
-          </>
+          </div>
         ))}
-        {/* <UserImages loadImages={loadImages} /> */}
       </div>
     </>
   );

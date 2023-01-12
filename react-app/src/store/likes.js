@@ -33,7 +33,6 @@ export const deleteLike = (id) => {
 
 export const fetchAllLikes = (imageId) => async (dispatch) => {
     const res = await fetch(`/api/likes`)
-    console.log('^^^^^^^^^^^^^^^^ all likes res ', res)
     if(res.ok){
         const likes = await res.json();
         dispatch(getLikes(likes));

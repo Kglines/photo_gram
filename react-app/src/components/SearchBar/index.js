@@ -4,13 +4,14 @@ import { NavLink } from 'react-router-dom';
 import './SearchBar.css';
 
 function SearchBar({ userList }) {
-    console.log('USERS = ', userList)
+    
     const [searchInput, setSearchInput] = useState('');
     const [filteredData, setFilteredData] = useState([]);
 
     const handleChange = (e) => {
         e.preventDefault();
         setSearchInput(e.target.value);
+
         const newFilter = userList.filter(user => {
             return user.username.toLowerCase().includes(searchInput.toLowerCase())
         })
@@ -25,12 +26,6 @@ function SearchBar({ userList }) {
     const clearInput = () => {
         setFilteredData([]);
         setSearchInput('');
-    }
-
-    if (searchInput.toLowerCase().length > 0){
-        userList?.filter((user) => {
-            return user.username.match(searchInput)
-        })
     }
 
   return (
@@ -53,10 +48,12 @@ function SearchBar({ userList }) {
       {filteredData.length !== 0 && (
         <div className='data-result'>
           {filteredData.map((data) => (
-            <NavLink className='data-link' to={`/users/${data.id}`}>
-              <p className='data-item' key={data.id}>
-                {data.username}
-              </p>
+            <NavLink
+              key={data?.id}
+              className='data-link'
+              to={`/users/${data?.id}`}
+            >
+              <p className='data-item'>{data?.username}</p>
             </NavLink>
           ))}
         </div>

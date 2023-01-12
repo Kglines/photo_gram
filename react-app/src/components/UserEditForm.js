@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchEditUser} from '../store/session';
+import './User.css';
 
 function UserEditForm({ setEditModal, user }) {
     const { userId } = useParams();

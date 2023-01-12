@@ -1,9 +1,9 @@
 import React from 'react'
 import { NavLink, useParams } from 'react-router-dom'
 import { FaHeart, FaRegComment, FaRegHeart } from 'react-icons/fa';
-import './ImageListItem.css'
 import { useDispatch } from 'react-redux';
 import { fetchCreateLike, fetchDeleteLike} from '../../../store/images.js'
+import './ImageListItem.css'
 
 
 function ImageListItem({ image, user, loadImages }) {
