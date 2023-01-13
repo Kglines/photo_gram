@@ -10,6 +10,9 @@
     cursor: pointer;
 }
 
-#create-image-emoji-picker{
-    height: 200px;
+#create-image-emoji-picker aside{
+    position: relative;
+    top: 0px;
+    left: 25px;
 }
+
