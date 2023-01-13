@@ -25,7 +25,6 @@ def validation_errors_to_error_messages(validation_errors):
 def all_images():
     images = Image.query.order_by(desc(Image.created_at))
     # images = Image.query.order_by(Image.created_at.desc())
-    print('************************ = ', images)
     return {'Images': [image.image_details_to_dict() for image in images]}, 200
 
 

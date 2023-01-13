@@ -2,14 +2,14 @@ import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-// import UsersList from './components/UsersList';
-// import User from './components/User';
+import UsersList from './components/UsersList';
+import User from './components/User';
 import { authenticate } from './store/session';
-// import LoginForm  from './components/auth/LoginForm';
-// import NavBar  from './components/NavBar/NavBar';
-// import SignUpForm  from './components/auth/SignUpForm';
+import LoginForm  from './components/auth/LoginForm';
+import NavBar  from './components/NavBar/NavBar';
+import SignUpForm  from './components/auth/SignUpForm';
 import ImageList  from './components/Images/ImageList';
-// import ImageDetail  from './components/Images/ImageDetail';
+import ImageDetail  from './components/Images/ImageDetail';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -26,13 +26,13 @@ function App() {
     return null;
   }
 
-  const LoginForm = lazy(() => import("./components/auth/LoginForm"));
-  const NavBar = lazy(() => import('./components/NavBar/NavBar'));
-  const SignUpForm = lazy(() => import('./components/auth/SignUpForm'));
-  const ImageDetail = lazy(() => import('./components/Images/ImageDetail'));
+  // const LoginForm = lazy(() => import("./components/auth/LoginForm"));
+  // const NavBar = lazy(() => import('./components/NavBar/NavBar'));
+  // const SignUpForm = lazy(() => import('./components/auth/SignUpForm'));
+  // const ImageDetail = lazy(() => import('./components/Images/ImageDetail'));
   // const ImageList = lazy(() => import('./components/Images/ImageList'));
-  const UsersList = lazy(() => import('./components/UsersList'));
-  const User = lazy(() => import('./components/User'));
+  // const UsersList = lazy(() => import('./components/UsersList'));
+  // const User = lazy(() => import('./components/User'));
 
 
   return (
