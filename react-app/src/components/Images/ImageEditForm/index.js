@@ -77,6 +77,7 @@ function ImageEditForm({ imageId, setEditModal, image }) {
         )}
         <span>
           <BsEmojiSmile
+            className='show-emoji-edit'
             style={{
               width: '30px',
               height: '30px',

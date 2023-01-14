@@ -10,3 +10,6 @@
 .show-emoji-edit{
     z-index: 12;
 }
+.show-emoji-edit:hover{
+    cursor: pointer;
+}
