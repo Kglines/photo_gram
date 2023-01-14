@@ -13,7 +13,7 @@ function ImageList() {
   const sessionUser = useSelector(state => state.session.user)
 
   const displayImages = []
-
+console.log(displayImages)
   // For Each Image
   images?.forEach(image => {
     // And for each follow
@@ -46,10 +46,10 @@ function ImageList() {
 
   return (
     <div className='image-list-container'>
-      {/* {displayImages.length > 0 ? displayImages?.map((image) => ( */}
-    {images.length > 0 ? images?.map(image => (
+    {/* {images.length > 0 ? images?.map(image => ( */}
+      {displayImages.length > 0 ? displayImages?.map((image) => (
         <div key={image?.id}>
-        {console.log('IMAGE in IMAGE LIST = ', image)}
+        {/* {console.log('IMAGE in IMAGE LIST = ', image)} */}
             <ImageListItem
               image={image}
               user={image?.owner}
