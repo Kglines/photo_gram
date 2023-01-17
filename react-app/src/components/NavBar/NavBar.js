@@ -16,7 +16,6 @@ import './NavBar.css';
 const NavBar = () => {
   const user = useSelector(state => state.session.user);
   const history = useHistory()
-
   const [showModal, setShowModal] = useState(false);
   const [aboutModal, setAboutModal] = useState(false)
 

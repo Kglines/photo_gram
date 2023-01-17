@@ -31,17 +31,17 @@ function UserImages({ image, loadImages }) {
     : image?.created_at?.slice(0, 16);
 
   // Intersection Observer...adds class to each img element to gradually reveal the image
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-      } else {
-        entry.target.classList.remove('show');
-      }
-    });
-  });
-  const hiddenElements = document.querySelectorAll('.image-list-item-img');
-  hiddenElements.forEach((el) => observer.observe(el));
+  // const observer = new IntersectionObserver((entries) => {
+  //   entries.forEach((entry) => {
+  //     if (entry.isIntersecting) {
+  //       entry.target.classList.add('show');
+  //     } else {
+  //       entry.target.classList.remove('show');
+  //     }
+  //   });
+  // });
+  // const hiddenElements = document.querySelectorAll('.image-list-item-img');
+  // hiddenElements.forEach((el) => observer.observe(el));
 
   return (
     <div>
@@ -55,7 +55,7 @@ function UserImages({ image, loadImages }) {
             to={`/images/${image?.id}`}
           >
             <img
-              className='image-list-item-img'
+              className='image-list-item-img show'
               src={image?.image_url}
               alt={image?.caption}
             />
