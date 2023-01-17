@@ -77,3 +77,25 @@
 .logo:hover{
     cursor: unset;
 }
+
+/* @media (max-width: 768px){
+    .nav-list {
+        list-style: none;
+        background-color: white;
+        min-width: 100%;
+        position: fixed;
+        bottom: -15px;
+        height: 450px;
+        z-index: 2;
+    }
+    .nav-list-item {
+        font-size: 10px;
+    }
+    .nav-icon{
+        font-size: 10px;
+    }
+    .nav-btn{
+        display: flex;
+        flex-direction: row;
+    }
+} */

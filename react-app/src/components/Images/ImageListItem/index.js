@@ -24,17 +24,17 @@ function ImageListItem({ image, user, loadImages }) {
 
   const postDate = image?.updated_at ? image?.updated_at?.slice(0, 16) : image?.created_at?.slice(0, 16)
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('show');
-      } else {
-        entry.target.classList.remove('show');
-      }
-    })
-  })
-  const hiddenElements = document.querySelectorAll('.image-list-item-img');
-  hiddenElements.forEach(el => observer.observe(el));
+  // const observer = new IntersectionObserver((entries) => {
+  //   entries.forEach(entry => {
+  //     if(entry.isIntersecting){
+  //       entry.target.classList.add('show');
+  //     } else {
+  //       entry.target.classList.remove('show');
+  //     }
+  //   })
+  // })
+  // const hiddenElements = document.querySelectorAll('.image-list-item-img');
+  // hiddenElements.forEach(el => observer.observe(el));
 
   return (
     <div className='image-list-item-container'>
@@ -48,7 +48,7 @@ function ImageListItem({ image, user, loadImages }) {
         >
        
           <img
-            className='image-list-item-img'
+            className='image-list-item-img show'
             src={image?.image_url}
             alt={image?.caption}
           />
