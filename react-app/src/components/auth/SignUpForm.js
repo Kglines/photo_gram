@@ -125,7 +125,9 @@ const SignUpForm = () => {
           >
             Sign Up
           </button>
-          <p>-------- OR --------</p>
+          <p className='login-or'>
+            <hr width='50px' align='center'></hr>Or<hr width='50px'></hr>
+          </p>
           <p className='login-link'>
             Already have an account?{' '}
             <NavLink to='/login' exact={true}>
