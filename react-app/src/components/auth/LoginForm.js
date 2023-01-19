@@ -89,7 +89,9 @@ const LoginForm = () => {
           >
             Login
           </button>
-          <p>-------- OR --------</p>
+          <p className='login-or'>
+            <hr width='40px' align='center'></hr>Or<hr width='40px'></hr>
+          </p>
           <p className='login-link'>
             Don't have an account?{' '}
             <NavLink to='/sign-up' exact={true}>
@@ -98,7 +100,9 @@ const LoginForm = () => {
           </p>
         </form>
         <div className='demo-login'>
-          <p>-------- OR --------</p>
+          <p className='login-or'>
+            <hr width='40px' align='center'></hr>Or<hr width='40px'></hr>
+          </p>
           <p>Try it out</p>
           <DemoLogin />
           <a

@@ -10,6 +10,8 @@ import NavBar  from './components/NavBar/NavBar';
 import SignUpForm  from './components/auth/SignUpForm';
 import ImageList  from './components/Images/ImageList';
 import ImageDetail  from './components/Images/ImageDetail';
+import Footer from './components/Footer';
+import SuggestedFollows from './components/Follow/SuggestedFollows';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -42,9 +44,11 @@ function App() {
         <Switch>
           <Route path='/login' exact={true}>
             <LoginForm />
+            <Footer />
           </Route>
           <Route path='/sign-up' exact={true}>
             <SignUpForm />
+            <Footer />
           </Route>
           <ProtectedRoute path='/users' exact={true}>
             <UsersList />

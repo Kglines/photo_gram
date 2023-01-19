@@ -9,7 +9,7 @@
     left: 0;
     height: 100vh;
     padding-top: 50px;
-    margin-top: -15px;
+    margin-top: 65px;
     box-shadow: 1px 1px 5px rgb(210, 210, 210);
 }
 
@@ -71,6 +71,8 @@
     font-size: 45px;
     color: rgb(72, 72, 72);
     text-decoration: none;
+    margin-left: -20px;
+    padding-right: 20px;
 }
 
 

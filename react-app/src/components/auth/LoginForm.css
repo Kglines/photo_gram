@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     margin-left: -15%;
-    margin-top: 5%;
+    margin-top: 100px;
     /* grid-auto-flow: column;
     gap: 5px; */
 }
@@ -49,10 +49,10 @@
 }
 
 
-.login-form{
+.login-form {
     background-color: white;
     width: 300px;
-    height: 350px;
+    min-height: 500px;
     padding: 50px;
     margin-left: -35%;
     text-align: center;
@@ -61,10 +61,11 @@
 .signup-form{
     background-color: white;
     width: 300px;
-    height: 500px;
+    min-height: 500px;
     padding: 50px;
     margin-left: -35%;
     text-align: center;
+    margin-bottom: -12.5px;
 }
 
 .login-form input, .signup-form input {
@@ -100,6 +101,13 @@
     font-size: 18px;
 }
 
+.login-or {
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    margin: 20px 45px;
+}
+
 .login-btn:hover{
     cursor: pointer;
 }
@@ -116,7 +124,7 @@
 
 .demo-login{
     background-color: white;
-    margin-top: -20px;
+    margin-top: -200px;
     width: 300px;
     margin-left: -35%;
     text-align: center;
