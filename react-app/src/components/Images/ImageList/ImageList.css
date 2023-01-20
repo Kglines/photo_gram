@@ -1,3 +1,8 @@
+#image-list {
+    width: 90%;
+    height: 110%;
+}
+
 .image-list-container {
     display: flex;
     flex-direction: column-reverse;
@@ -12,7 +17,7 @@
     justify-content: right;
     align-items: right;
     position: sticky;
-    bottom: 500px;
+    bottom: 45%;
     right: 0px;
     margin-top: -10%;
     margin-left: 50%;

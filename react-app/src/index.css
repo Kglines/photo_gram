@@ -1,4 +1,7 @@
 /* TODO Add site wide styles */
+html {
+    background-color: rgb(241, 239, 239);
+}
 body {
     box-sizing: border-box;
     position: relative;

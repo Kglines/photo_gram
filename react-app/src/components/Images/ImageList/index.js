@@ -63,7 +63,7 @@ function ImageList() {
   }, [dispatch])
 
   return (
-    <div>
+    <div id='image-list'>
 
     <div className='image-list-container'>
     {/* {images.length > 0 ? images?.map(image => ( */}
