@@ -5,6 +5,7 @@ import { fetchAllImages } from '../../../store/images';
 import SuggestedFollows from '../../Follow/SuggestedFollows';
 import SearchBar from '../../SearchBar';
 import ImageListItem from '../ImageListItem';
+import Footer from '../../Footer';
 
 import './ImageList.css'
 
@@ -62,6 +63,8 @@ function ImageList() {
   }, [dispatch])
 
   return (
+    <div>
+
     <div className='image-list-container'>
     {/* {images.length > 0 ? images?.map(image => ( */}
       {displayImages.length > 0 ? displayImages?.map((image) => (
@@ -83,8 +86,10 @@ function ImageList() {
       {/* <div>
         <SuggestedFollows suggested={notFriends} />
       </div> */}
+    </div>
       <div className='sidebar'>
         <SearchBar userList={users} />
+        <SuggestedFollows userList={users} />
       </div>
     </div>
   );

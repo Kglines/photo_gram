@@ -2,37 +2,28 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { fetchFollows } from '../../../store/follows';
+import './SuggestedFollows.css';
 
-function SuggestedFollows({ suggested }) {
-  const dispatch = useDispatch();
+function SuggestedFollows({ userList }) {
 
-  const [ users, setUsers ] = useState('');
-  const latestUsers = users?.slice(users?.length - 4, users?.length)
-    const sessionUser = useSelector(state => state.session.user)
-    
-    console.log('USERS ====== ', users)
-    console.log('Latest USER = ', latestUsers)
-
-    useEffect(() => {
-      async function fetchData() {
-        const response = await fetch('/api/users/');
-        const responseData = await response.json();
-        setUsers(responseData.users);
-      }
-      fetchData();
-    }, []);
+  const latestUsers = userList?.slice(userList?.length - 5, userList?.length)
     
   return (
-    <div>
+    <div className='suggested-container'>
       <h3>Newest Members</h3>
-      <div>{latestUsers?.map(user => (
-        <NavLink key={user?.id} to={`/users/${user?.id}`}>
-          <p>{user?.username}</p>
-        </NavLink>
-      ))}
+      <div>
+        {latestUsers?.map((user) => (
+          <NavLink
+            key={user?.id}
+            to={`/users/${user?.id}`}
+            className='suggested-list'
+          >
+            <p className='suggested-list'>{user?.username}</p>
+          </NavLink>
+        ))}
       </div>
     </div>
-  )
+  );
 }
 
 export default SuggestedFollows
