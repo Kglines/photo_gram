@@ -17,6 +17,10 @@
     padding: 10px;
 }
 
+.nav-btn:focus{
+    background-color: rgb(241, 241, 241);
+}
+
 .nav-btn {
     display: flex;
     flex-direction: row;
