@@ -64,29 +64,31 @@ function ImageList() {
 
   return (
     <div id='image-list'>
-
-    <div className='image-list-container'>
-    {/* {images.length > 0 ? images?.map(image => ( */}
-      {displayImages.length > 0 ? displayImages?.map((image) => (
-        <div key={image?.id}>
-        
-            <ImageListItem
-              image={image}
-              user={image?.owner}
-              loadImages={loadImages}
-            />
-        </div>
-      )) 
-      :
-      <div>
-        <h2>Not Following anyone yet.</h2>
-        <h3>Explore different profiles and choose someone to follow!</h3>
-      </div>
-      }
-      {/* <div>
+      <div className='image-list-container'>
+        {/* {images.length > 0 ? images?.map(image => ( */}
+        {displayImages.length > 0 ? (
+          displayImages?.map((image) => (
+            <div key={image?.id}>
+              <ImageListItem
+                image={image}
+                user={image?.owner}
+                loadImages={loadImages}
+              />
+            </div>
+          ))
+        ) : (
+          <div style={{ width: '300px', marginTop: '100px' }}>
+            <h2>Not Following anyone yet.</h2>
+            <h3>
+              Search for friends, explore different profiles, and choose someone
+              to follow!
+            </h3>
+          </div>
+        )}
+        {/* <div>
         <SuggestedFollows suggested={notFriends} />
       </div> */}
-    </div>
+      </div>
       <div className='sidebar'>
         <SearchBar userList={users} />
         <SuggestedFollows userList={users} />
