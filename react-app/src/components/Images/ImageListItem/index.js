@@ -10,7 +10,7 @@ function ImageListItem({ image, user, loadImages }) {
   const dispatch = useDispatch()
   const { userId } = useParams()
   const liked = image?.Likes?.liked
-
+console.log('User = ', user)
   const handleClick = async (e) => {
     return liked
       ? await dispatch(fetchDeleteLike(image?.id))
@@ -39,6 +39,7 @@ function ImageListItem({ image, user, loadImages }) {
   return (
     <div className='image-list-item-container'>
       <NavLink className='user-link' to={`/users/${user?.id}`}>
+        {user?.profile_img && <img src={user?.profile_img} />}
         <p>{user?.username}</p>
       </NavLink>
       <div className='image-list-item-img-container'>
