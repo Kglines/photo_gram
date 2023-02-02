@@ -9,10 +9,10 @@ function Followers({ user, setFollowersModal }) {
 
     const followers = useSelector(state => state.follows);
 
-    const isFollowers = followers?.followers?.followers.length;
+    const isFollowers = followers?.followers?.followers?.length;
 
     useEffect(() => {
-        dispatch(fetchFollowers(user.id))
+        dispatch(fetchFollowers(user?.id))
     }, [dispatch])
     
   return (
@@ -34,7 +34,7 @@ function Followers({ user, setFollowersModal }) {
             </div>
         </div>
           <div className='following-modal-btn'>
-            <Follow user={follower.user} sessionUser={user} />
+            <Follow user={follower?.user} sessionUser={user} />
           </div>
         </div>
       ))

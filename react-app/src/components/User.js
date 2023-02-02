@@ -10,6 +10,7 @@ import { VscDiffAdded } from 'react-icons/vsc';
 import Follow from './Follow/Follow';
 import Following from './Follow/Following';
 import Followers from './Follow/Followers';
+import { fetchFollowers } from '../store/follows';
 import UserImages from './UserImages';
 
 
@@ -28,6 +29,13 @@ function User() {
   const [images, setImages] = useState([]);
 
   const myImages = Object.values(useSelector(state => state.images.user_images))
+
+  const followers = useSelector((state) => state.follows);
+  
+
+  useEffect(() => {
+    dispatch(fetchFollowers(userId));
+  }, [dispatch]);
   
 
   useEffect(() => {
@@ -48,11 +56,12 @@ function User() {
     const fetchData = async () => {
       const response = await fetch(`/api/users/${userId}`);
       const user = await response.json();
+      
       setUser(user)
     }
     fetchData()
     return () => {setIsMounted(false)}
-  }, [dispatch, userId, user?.bio, user?.firstname, user?.lastname, images])
+  }, [dispatch, userId, user?.bio, user?.firstname, user?.lastname, images, user?.profile_img])
 
   if (!user) {
     return null;
@@ -74,9 +83,11 @@ function User() {
               </Modal>
             )}
           </div>
-          {user?.profile_img && <div className='user-img-container'>
-            <img className='profile-img' src={user?.profile_img} />
-          </div>}
+          {user?.profile_img && (
+            <div className='user-img-container'>
+              <img className='profile-img' src={user?.profile_img} />
+            </div>
+          )}
           <div className='user-info'>
             <ul>
               <li className='user-info-item user-info-username'>
@@ -118,9 +129,37 @@ function User() {
                       <strong>Bio: </strong> {sessionUser?.bio}
                     </li>
                   ) : null}
-                  <li className='user-info-item'>
-                    <strong>Posts: </strong> {user?.Images?.length}
-                  </li>
+                  <div className='user-info-item profile-stats'>
+                    <div className='profile-stats-posts posts-btn'>
+                      <button>{user?.Images?.length} Posts</button>
+                    </div>
+                    <div className='following-btn'>
+                      <button onClick={() => setFollowingModal(true)}>
+                        {user?.Follows?.length} Following
+                      </button>
+                      {followingModal && (
+                        <Modal onClose={() => setFollowingModal(false)}>
+                          <Following
+                            setFollowingModal={setFollowingModal}
+                            user={user}
+                          />
+                        </Modal>
+                      )}
+                    </div>
+                    <div className='followers-btn'>
+                      <button onClick={() => setFollowersModal(true)}>
+                        {followers?.followers?.followers?.length} Followers
+                      </button>
+                      {followersModal && (
+                        <Modal onClose={() => setFollowersModal(false)}>
+                          <Followers
+                            setFollowersModal={setFollowersModal}
+                            user={user}
+                          />
+                        </Modal>
+                      )}
+                    </div>
+                  </div>
                 </div>
               )}
               {!isOwner && (
@@ -139,7 +178,9 @@ function User() {
                     </li>
                   ) : null}
                   <li className='user-info-item'>
-                    <strong>Posts: </strong> {user?.Images?.length}
+                    <div>
+                      <strong>Posts: </strong> {user?.Images?.length}
+                    </div>
                   </li>
                 </div>
               )}
@@ -148,7 +189,7 @@ function User() {
         </div>
       </div>
       <div className='user-profile-btns'>
-        {isOwner && (
+        {/* {isOwner && (
           <div className='user-profile-create'>
             <div>
               <VscDiffAdded
@@ -159,13 +200,13 @@ function User() {
             </div>
             <div>Create</div>
           </div>
-        )}
-        {showModal && (
+        )} */}
+        {/* {showModal && (
           <Modal onClose={() => setShowModal(false)}>
             <ImageCreateForm setShowModal={setShowModal} />
           </Modal>
-        )}
-        <div className='follows-btns'>
+        )} */}
+        {/* <div className='follows-btns'>
           {isOwner && (
             <div className='following-btn'>
               <button onClick={() => setFollowingModal(true)}>Following</button>
@@ -192,7 +233,7 @@ function User() {
               )}
             </div>
           )}
-        </div>
+        </div> */}
       </div>
       <div className='profile-image-list'>
         {errors?.map((error) => (

@@ -39,10 +39,14 @@ export const fetchGetUser = (userId) => async (dispatch) => {
 };
 
 export const fetchEditUser = (user, userId) => async (dispatch) => {
+  const formData = new FormData()
+  formData.append('user', user)
+  console.log('USER in THUNK = ', formData)
   const res = await fetch(`/api/users/${userId}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user),
+    // body: formData
   });
 
   if (res.ok){

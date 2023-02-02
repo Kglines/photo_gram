@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { fetchEditUser} from '../store/session';
+import { useHistory, useParams } from 'react-router-dom';
+import { fetchEditUser, fetchGetUser} from '../store/session';
 import './User.css';
 
 function UserEditForm({ setEditModal, user }) {
     const { userId } = useParams();
+    console.log('ID = ', userId)
     const dispatch = useDispatch();
+    const history = useHistory()
 
     const [firstname, setFirstname] = useState(user?.firstname || '');
     const [lastname, setLastname] = useState(user?.lastname || '');
@@ -14,44 +16,66 @@ function UserEditForm({ setEditModal, user }) {
     const [bio, setBio] = useState(user?.bio || '');
     const [errors, setErrors] = useState([]);
 
+    // useEffect(() => {
+    //   const fetchData = async () => {
+    //     const response = await fetch(`/api/users/${userId}`);
+    //     const user = await response.json();
+    //   };
+    //   fetchData();
+    // }, [dispatch, userId, user.profile_img])
+
     const handleSubmit = async (e) => {
       e.preventDefault();
 
-      const formData = new FormData();
-      formData.append('firstname', firstname);
-      formData.append('lastname', lastname);
-      formData.append('profile_img', profilePic);
-      formData.append('bio', bio)
+      // const formData = new FormData();
+      // formData.append('firstname', firstname);
+      // formData.append('lastname', lastname);
+      // formData.append('profile_img', profilePic || '');
+      // formData.append('bio', bio)
 
-      const res = await fetch(`/api/users/${userId}`, {
-        method: 'PUT',
-        body: formData
-      })
+      // const res = await dispatch(fetchEditUser(formData, userId))
 
-      if(res.ok){
-        setEditModal(false);
-      }
-      // const payload = {
-      //   firstname,
-      //   lastname,
-      //   profilePic,
-      //   bio
+      // const res = await fetch(`/api/users/${userId}`, {
+      //   method: 'PUT',
+      //   body: formData
+      // })
+
+      // history.push(`/users/${userId}`)
+      // if(!res.ok){
+      //   console.log('Something went wrong!')
+      //   // const data = await res.json();
+      //   // if(data.errors) setErrors(data.errors)
+      // } else {
+      //   // fetchGetUser(userId)
+      //   window.location.reload()
+      //   setErrors([])
+      //   setFirstname('')
+      //   setLastname('')
+      //   setProfilePic('')
+      //   setBio('')
+      //   setEditModal(false);
       // }
+      const payload = {
+        firstname,
+        lastname,
+        profile_img: profilePic,
+        bio
+      }
 
-      // dispatch(fetchEditUser(payload, userId))
-      //   .then(async (res) => {
-      //     if(res.ok === false){
-      //       const data = await res.json()
-      //       if(data.errors) setErrors(data.errors)
-      //     } else {
-      //       setErrors([])
-      //       setFirstname('')
-      //       setLastname('')
-      //       setProfilePic('')
-      //       setBio('')
-      //       setEditModal(false)
-      //     }
-      //   })
+      dispatch(fetchEditUser(payload, userId))
+        .then(async (res) => {
+          if(res.ok === false){
+            const data = await res.json()
+            if(data.errors) setErrors(data.errors)
+          } else {
+            setErrors([])
+            setFirstname('')
+            setLastname('')
+            setProfilePic('')
+            setBio('')
+            setEditModal(false)
+          }
+        })
     }
 
   return (
@@ -83,7 +107,6 @@ function UserEditForm({ setEditModal, user }) {
         type='file'
         accept='image/*'
         onChange={(e) => setProfilePic(e.target.files[0])}
-        required
       />
       <textarea
         className='modal-input-body'
