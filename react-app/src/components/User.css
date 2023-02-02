@@ -11,6 +11,19 @@
 
 .user-info-item{
     list-style: none;
+    line-height: 1.60rem;
+}
+
+.profile-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: -25px;
+}
+
+.profile-stats-posts {
+    display: flex;
+    align-items: center;
 }
 
 .profile-img{
@@ -38,10 +51,10 @@
     gap: 50px;
 }
 
-.following-btn button, .followers-btn button{
-    width: 100px;
+.following-btn button, .followers-btn button, .posts-btn button{
+    width: 110px;
     height: 40px;
-    color: #838c95;
+    color: #696969;
     font-size: 18px;
     border: none;
 }

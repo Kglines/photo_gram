@@ -55,7 +55,8 @@ function Image({ image, user, loadImage, isLoading }) {
           <div className='image-text-container-header'>
             <NavLink to={`/users/${user?.id}`} className='user-link'>
               <div>
-                <span>{user?.username}</span>
+                {user?.profile_img && <img style={{ margin: '-20px 0px'}} src={user?.profile_img} />}
+                <span style={{ marginLeft: '5px'}}>{user?.username}</span>
               </div>
             </NavLink>
               <div className='image-btn-container'>
