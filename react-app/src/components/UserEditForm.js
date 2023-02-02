@@ -102,12 +102,12 @@ function UserEditForm({ setEditModal, user }) {
         name='lastname'
         placeholder='Last Name'
       />
-      <input
+      {/* <input
         className='modal-input-title file-btn'
         type='file'
         accept='image/*'
         onChange={(e) => setProfilePic(e.target.files[0])}
-      />
+      /> */}
       <textarea
         className='modal-input-body'
         type='text'
