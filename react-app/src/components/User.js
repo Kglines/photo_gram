@@ -74,9 +74,9 @@ function User() {
               </Modal>
             )}
           </div>
-          {user?.profile_img && <div className='user-img-container'>
-            <img className='profile-img' src={user?.profile_img} />
-          </div>}
+          <div className='user-img-container'>
+            <li></li>
+          </div>
           <div className='user-info'>
             <ul>
               <li className='user-info-item user-info-username'>

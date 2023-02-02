@@ -13,13 +13,6 @@
     list-style: none;
 }
 
-.profile-img{
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
 .user-profile-create{
     margin-bottom: 20px;
 }

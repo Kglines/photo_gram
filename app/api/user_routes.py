@@ -48,20 +48,10 @@ def edit_user(id):
         return {'errors': ['Unauthorized, please sign in.']}, 401
     form = UserEditForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    file = request.files['profile_img']
     if form.validate_on_submit():
         user.firstname=form.data['firstname']
         user.lastname=form.data['lastname']
-        user.profile_img=form.data['profile_img']
         user.bio=form.data['bio']
-
-        if not allowed_file(file.filename):
-            return {'errors': 'file type not permitted'}, 400
-        file.filename = get_unique_filename(file.filename)
-        upload = upload_file_to_s3(file)
-        if 'url' not in upload:
-            return upload, 400
-        user.profile_img = upload['url']
         db.session.commit()
         return user.to_dict(), 200
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401

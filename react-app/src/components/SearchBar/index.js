@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import './SearchBar.css';
 
 function SearchBar({ userList }) {
-    // console.log('USERS LIST IN SEARCH = ', userList)
+    console.log('USERS LIST IN SEARCH = ', userList)
     const [searchInput, setSearchInput] = useState('');
     const [filteredData, setFilteredData] = useState([]);
 

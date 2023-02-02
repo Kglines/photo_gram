@@ -9,21 +9,9 @@
 
 .user-link{
     /* background-color: yellow; */
-    display: flex;
     width: 50px;
-    margin-bottom: 5px;
+    margin-bottom: -15px;
     color: rgb(45, 39, 39);
-}
-
-.user-link img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.user-link p {
-    margin-left: 5px;
 }
 
 .image-list-item-img-link{

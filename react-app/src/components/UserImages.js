@@ -47,7 +47,6 @@ function UserImages({ image, loadImages }) {
     <div>
       <div className='image-list-item-container' key={image?.id}>
         <NavLink className='user-link' to={`/users/${image?.owner?.id}`}>
-          {image?.owner?.profile_img && <img src={image?.owner?.profile_img} />}
           <p>{image?.owner?.username}</p>
         </NavLink>
         <div className='image-list-item-img-container'>
