@@ -5,7 +5,6 @@ import { fetchAllImages } from '../../../store/images';
 import SuggestedFollows from '../../Follow/SuggestedFollows';
 import SearchBar from '../../SearchBar';
 import ImageListItem from '../ImageListItem';
-import Footer from '../../Footer';
 
 import './ImageList.css'
 
