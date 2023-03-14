@@ -1,13 +1,21 @@
-.suggested-container {
-    text-align: center;
-    width: 600px;
+@media screen and (max-width: 1000px){
+    .suggested-container {
+        display: none;
+    }
 }
 
-.suggested-list {
-    text-decoration: none;
-    color: gray;
-}
-.suggested-list:hover {
-    text-decoration: none;
-    color: #0a95ff;
+@media screen and (min-width: 1000px){
+    .suggested-container {
+        text-align: center;
+        width: 600px;
+    }
+    
+    .suggested-list {
+        text-decoration: none;
+        color: gray;
+    }
+    .suggested-list:hover {
+        text-decoration: none;
+        color: #0a95ff;
+    }
 }
