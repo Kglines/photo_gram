@@ -10,6 +10,10 @@ import { MdOutlineExplore } from 'react-icons/md'
 import { BsInfoSquare } from 'react-icons/bs'
 import { IoSettingsOutline } from 'react-icons/io5'
 import { AiFillGithub, AiFillLinkedin } from 'react-icons/ai';
+import { IoLogOutOutline } from 'react-icons/io5';
+import { FaArrowLeft, FaBars } from 'react-icons/fa';
+import { GiHamburgerMenu } from 'react-icons/gi'
+import { TbArrowBigRight } from 'react-icons/tb';
 
 import './NavBar.css';
 
@@ -17,7 +21,8 @@ const NavBar = () => {
   const user = useSelector(state => state.session.user);
   const history = useHistory()
   const [showModal, setShowModal] = useState(false);
-  const [aboutModal, setAboutModal] = useState(false)
+  const [aboutModal, setAboutModal] = useState(false);
+  const [showNav, setShowNav] = useState(true);
 
   let sessionLinks;
 
@@ -27,15 +32,13 @@ const NavBar = () => {
 
   if(user){
     sessionLinks = (
-      <ul className='nav-list'>
+      <nav className='nav'>
+      <ul className={showNav ? 'nav-list' : 'hidden'}>
         <li className='nav-list-item'>
-            <p className='logo'>Photogram</p>
+          <p className='logo'>Photogram</p>
         </li>
         <li className='nav-list-item'>
-          <button 
-            className='nav-btn' 
-            onClick={handleClick}
-          >
+          <button className='nav-btn' onClick={handleClick}>
             <BsHouseDoorFill className='nav-icon' />
             Home
           </button>
@@ -55,10 +58,7 @@ const NavBar = () => {
           )}
         </li>
         <li className='nav-list-item'>
-          <button 
-            className='nav-btn' 
-            onClick={() => history.push('/users')}
-          >
+          <button className='nav-btn' onClick={() => history.push('/users')}>
             <MdOutlineExplore className='nav-icon' />
             Explore
           </button>
@@ -72,11 +72,8 @@ const NavBar = () => {
             Profile
           </button>
         </li>
-        <li className='nav-list-item'>
-          <button 
-            className='nav-btn' 
-            onClick={() => setAboutModal(true)}
-          >
+        <li className='nav-list-item nav-about'>
+          <button className='nav-btn' onClick={() => setAboutModal(true)}>
             <BsInfoSquare className='nav-icon' />
             About
           </button>
@@ -116,6 +113,8 @@ const NavBar = () => {
           <LogoutButton />
         </li>
       </ul>
+
+      </nav>
     );
   } else {
     sessionLinks = null
@@ -123,7 +122,11 @@ const NavBar = () => {
 
   return (
     <nav>
-      {sessionLinks}
+      <div>
+        {
+          sessionLinks
+        }
+      </div>
     </nav>
   );
 }
