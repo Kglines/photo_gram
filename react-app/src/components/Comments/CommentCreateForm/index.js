@@ -48,7 +48,7 @@ function CommentCreateForm({ image }) {
   return (
     <div>
       <form className='comment-create-form-container' onSubmit={handleSubmit}>
-        <span className='emoji-container'>
+        <div className='emoji-container'>
           {showPicker && (
             <EmojiPicker
               onEmojiClick={(e) => emojiClick(e.emoji)}
@@ -61,7 +61,7 @@ function CommentCreateForm({ image }) {
             className='show-emoji'
             onClick={() => setShowPicker(!showPicker)}
           />
-        </span>
+        </div>
         <input
           type='text'
           placeholder='Add a Comment...'
