@@ -2,15 +2,29 @@
 html {
     background-color: rgb(241, 239, 239);
 }
-body {
-    box-sizing: border-box;
-    position: relative;
-    margin-left: 33%;
-    background-color: rgb(241, 239, 239);
-    font-family: sans-serif;
+
+@media screen and (max-width: 1000px){
+    body {
+        margin-left: 0px;
+        box-sizing: border-box;
+        position: relative;
+        background-color: rgb(241, 239, 239);
+        font-family: sans-serif;
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
 }
 
-
+@media screen and (min-width: 1000px){
+    body {
+        box-sizing: border-box;
+        position: relative;
+        margin-left: 33%;
+        background-color: rgb(241, 239, 239);
+        font-family: sans-serif;
+    }
+}
 
 .user-link {
     text-decoration: none;
