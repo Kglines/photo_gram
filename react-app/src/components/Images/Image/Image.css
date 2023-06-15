@@ -2,9 +2,12 @@
     .full-image{
         display: flex;
         flex-direction: column;
+        justify-content: center;
     }
     .image-pic{
-        width: 100%;
+        width: 95%;
+        display: flex;
+        margin: 0px auto;
         height: fit-content;
         object-fit: cover;
     }
