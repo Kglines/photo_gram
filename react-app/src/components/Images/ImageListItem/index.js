@@ -24,22 +24,22 @@ console.log('User = ', user)
 
   const postDate = image?.updated_at ? image?.updated_at?.slice(0, 16) : image?.created_at?.slice(0, 16)
 
-  // const observer = new IntersectionObserver((entries) => {
-  //   entries.forEach(entry => {
-  //     if(entry.isIntersecting){
-  //       entry.target.classList.add('show');
-  //     } else {
-  //       entry.target.classList.remove('show');
-  //     }
-  //   })
-  // })
-  // const hiddenElements = document.querySelectorAll('.image-list-item-img');
-  // hiddenElements.forEach(el => observer.observe(el));
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('show');
+      } else {
+        entry.target.classList.remove('show');
+      }
+    })
+  })
+  const hiddenElements = document.querySelectorAll('.image-list-item-img');
+  hiddenElements.forEach(el => observer.observe(el));
 
   return (
     <div className='image-list-item-container'>
       <NavLink className='user-link' to={`/users/${user?.id}`}>
-        {user?.profile_img && <img src={user?.profile_img} />}
+        {user?.profile_img && <img src={user?.profile_img} alt={user?.username} />}
         <p>{user?.username}</p>
       </NavLink>
       <div className='image-list-item-img-container'>
